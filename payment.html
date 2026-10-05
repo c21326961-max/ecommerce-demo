@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Payment | ShopSphere</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #22c55e;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 22px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #22c55e;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .page-title h1 {
+      font-size: 34px;
+      color: #111827;
+      margin-bottom: 10px;
+    }
+
+    .page-title p {
+      color: #6b7280;
+    }
+
+    .payment-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    }
+
+    .card h2 {
+      font-size: 21px;
+      margin-bottom: 22px;
+      color: #111827;
+    }
+
+    .payment-method {
+      border: 2px solid #e5e7eb;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .payment-method:hover {
+      border-color: #22c55e;
+    }
+
+    .payment-method.active {
+      border-color: #22c55e;
+      background: #f0fdf4;
+    }
+
+    .payment-method label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .payment-method input {
+      width: 18px;
+      height: 18px;
+      accent-color: #22c55e;
+    }
+
+    .method-description {
+      margin-top: 8px;
+      margin-left: 30px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .notice {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-weight: bold;
+    }
+
+    .item-quantity {
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .item-price {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #111827;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .pay-button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 16px;
+      background: #22c55e;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .pay-button:hover {
+      background: #16a34a;
+    }
+
+    .pay-button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #374151;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: #22c55e;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #6b7280;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .payment-layout {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 16px 20px;
+      }
+
+      nav a {
+        margin-left: 10px;
+      }
+
+      .page-title h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Shop<span>Sphere</span>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="cart.html">Cart</a>
+    </nav>
+
+  </header>
+
+
+  <div class="container">
+
+    <div class="page-title">
+      <h1>Payment</h1>
+      <p>Choose your preferred payment method to complete your order.</p>
+    </div>
+
+
+    <div id="emptyMessage" class="card empty" style="display:none;">
+
+      <h2>Your cart is empty</h2>
+
+      <p>Please add products before making a payment.</p>
+
+      <br>
+
+      <a href="products.html" class="back-link">
+        ← Continue Shopping
+      </a>
+
+    </div>
+
+
+    <div id="paymentContent" class="payment-layout">
+
+      <!-- PAYMENT METHODS -->
+
+      <div class="card">
+
+        <h2>Choose Payment Method</h2>
+
+
+        <div class="payment-method active">
+
+          <label>
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Mobile Money"
+              checked
+            >
+
+            <span>📱 Mobile Money</span>
+
+          </label>
+
+          <div class="method-description">
+            Pay using mobile money services.
+          </div>
+
+        </div>
+
+
+        <div class="payment-method">
+
+          <label>
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Card Payment"
+            >
+
+            <span>💳 Card Payment</span>
+
+          </label>
+
+          <div class="method-description">
+            Pay securely using your debit or credit card.
+          </div>
+
+        </div>
+
+
+        <div class="payment-method">
+
+          <label>
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Bank Payment"
+            >
+
+            <span>🏦 Bank Payment</span>
+
+          </label>
+
+          <div class="method-description">
+            Make payment directly through your bank.
+          </div>
+
+        </div>
+
+
+        <div class="notice">
+
+          <strong>Demo Payment</strong><br>
+
+          This is a demonstration website.
+          No real money will be charged.
+          Clicking the payment button will simulate a successful payment.
+
+        </div>
+
+
+        <button
+          class="pay-button"
+          id="payButton"
+          onclick="processPayment()"
+        >
+          Continue to Payment
+        </button>
+
+
+        <a href="checkout.html" class="back-link">
+          ← Back to Checkout
+        </a>
+
+      </div>
+
+
+      <!-- ORDER SUMMARY -->
+
+      <div class="card">
+
+        <h2>Order Summary</h2>
+
+        <div id="orderItems"></div>
+
+        <div class="total">
+
+          <span>Total</span>
+
+          <span id="orderTotal">
+            TSh 0
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    © 2026 ShopSphere. All rights reserved.
+  </footer>
+
+
+  <script>
+
+    // ==========================================
+    // GET CART
+    // ==========================================
+
+    const cart =
+      JSON.parse(
+        localStorage.getItem("shopSphereCart")
+      ) || [];
+
+
+    // ==========================================
+    // GET CUSTOMER INFORMATION
+    // ==========================================
+
+    const customer =
+      JSON.parse(
+        localStorage.getItem("shopSphereCustomer")
+      ) || {};
+
+
+    const paymentContent =
+      document.getElementById("paymentContent");
+
+    const emptyMessage =
+      document.getElementById("emptyMessage");
+
+    const orderItems =
+      document.getElementById("orderItems");
+
+    const orderTotal =
+      document.getElementById("orderTotal");
+
+    const payButton =
+      document.getElementById("payButton");
+
+
+    // ==========================================
+    // CALCULATE TOTAL
+    // ==========================================
+
+    let orderTotalAmount = 0;
+
+
+    // ==========================================
+    // CHECK CART
+    // ==========================================
+
+    if (cart.length === 0) {
+
+      paymentContent.style.display = "none";
+
+      emptyMessage.style.display = "block";
+
+    } else {
+
+      cart.forEach(item => {
+
+        const quantity =
+          Number(item.quantity) || 1;
+
+        const price =
+          Number(item.price) || 0;
+
+        const itemTotal =
+          price * quantity;
+
+        orderTotalAmount += itemTotal;
+
+
+        const itemElement =
+          document.createElement("div");
+
+        itemElement.className =
+          "order-item";
+
+
+        itemElement.innerHTML = `
+
+          <div>
+
+            <div class="item-name">
+              ${item.name}
+            </div>
+
+            <div class="item-quantity">
+              Quantity: ${quantity}
+            </div>
+
+          </div>
+
+          <div class="item-price">
+            TSh ${itemTotal.toLocaleString()}
+          </div>
+
+        `;
+
+
+        orderItems.appendChild(itemElement);
+
+      });
+
+
+      orderTotal.textContent =
+        "TSh " +
+        orderTotalAmount.toLocaleString();
+
+    }
+
+
+    // ==========================================
+    // PAYMENT METHOD SELECTION
+    // ==========================================
+
+    document
+      .querySelectorAll(".payment-method")
+      .forEach(method => {
+
+        method.addEventListener(
+          "click",
+          function() {
+
+            document
+              .querySelectorAll(".payment-method")
+              .forEach(item => {
+
+                item.classList.remove("active");
+
+              });
+
+
+            this.classList.add("active");
+
+
+            const radio =
+              this.querySelector("input");
+
+            radio.checked = true;
+
+          }
+        );
+
+      });
+
+
+    // ==========================================
+    // PROCESS PAYMENT
+    // ==========================================
+
+    function processPayment() {
+
+      if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+      }
+
+
+      const selectedMethod =
+        document.querySelector(
+          'input[name="paymentMethod"]:checked'
+        );
+
+
+      if (!selectedMethod) {
+
+        alert(
+          "Please choose a payment method."
+        );
+
+        return;
+
+      }
+
+
+      // Disable button
+
+      payButton.disabled = true;
+
+      payButton.textContent =
+        "Processing Payment...";
+
+
+      // ========================================
+      // PAYMENT INFORMATION
+      // ========================================
+
+      const paymentTime =
+        new Date().toISOString();
+
+
+      const paymentStatus =
+        "PAID";
+
+
+      const orderStatus =
+        "Processing";
+
+
+      const paymentMethod =
+        selectedMethod.value;
+
+
+      // ========================================
+      // SAVE PAYMENT INFORMATION
+      // ========================================
+
+      localStorage.setItem(
+        "shopSpherePaymentMethod",
+        paymentMethod
+      );
+
+
+      localStorage.setItem(
+        "shopSpherePaymentTime",
+        paymentTime
+      );
+
+
+      localStorage.setItem(
+        "shopSpherePaymentStatus",
+        paymentStatus
+      );
+
+
+      // ========================================
+      // SIMULATE PAYMENT
+      // ========================================
+
+      setTimeout(function() {
+
+
+        // ======================================
+        // CREATE UNIQUE ORDER NUMBER
+        // ======================================
+
+        const randomNumber =
+          Math.floor(
+            100000 +
+            Math.random() * 900000
+          );
+
+
+        const orderNumber =
+          "SS-" + randomNumber;
+
+
+        // ======================================
+        // CREATE ORDER OBJECT
+        // ======================================
+
+        const newOrder = {
+
+          orderNumber: orderNumber,
+
+          customer: customer,
+
+          products: cart,
+
+          total: orderTotalAmount,
+
+          paymentMethod: paymentMethod,
+
+          paymentStatus: paymentStatus,
+
+          orderStatus: orderStatus,
+
+          paymentTime: paymentTime,
+
+          createdAt: paymentTime
+
+        };
+
+
+        // ======================================
+        // GET EXISTING ORDERS
+        // ======================================
+
+        let orders =
+          JSON.parse(
+            localStorage.getItem(
+              "shopSphereOrders"
+            )
+          ) || [];
+
+
+        // ======================================
+        // ADD NEW ORDER
+        // ======================================
+
+        orders.push(newOrder);
+
+
+        // ======================================
+        // SAVE ALL ORDERS
+        // ======================================
+
+        localStorage.setItem(
+          "shopSphereOrders",
+          JSON.stringify(orders)
+        );
+
+
+        // ======================================
+        // SAVE LATEST ORDER NUMBER
+        // ======================================
+
+        localStorage.setItem(
+          "shopSphereOrderNumber",
+          orderNumber
+        );
+
+
+        // ======================================
+        // SAVE ORDER STATUS
+        // ======================================
+
+        localStorage.setItem(
+          "shopSphereOrderStatus",
+          orderStatus
+        );
+
+
+        // ======================================
+        // GO TO SUCCESS PAGE
+        // ======================================
+
+        window.location.href =
+          "success.html";
+
+
+      }, 1500);
+
+    }
+
+  </script>
+
+</body>
+</html>

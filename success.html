@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Order Successful — ShopSphere</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: #111827;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo span {
+      color: #38bdf8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1000px;
+      margin: 45px auto 70px;
+    }
+
+    .success-header {
+      background: white;
+      border-radius: 20px;
+      padding: 45px 25px;
+      text-align: center;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+      margin-bottom: 25px;
+    }
+
+    .success-icon {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: #16a34a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 42px;
+      font-weight: bold;
+    }
+
+    .success-header h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .success-header p {
+      color: #64748b;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .order-number {
+      display: inline-block;
+      margin-top: 20px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    .product {
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #e5e7eb;
+      align-items: center;
+    }
+
+    .product:last-child {
+      border-bottom: none;
+    }
+
+    .product-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-info h3 {
+      font-size: 16px;
+      margin-bottom: 7px;
+      color: #111827;
+    }
+
+    .product-info p {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-weight: 800;
+      color: #111827;
+      white-space: nowrap;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 15px;
+    }
+
+    .summary-row span:first-child {
+      color: #64748b;
+    }
+
+    .summary-row span:last-child {
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      margin-top: 8px;
+    }
+
+    .total-row strong:first-child {
+      font-size: 18px;
+    }
+
+    .total-price {
+      font-size: 24px;
+      color: #16a34a;
+      font-weight: 900;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+
+    .customer-box {
+      margin-top: 22px;
+      padding: 17px;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+
+    .customer-box h3 {
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .customer-box p {
+      color: #64748b;
+      font-size: 14px;
+      margin: 6px 0;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 180px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1f2937;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .btn-secondary:hover {
+      background: #bae6fd;
+      transform: translateY(-1px);
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px 10px;
+      color: #64748b;
+    }
+
+    footer {
+      background: #111827;
+      color: #94a3b8;
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 750px) {
+      .navbar {
+        padding: 16px 5%;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a:nth-child(-n+3) {
+        display: none;
+      }
+
+      .container {
+        margin-top: 25px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .success-header {
+        padding: 35px 18px;
+      }
+
+      .success-header h1 {
+        font-size: 26px;
+      }
+
+      .product {
+        align-items: flex-start;
+      }
+
+      .product-price {
+        font-size: 14px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      Shop<span>Sphere</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="cart.html">Cart</a>
+    </div>
+  </nav>
+
+
+  <main class="container">
+
+    <!-- SUCCESS HEADER -->
+    <section class="success-header">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <h1>Payment Successful!</h1>
+
+      <p>
+        Thank you for your order. Your payment has been received
+        and your order is now being processed.
+      </p>
+
+      <div class="order-number" id="orderNumber">
+        Order: Loading...
+      </div>
+
+    </section>
+
+
+    <div class="grid">
+
+      <!-- PRODUCTS -->
+      <section class="card">
+
+        <h2>🛍️ Products Purchased</h2>
+
+        <div id="productsList">
+          <div class="empty">
+            Loading products...
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ORDER SUMMARY -->
+      <section class="card">
+
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Order Number</span>
+          <span id="summaryOrderNumber">-</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Payment Status</span>
+
+          <span>
+            <span class="status">
+              <span class="status-dot"></span>
+              PAID
+            </span>
+          </span>
+        </div>
+
+        <div class="summary-row">
+          <span>Order Status</span>
+          <span>Processing</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Payment Method</span>
+          <span id="paymentMethod">-</span>
+        </div>
+
+        <div class="total-row">
+          <strong>Total Paid</strong>
+          <span class="total-price" id="totalPrice">
+            TSh 0
+          </span>
+        </div>
+
+
+        <!-- CUSTOMER -->
+        <div class="customer-box">
+
+          <h3>Customer Information</h3>
+
+          <p>
+            <strong>Name:</strong>
+            <span id="customerName">-</span>
+          </p>
+
+          <p>
+            <strong>Phone:</strong>
+            <span id="customerPhone">-</span>
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+            <span id="customerEmail">-</span>
+          </p>
+
+          <p>
+            <strong>Delivery Address:</strong>
+            <span id="customerAddress">-</span>
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+    <div class="buttons">
+
+      <a href="products.html" class="btn btn-primary">
+        Continue Shopping
+      </a>
+
+      <a href="history.html" class="btn btn-secondary">
+        Track Order
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <footer>
+    © 2026 ShopSphere. All rights reserved.
+  </footer>
+
+
+  <script>
+
+    // ==========================================
+    // GET SAVED DATA
+    // ==========================================
+
+    const cart =
+      JSON.parse(localStorage.getItem("shopSphereCart")) || [];
+
+    const customer =
+      JSON.parse(localStorage.getItem("shopSphereCustomer")) || {};
+
+    const orderNumber =
+      localStorage.getItem("shopSphereOrderNumber") ||
+      "SS-" + Math.floor(100000 + Math.random() * 900000);
+
+    const paymentMethod =
+      localStorage.getItem("shopSpherePaymentMethod") ||
+      "Mobile Money";
+
+
+    // ==========================================
+    // SAVE ORDER NUMBER IF MISSING
+    // ==========================================
+
+    localStorage.setItem(
+      "shopSphereOrderNumber",
+      orderNumber
+    );
+
+
+    // ==========================================
+    // FORMAT MONEY
+    // ==========================================
+
+    function formatMoney(amount) {
+
+      return "TSh " +
+        Number(amount || 0).toLocaleString("en-TZ");
+
+    }
+
+
+    // ==========================================
+    // DISPLAY ORDER NUMBER
+    // ==========================================
+
+    document.getElementById("orderNumber").textContent =
+      "Order: " + orderNumber;
+
+    document.getElementById("summaryOrderNumber").textContent =
+      orderNumber;
+
+
+    // ==========================================
+    // DISPLAY PAYMENT METHOD
+    // ==========================================
+
+    document.getElementById("paymentMethod").textContent =
+      paymentMethod;
+
+
+    // ==========================================
+    // DISPLAY CUSTOMER INFORMATION
+    // ==========================================
+
+    document.getElementById("customerName").textContent =
+      customer.fullName || customer.name || "-";
+
+    document.getElementById("customerPhone").textContent =
+      customer.phone || "-";
+
+    document.getElementById("customerEmail").textContent =
+      customer.email || "-";
+
+    document.getElementById("customerAddress").textContent =
+      customer.address || "-";
+
+
+    // ==========================================
+    // DISPLAY PRODUCTS
+    // ==========================================
+
+    const productsList =
+      document.getElementById("productsList");
+
+    let total = 0;
+
+    if (!cart.length) {
+
+      productsList.innerHTML = `
+        <div class="empty">
+          No products found for this order.
+        </div>
+      `;
+
+    } else {
+
+      productsList.innerHTML = "";
+
+      cart.forEach(item => {
+
+        const quantity =
+          Number(item.quantity) || 1;
+
+        const price =
+          Number(item.price) || 0;
+
+        const itemTotal =
+          price * quantity;
+
+        total += itemTotal;
+
+
+        const product = document.createElement("div");
+
+        product.className = "product";
+
+
+        // IMAGE
+
+        let imageHTML = "";
+
+        if (item.image_url || item.image) {
+
+          const image =
+            item.image_url || item.image;
+
+          imageHTML = `
+            <img
+              src="${image}"
+              alt="${item.name || "Product"}"
+              onerror="this.style.display='none'"
+            >
+          `;
+
+        }
+
+
+        product.innerHTML = `
+
+          <div class="product-image">
+            ${imageHTML}
+          </div>
+
+          <div class="product-info">
+
+            <h3>
+              ${item.name || "Product"}
+            </h3>
+
+            <p>
+              Quantity: ${quantity}
+            </p>
+
+            <p>
+              Unit Price: ${formatMoney(price)}
+            </p>
+
+          </div>
+
+          <div class="product-price">
+            ${formatMoney(itemTotal)}
+          </div>
+
+        `;
+
+
+        productsList.appendChild(product);
+
+      });
+
+    }
+
+
+    // ==========================================
+    // DISPLAY TOTAL
+    // ==========================================
+
+    document.getElementById("totalPrice").textContent =
+      formatMoney(total);
+
+
+  </script>
+
+</body>
+</html>

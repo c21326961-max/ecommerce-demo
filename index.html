@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSphere | Everything You Need</title>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fc;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #111827;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #e5e7eb;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        .cart-btn {
+            background: #2563eb;
+            color: white !important;
+            padding: 9px 15px;
+            border-radius: 10px;
+        }
+
+        .cart-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 21px;
+            height: 21px;
+            margin-left: 5px;
+            padding: 0 5px;
+            border-radius: 50px;
+            background: white;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background:
+                radial-gradient(circle at top right, rgba(56,189,248,0.25), transparent 35%),
+                linear-gradient(135deg, #111827, #1e3a8a);
+            color: white;
+            padding: 90px 20px;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 18px;
+            color: #dbeafe;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-block;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #38bdf8;
+            color: #082f49;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* Phone mockup */
+
+        .device {
+            width: 270px;
+            height: 530px;
+            margin: auto;
+            padding: 12px;
+            background: #020617;
+            border-radius: 38px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            transform: rotate(4deg);
+        }
+
+        .device-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            background: white;
+            color: #111827;
+        }
+
+        .preview-image {
+            height: 270px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+            font-size: 90px;
+        }
+
+        .preview-info {
+            padding: 25px;
+        }
+
+        .preview-info small {
+            color: #64748b;
+        }
+
+        .preview-info h3 {
+            margin: 8px 0;
+        }
+
+        .preview-price {
+            color: #2563eb;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           TRUST BAR
+        ========================= */
+
+        .trust-bar {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .trust-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .trust-item {
+            text-align: center;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .trust-icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* =========================
+           GENERAL SECTION
+        ========================= */
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #64748b;
+        }
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+
+        .category-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 25px 15px;
+            text-align: center;
+            border-radius: 16px;
+            transition: 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+        }
+
+        .category-icon {
+            font-size: 38px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .category-card h3 {
+            font-size: 15px;
+        }
+
+        /* =========================
+           FEATURED PRODUCTS
+        ========================= */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 230px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            display: block;
+        }
+
+        .no-image {
+            font-size: 65px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .product-price {
+            color: #2563eb;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .add-btn {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        .featured-loading,
+        .featured-empty,
+        .featured-error {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 55px 20px;
+            color: #64748b;
+            background: white;
+            border-radius: 18px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .featured-error {
+            color: #b91c1c;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features-section {
+            background: #111827;
+            color: white;
+        }
+
+        .features-section .section {
+            max-width: 1200px;
+        }
+
+        .features-section .section-header p {
+            color: #cbd5e1;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 18px;
+        }
+
+        .feature-icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* =========================
+           TRACK ORDER
+        ========================= */
+
+        .track-box {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+
+        .track-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .track-form input {
+            flex: 1;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .track-form button {
+            border: none;
+            padding: 14px 22px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 70px 30px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #e0f2fe;
+            margin-bottom: 25px;
+        }
+
+        .cta a {
+            display: inline-block;
+            background: white;
+            color: #1d4ed8;
+            padding: 14px 25px;
+            border-radius: 12px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #020617;
+            color: white;
+            padding: 50px 20px 25px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .footer-column a {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 35px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            z-index: 2000;
+            background: #111827;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            transform: translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .trust-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section {
+                padding: 60px 15px;
+            }
+
+            .hero {
+                padding: 60px 15px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .track-form {
+                flex-direction: column;
+            }
+
+            .cta {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+                Shop<span>Sphere</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Shop</a>
+                <a href="#categories">Categories</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="history.html">Track Order</a>
+
+                <a href="cart.html" class="cart-btn">
+                    🛒 Cart
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-container">
+
+            <div>
+
+                <h1>
+                    Everything you need.
+                    <span>One place.</span>
+                </h1>
+
+                <p>
+                    Discover quality products, enjoy secure payments,
+                    fast ordering and a simple shopping experience with ShopSphere.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="products.html" class="btn-primary">
+                        Shop Now →
+                    </a>
+
+                    <a href="#how-it-works" class="btn-secondary">
+                        How It Works
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="device">
+
+                <div class="device-screen">
+
+                    <div class="preview-image">
+                        📱
+                    </div>
+
+                    <div class="preview-info">
+
+                        <small>Featured Product</small>
+
+                        <h3>Premium Smartphone</h3>
+
+                        <div class="preview-price">
+                            TSh 850,000
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRUST BAR
+    ========================= -->
+
+    <div class="trust-bar">
+
+        <div class="trust-container">
+
+            <div class="trust-item">
+                <span class="trust-icon">🔐</span>
+                Secure Payments
+            </div>
+
+            <div class="trust-item">
+                <span class="trust-icon">⚡</span>
+                Fast Ordering
+            </div>
+
+            <div class="trust-item">
+                <span class="trust-icon">📦</span>
+                Order Tracking
+            </div>
+
+            <div class="trust-item">
+                <span class="trust-icon">💬</span>
+                Customer Support
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <section class="section" id="categories">
+
+        <div class="section-header">
+
+            <h2>Shop by Category</h2>
+
+            <p>
+                Explore products from different categories.
+            </p>
+
+        </div>
+
+
+        <div class="categories">
+
+            <a href="products.html" class="category-card">
+                <span class="category-icon">📱</span>
+                <h3>Phones</h3>
+            </a>
+
+            <a href="products.html" class="category-card">
+                <span class="category-icon">💻</span>
+                <h3>Electronics</h3>
+            </a>
+
+            <a href="products.html" class="category-card">
+                <span class="category-icon">👕</span>
+                <h3>Fashion</h3>
+            </a>
+
+            <a href="products.html" class="category-card">
+                <span class="category-icon">💄</span>
+                <h3>Beauty</h3>
+            </a>
+
+            <a href="products.html" class="category-card">
+                <span class="category-icon">🏠</span>
+                <h3>Home</h3>
+            </a>
+
+            <a href="products.html" class="category-card">
+                <span class="category-icon">🎧</span>
+                <h3>Accessories</h3>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURED PRODUCTS
+    ========================= -->
+
+    <section class="section" id="shop">
+
+        <div class="section-header">
+
+            <h2>Featured Products</h2>
+
+            <p>
+                Discover some of our latest products.
+            </p>
+
+        </div>
+
+
+        <!-- Products loaded from Supabase -->
+
+        <div class="products" id="featuredProducts">
+
+            <div class="featured-loading">
+                Loading products...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
+
+    <section class="section" id="how-it-works">
+
+        <div class="section-header">
+
+            <h2>How It Works</h2>
+
+            <p>
+                Shopping with ShopSphere is simple.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">1</div>
+
+                <h3>Browse</h3>
+
+                <p>
+                    Explore products and choose what you want.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">2</div>
+
+                <h3>Add to Cart</h3>
+
+                <p>
+                    Add your favorite products to your shopping cart.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">3</div>
+
+                <h3>Checkout</h3>
+
+                <p>
+                    Enter your delivery and contact information.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">4</div>
+
+                <h3>Pay</h3>
+
+                <p>
+                    Select your preferred payment method.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">5</div>
+
+                <h3>Receive</h3>
+
+                <p>
+                    Track your order and receive your products.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+
+    <section class="features-section">
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <h2>Why ShopSphere?</h2>
+
+                <p>
+                    Everything is designed to make online shopping easier.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">💳</div>
+
+                    <h3>Secure Payments</h3>
+
+                    <p>
+                        Multiple payment options make checkout simple and convenient.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">📊</div>
+
+                    <h3>Easy Management</h3>
+
+                    <p>
+                        Products and orders can be managed from the admin dashboard.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">📦</div>
+
+                    <h3>Order Tracking</h3>
+
+                    <p>
+                        Customers can check their order information easily.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">📱</div>
+
+                    <h3>Mobile Friendly</h3>
+
+                    <p>
+                        The website works smoothly on phones, tablets and computers.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRACK ORDER
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>Track Your Order</h2>
+
+            <p>
+                Enter your order number to check your order.
+            </p>
+
+        </div>
+
+
+        <div class="track-box">
+
+            <form class="track-form" id="trackForm">
+
+                <input
+                    type="text"
+                    id="orderNumber"
+                    placeholder="Enter order number e.g. SS-123456"
+                    required
+                >
+
+                <button type="submit">
+                    Track Order
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================= -->
+
+    <div class="cta">
+
+        <h2>Ready to Start Shopping?</h2>
+
+        <p>
+            Find your next product and enjoy a simple shopping experience.
+        </p>
+
+        <a href="products.html">
+            Browse Products →
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-column">
+
+                <h3>ShopSphere</h3>
+
+                <p>
+                    A modern e-commerce experience designed for simple,
+                    secure and convenient online shopping.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Shop</h3>
+
+                <a href="products.html">All Products</a>
+                <a href="products.html">Phones</a>
+                <a href="products.html">Electronics</a>
+                <a href="products.html">Accessories</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Customer</h3>
+
+                <a href="cart.html">Cart</a>
+                <a href="checkout.html">Checkout</a>
+                <a href="history.html">Track Order</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Admin</h3>
+
+                <a href="dashboard.html">Dashboard</a>
+                <a href="admin-products.html">Manage Products</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 ShopSphere. All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- Toast -->
+
+    <div class="toast" id="toast"></div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================================
+           SUPABASE CONFIGURATION
+        ========================================= */
+
+        const SUPABASE_URL =
+            "https://ienquzigbawhvthnirtj.supabase.co";
+
+        /*
+          WEKA HAPA SUPABASE PUBLISHABLE/ANON KEY
+          ILE ILE UNAYOTUMIA KWENYE products.html
+        */
+
+        const SUPABASE_KEY =
+            "sb_publishable_tSbACTjOICJlthE03XmGCA_sIgigXup";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* =========================================
+           CART
+        ========================================= */
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("shopSphereCart") || "[]"
+            );
+
+
+        function updateCartCount() {
+
+            const count =
+                cart.reduce(
+                    (total, item) =>
+                        total + Number(item.quantity || 0),
+                    0
+                );
+
+            const cartCount =
+                document.querySelector(".cart-count");
+
+            if (cartCount) {
+                cartCount.textContent = count;
+            }
+        }
+
+
+        function saveCart() {
+
+            localStorage.setItem(
+                "shopSphereCart",
+                JSON.stringify(cart)
+            );
+
+            updateCartCount();
+        }
+
+
+        /* =========================================
+           TOAST MESSAGE
+        ========================================= */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById("toast");
+
+            toast.textContent = message;
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+
+
+        /* =========================================
+           FORMAT PRICE
+        ========================================= */
+
+        function formatPrice(price) {
+
+            return Number(price || 0)
+                .toLocaleString("en-TZ");
+        }
+
+
+        /* =========================================
+           ADD PRODUCT TO CART
+        ========================================= */
+
+        function addToCart(product) {
+
+            const existing =
+                cart.find(
+                    item => item.id === product.id
+                );
+
+
+            if (existing) {
+
+                const stock =
+                    Number(product.stock || 0);
+
+                if (
+                    stock > 0 &&
+                    existing.quantity >= stock
+                ) {
+
+                    showToast(
+                        "Maximum available stock reached."
+                    );
+
+                    return;
+                }
+
+                existing.quantity += 1;
+
+            } else {
+
+                cart.push({
+
+                    id: product.id,
+
+                    name: product.name,
+
+                    price: Number(product.price || 0),
+
+                    image_url: product.image_url || "",
+
+                    stock: Number(product.stock || 0),
+
+                    quantity: 1
+
+                });
+
+            }
+
+
+            saveCart();
+
+            showToast(
+                product.name + " added to cart 🛒"
+            );
+        }
+
+
+        /* =========================================
+           IMAGE FALLBACK
+        ========================================= */
+
+        function createProductImage(product) {
+
+            const imageBox =
+                document.createElement("div");
+
+            imageBox.className =
+                "product-image";
+
+
+            if (product.image_url) {
+
+                const img =
+                    document.createElement("img");
+
+                img.src =
+                    product.image_url;
+
+                img.alt =
+                    product.name || "Product";
+
+                img.loading =
+                    "lazy";
+
+
+                img.onerror =
+                    function () {
+
+                        this.style.display =
+                            "none";
+
+                        imageBox.innerHTML =
+                            '<div class="no-image">🛍️</div>';
+                    };
+
+
+                imageBox.appendChild(img);
+
+            } else {
+
+                imageBox.innerHTML =
+                    '<div class="no-image">🛍️</div>';
+            }
+
+
+            return imageBox;
+        }
+
+
+        /* =========================================
+           LOAD FEATURED PRODUCTS
+        ========================================= */
+
+        async function loadFeaturedProducts() {
+
+            const container =
+                document.getElementById(
+                    "featuredProducts"
+                );
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+
+                    .from("products")
+
+                    .select("*")
+
+                    .eq("is_active", true)
+
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    )
+
+                    .limit(4);
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                container.innerHTML = "";
+
+
+                if (!data || data.length === 0) {
+
+                    container.innerHTML = `
+                        <div class="featured-empty">
+                            <h3>No products available</h3>
+                            <p>
+                                Add products from the Admin Products page.
+                            </p>
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                data.forEach(product => {
+
+                    const card =
+                        document.createElement("article");
+
+                    card.className =
+                        "product-card";
+
+
+                    /* IMAGE */
+
+                    const imageBox =
+                        createProductImage(product);
+
+
+                    /* INFO */
+
+                    const info =
+                        document.createElement("div");
+
+                    info.className =
+                        "product-info";
+
+
+                    const category =
+                        document.createElement("div");
+
+                    category.className =
+                        "product-category";
+
+                    category.textContent =
+                        product.category || "Product";
+
+
+                    const name =
+                        document.createElement("div");
+
+                    name.className =
+                        "product-name";
+
+                    name.textContent =
+                        product.name || "Unnamed Product";
+
+
+                    const bottom =
+                        document.createElement("div");
+
+                    bottom.className =
+                        "product-bottom";
+
+
+                    const price =
+                        document.createElement("div");
+
+                    price.className =
+                        "product-price";
+
+                    price.textContent =
+                        "TSh " +
+                        formatPrice(product.price);
+
+
+                    const button =
+                        document.createElement("button");
+
+                    button.className =
+                        "add-btn";
+
+                    button.type =
+                        "button";
+
+                    button.textContent =
+                        "+";
+
+                    button.title =
+                        "Add to Cart";
+
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            addToCart(product);
+
+                        }
+                    );
+
+
+                    bottom.appendChild(price);
+
+                    bottom.appendChild(button);
+
+
+                    info.appendChild(category);
+
+                    info.appendChild(name);
+
+                    info.appendChild(bottom);
+
+
+                    card.appendChild(imageBox);
+
+                    card.appendChild(info);
+
+
+                    /* Open Product Details when the product card is clicked */
+                    card.style.cursor = "pointer";
+
+                    card.addEventListener("click", function(event) {
+
+                        /* Do not redirect when Add to Cart is clicked */
+                        if (event.target.closest(".add-btn")) {
+                            return;
+                        }
+
+                        window.location.href =
+                            "product.html?id=" +
+                            encodeURIComponent(product.id);
+                    });
+
+
+                    container.appendChild(card);
+
+                });
+
+
+            } catch (error) {
+
+                console.error(
+                    "Supabase error:",
+                    error
+                );
+
+
+                container.innerHTML = `
+                    <div class="featured-error">
+                        <h3>Unable to load products</h3>
+                        <p>
+                            Please check your Supabase connection.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+
+        /* =========================================
+           TRACK ORDER
+        ========================================= */
+
+        document
+            .getElementById("trackForm")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+                    const orderNumber =
+                        document
+                            .getElementById(
+                                "orderNumber"
+                            )
+                            .value
+                            .trim();
+
+
+                    if (!orderNumber) {
+                        return;
+                    }
+
+
+                    window.location.href =
+                        "history.html?order=" +
+                        encodeURIComponent(
+                            orderNumber
+                        );
+                }
+            );
+
+
+        /* =========================================
+           START
+        ========================================= */
+
+        updateCartCount();
+
+        loadFeaturedProducts();
+
+    </script>
+
+</body>
+</html>
