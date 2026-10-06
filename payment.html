@@ -240,7 +240,6 @@
     }
 
     @media (max-width: 800px) {
-
       .payment-layout {
         grid-template-columns: 1fr;
       }
@@ -256,273 +255,230 @@
       .page-title h1 {
         font-size: 28px;
       }
-
     }
   </style>
 </head>
 
 <body>
 
-  <header>
+<header>
 
-    <div class="logo">
-      Shop<span>Sphere</span>
-    </div>
+  <div class="logo">
+    Shop<span>Sphere</span>
+  </div>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Shop</a>
-      <a href="cart.html">Cart</a>
-    </nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="cart.html">Cart</a>
+  </nav>
 
-  </header>
+</header>
 
+<div class="container">
 
-  <div class="container">
+  <div class="page-title">
+    <h1>Payment</h1>
+    <p>Choose your preferred payment method to complete your order.</p>
+  </div>
 
-    <div class="page-title">
+  <div id="emptyMessage" class="card empty" style="display:none;">
 
-      <h1>Payment</h1>
+    <h2>Your cart is empty</h2>
 
-      <p>
-        Choose your preferred payment method to complete your order.
-      </p>
+    <p>Please add products before making a payment.</p>
 
-    </div>
+    <br>
 
+    <a href="products.html" class="back-link">
+      ← Continue Shopping
+    </a>
 
-    <div id="emptyMessage" class="card empty" style="display:none;">
+  </div>
 
-      <h2>
-        Your cart is empty
-      </h2>
+  <div id="paymentContent" class="payment-layout">
 
-      <p>
-        Please add products before making a payment.
-      </p>
+    <!-- PAYMENT METHODS -->
 
-      <br>
+    <div class="card">
 
-      <a href="products.html" class="back-link">
-        ← Continue Shopping
+      <h2>Choose Payment Method</h2>
+
+      <!-- MOBILE MONEY -->
+
+      <div class="payment-method active">
+
+        <label>
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="Mobile Money"
+            checked
+          >
+
+          <span>
+            📱 Mobile Money
+          </span>
+
+        </label>
+
+        <div class="method-description">
+          Pay using mobile money services.
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="payment-method">
+
+        <label>
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="Card Payment"
+          >
+
+          <span>
+            💳 Card Payment
+          </span>
+
+        </label>
+
+        <div class="method-description">
+          Pay securely using your debit or credit card.
+        </div>
+
+      </div>
+
+      <!-- BANK -->
+
+      <div class="payment-method">
+
+        <label>
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="Bank Payment"
+          >
+
+          <span>
+            🏦 Bank Payment
+          </span>
+
+        </label>
+
+        <div class="method-description">
+          Make payment directly through your bank.
+        </div>
+
+      </div>
+
+      <!-- CASH ON DELIVERY -->
+
+      <div class="payment-method" id="codMethod">
+
+        <label>
+
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="Cash on Delivery"
+          >
+
+          <span>
+            💵 Cash on Delivery
+          </span>
+
+        </label>
+
+        <div class="method-description">
+          Pay when you receive or collect your order.
+          No online payment is required now.
+        </div>
+
+      </div>
+
+      <!-- ONLINE NOTICE -->
+
+      <div
+        class="notice"
+        id="onlineNotice"
+      >
+
+        <strong>Demo Payment</strong>
+
+        <br>
+
+        This is a demonstration website.
+        No real money will be charged.
+        Clicking the payment button will simulate
+        a successful payment.
+
+      </div>
+
+      <!-- COD NOTICE -->
+
+      <div
+        class="cod-notice"
+        id="codNotice"
+      >
+
+        <strong>
+          💵 Cash on Delivery selected
+        </strong>
+
+        <br><br>
+
+        You do not need to make an online payment now.
+
+        <br>
+
+        Your order will be recorded as
+        <strong>UNPAID</strong> and
+        <strong>Pending</strong>.
+
+        <br>
+
+        You will pay the full order amount when
+        you receive or collect your order.
+
+      </div>
+
+      <!-- BUTTON -->
+
+      <button
+        type="button"
+        class="pay-button"
+        id="payButton"
+      >
+        Continue to Payment
+      </button>
+
+      <a href="checkout.html" class="back-link">
+        ← Back to Checkout
       </a>
 
     </div>
 
+    <!-- ORDER SUMMARY -->
 
-    <div id="paymentContent" class="payment-layout">
+    <div class="card">
 
+      <h2>Order Summary</h2>
 
-      <!-- PAYMENT METHODS -->
+      <div id="orderItems"></div>
 
-      <div class="card">
+      <div class="total">
 
-        <h2>
-          Choose Payment Method
-        </h2>
+        <span>Total</span>
 
-
-        <!-- MOBILE MONEY -->
-
-        <div class="payment-method active">
-
-          <label>
-
-            <input
-              type="radio"
-              name="paymentMethod"
-              value="Mobile Money"
-              checked
-            >
-
-            <span>
-              📱 Mobile Money
-            </span>
-
-          </label>
-
-          <div class="method-description">
-
-            Pay using mobile money services.
-
-          </div>
-
-        </div>
-
-
-        <!-- CARD -->
-
-        <div class="payment-method">
-
-          <label>
-
-            <input
-              type="radio"
-              name="paymentMethod"
-              value="Card Payment"
-            >
-
-            <span>
-              💳 Card Payment
-            </span>
-
-          </label>
-
-          <div class="method-description">
-
-            Pay securely using your debit or credit card.
-
-          </div>
-
-        </div>
-
-
-        <!-- BANK -->
-
-        <div class="payment-method">
-
-          <label>
-
-            <input
-              type="radio"
-              name="paymentMethod"
-              value="Bank Payment"
-            >
-
-            <span>
-              🏦 Bank Payment
-            </span>
-
-          </label>
-
-          <div class="method-description">
-
-            Make payment directly through your bank.
-
-          </div>
-
-        </div>
-
-
-        <!-- CASH ON DELIVERY -->
-
-        <div class="payment-method" id="codMethod">
-
-          <label>
-
-            <input
-              type="radio"
-              name="paymentMethod"
-              value="Cash on Delivery"
-            >
-
-            <span>
-              💵 Cash on Delivery
-            </span>
-
-          </label>
-
-          <div class="method-description">
-
-            Pay when you receive or collect your order.
-            No online payment is required now.
-
-          </div>
-
-        </div>
-
-
-        <!-- ONLINE PAYMENT NOTICE -->
-
-        <div
-          class="notice"
-          id="onlineNotice">
-
-          <strong>
-            Demo Payment
-          </strong>
-          <br>
-
-          This is a demonstration website.
-          No real money will be charged.
-          Clicking the payment button will simulate
-          a successful payment.
-
-        </div>
-
-
-        <!-- COD NOTICE -->
-
-        <div
-          class="cod-notice"
-          id="codNotice">
-
-          <strong>
-            💵 Cash on Delivery selected
-          </strong>
-
-          <br><br>
-
-          You do not need to make an online payment now.
-
-          <br>
-
-          Your order will be recorded as
-          <strong>UNPAID</strong> and
-          <strong>Pending</strong>.
-
-          <br>
-
-          You will pay the full order amount when
-          you receive or collect your order.
-
-        </div>
-
-
-        <!-- BUTTON -->
-
-        <button
-          class="pay-button"
-          id="payButton"
-          onclick="processPayment()"
-        >
-
-          Continue to Payment
-
-        </button>
-
-
-        <a href="checkout.html" class="back-link">
-
-          ← Back to Checkout
-
-        </a>
-
-      </div>
-
-
-      <!-- ORDER SUMMARY -->
-
-      <div class="card">
-
-        <h2>
-          Order Summary
-        </h2>
-
-        <div id="orderItems"></div>
-
-
-        <div class="total">
-
-          <span>
-            Total
-          </span>
-
-          <span id="orderTotal">
-            TSh 0
-          </span>
-
-        </div>
+        <span id="orderTotal">
+          TSh 0
+        </span>
 
       </div>
 
@@ -530,379 +486,336 @@
 
   </div>
 
+</div>
 
-  <footer>
+<footer>
+  © 2026 ShopSphere. All rights reserved.
+</footer>
 
-    © 2026 ShopSphere. All rights reserved.
+<script>
 
-  </footer>
+  // ==========================================
+  // GET CART
+  // ==========================================
+
+  const cart =
+    JSON.parse(
+      localStorage.getItem("shopSphereCart")
+    ) || [];
 
 
-  <script>
+  // ==========================================
+  // GET CUSTOMER
+  // ==========================================
+
+  const customer =
+    JSON.parse(
+      localStorage.getItem("shopSphereCustomer")
+    ) || {};
 
 
-    // ==========================================
-    // GET CART
-    // ==========================================
+  // ==========================================
+  // ELEMENTS
+  // ==========================================
 
-    const cart =
+  const paymentContent =
+    document.getElementById("paymentContent");
+
+  const emptyMessage =
+    document.getElementById("emptyMessage");
+
+  const orderItems =
+    document.getElementById("orderItems");
+
+  const orderTotal =
+    document.getElementById("orderTotal");
+
+  const payButton =
+    document.getElementById("payButton");
+
+  const onlineNotice =
+    document.getElementById("onlineNotice");
+
+  const codNotice =
+    document.getElementById("codNotice");
+
+
+  // ==========================================
+  // TOTAL
+  // ==========================================
+
+  let orderTotalAmount = 0;
+
+
+  // ==========================================
+  // CHECK CART
+  // ==========================================
+
+  if (cart.length === 0) {
+
+    paymentContent.style.display = "none";
+
+    emptyMessage.style.display = "block";
+
+  } else {
+
+    cart.forEach(item => {
+
+      const quantity =
+        Number(item.quantity) || 1;
+
+      const price =
+        Number(item.price) || 0;
+
+      const itemTotal =
+        price * quantity;
+
+      orderTotalAmount += itemTotal;
+
+      const itemElement =
+        document.createElement("div");
+
+      itemElement.className =
+        "order-item";
+
+      itemElement.innerHTML = `
+
+        <div>
+
+          <div class="item-name">
+            ${item.name}
+          </div>
+
+          <div class="item-quantity">
+            Quantity: ${quantity}
+          </div>
+
+        </div>
+
+        <div class="item-price">
+          TSh ${itemTotal.toLocaleString()}
+        </div>
+
+      `;
+
+      orderItems.appendChild(itemElement);
+
+    });
+
+    orderTotal.textContent =
+      "TSh " +
+      orderTotalAmount.toLocaleString();
+
+  }
+
+
+  // ==========================================
+  // GENERATE ORDER NUMBER
+  // ==========================================
+
+  function generateOrderNumber() {
+
+    return "SS-" +
+      Math.floor(
+        100000 +
+        Math.random() * 900000
+      );
+
+  }
+
+
+  // ==========================================
+  // CREATE & SAVE ORDER
+  // ==========================================
+
+  function createOrder(
+    paymentMethod,
+    paymentStatus,
+    orderStatus
+  ) {
+
+    const orderNumber =
+      generateOrderNumber();
+
+    const orderTime =
+      new Date().toISOString();
+
+    const newOrder = {
+
+      orderNumber: orderNumber,
+
+      customer: customer,
+
+      products: cart,
+
+      total: orderTotalAmount,
+
+      paymentMethod: paymentMethod,
+
+      paymentStatus: paymentStatus,
+
+      orderStatus: orderStatus,
+
+      paymentTime: orderTime,
+
+      createdAt: orderTime
+
+    };
+
+
+    let orders =
       JSON.parse(
-        localStorage.getItem("shopSphereCart")
+        localStorage.getItem(
+          "shopSphereOrders"
+        )
       ) || [];
 
 
-    // ==========================================
-    // GET CUSTOMER INFORMATION
-    // ==========================================
-
-    const customer =
-      JSON.parse(
-        localStorage.getItem("shopSphereCustomer")
-      ) || {};
+    orders.push(newOrder);
 
 
-    // ==========================================
-    // GET ELEMENTS
-    // ==========================================
-
-    const paymentContent =
-      document.getElementById("paymentContent");
-
-    const emptyMessage =
-      document.getElementById("emptyMessage");
-
-    const orderItems =
-      document.getElementById("orderItems");
-
-    const orderTotal =
-      document.getElementById("orderTotal");
-
-    const payButton =
-      document.getElementById("payButton");
-
-    const onlineNotice =
-      document.getElementById("onlineNotice");
-
-    const codNotice =
-      document.getElementById("codNotice");
+    localStorage.setItem(
+      "shopSphereOrders",
+      JSON.stringify(orders)
+    );
 
 
-    // ==========================================
-    // CALCULATE TOTAL
-    // ==========================================
+    // Save latest order information
 
-    let orderTotalAmount = 0;
+    localStorage.setItem(
+      "shopSphereOrderNumber",
+      orderNumber
+    );
+
+    localStorage.setItem(
+      "shopSphereOrderStatus",
+      orderStatus
+    );
+
+    localStorage.setItem(
+      "shopSpherePaymentMethod",
+      paymentMethod
+    );
+
+    localStorage.setItem(
+      "shopSpherePaymentStatus",
+      paymentStatus
+    );
+
+    localStorage.setItem(
+      "shopSpherePaymentTime",
+      orderTime
+    );
 
 
-    // ==========================================
-    // CHECK CART
-    // ==========================================
+    // Clear cart after order is created
 
-    if (cart.length === 0) {
+    localStorage.removeItem(
+      "shopSphereCart"
+    );
 
-      paymentContent.style.display = "none";
 
-      emptyMessage.style.display = "block";
+    // IMPORTANT:
+    // Go directly to success page
+
+    window.location.replace(
+      "success.html"
+    );
+
+  }
+
+
+  // ==========================================
+  // PAYMENT METHOD SELECTION
+  // ==========================================
+
+  document
+    .querySelectorAll(".payment-method")
+    .forEach(method => {
+
+      method.addEventListener(
+        "click",
+        function(event) {
+
+          const radio =
+            this.querySelector(
+              'input[type="radio"]'
+            );
+
+          if (!radio) return;
+
+
+          document
+            .querySelectorAll(".payment-method")
+            .forEach(item => {
+
+              item.classList.remove(
+                "active"
+              );
+
+            });
+
+
+          this.classList.add("active");
+
+          radio.checked = true;
+
+
+          updatePaymentInterface(
+            radio.value
+          );
+
+        }
+      );
+
+    });
+
+
+  // ==========================================
+  // UPDATE INTERFACE
+  // ==========================================
+
+  function updatePaymentInterface(
+    paymentMethod
+  ) {
+
+    if (
+      paymentMethod ===
+      "Cash on Delivery"
+    ) {
+
+      codNotice.style.display =
+        "block";
+
+      onlineNotice.style.display =
+        "none";
+
+      payButton.textContent =
+        "Place Order — Cash on Delivery";
 
     } else {
 
-      cart.forEach(item => {
+      codNotice.style.display =
+        "none";
 
-        const quantity =
-          Number(item.quantity) || 1;
+      onlineNotice.style.display =
+        "block";
 
-        const price =
-          Number(item.price) || 0;
-
-        const itemTotal =
-          price * quantity;
-
-        orderTotalAmount += itemTotal;
-
-
-        const itemElement =
-          document.createElement("div");
-
-        itemElement.className =
-          "order-item";
-
-
-        itemElement.innerHTML = `
-
-          <div>
-
-            <div class="item-name">
-              ${item.name}
-            </div>
-
-            <div class="item-quantity">
-              Quantity: ${quantity}
-            </div>
-
-          </div>
-
-          <div class="item-price">
-            TSh ${itemTotal.toLocaleString()}
-          </div>
-
-        `;
-
-
-        orderItems.appendChild(itemElement);
-
-      });
-
-
-      orderTotal.textContent =
-        "TSh " +
-        orderTotalAmount.toLocaleString();
+      payButton.textContent =
+        "Continue to Payment";
 
     }
 
+  }
 
-    // ==========================================
-    // PAYMENT METHOD SELECTION
-    // ==========================================
 
-    document
-      .querySelectorAll(".payment-method")
-      .forEach(method => {
+  // ==========================================
+  // BUTTON CLICK
+  // ==========================================
 
-        method.addEventListener(
-          "click",
-          function() {
-
-            document
-              .querySelectorAll(".payment-method")
-              .forEach(item => {
-
-                item.classList.remove("active");
-
-              });
-
-
-            this.classList.add("active");
-
-
-            const radio =
-              this.querySelector("input");
-
-
-            radio.checked = true;
-
-
-            updatePaymentInterface(
-              radio.value
-            );
-
-          }
-        );
-
-      });
-
-
-    // ==========================================
-    // UPDATE PAYMENT INTERFACE
-    // ==========================================
-
-    function updatePaymentInterface(
-      paymentMethod
-    ) {
-
-      if (
-        paymentMethod ===
-        "Cash on Delivery"
-      ) {
-
-        // Show COD notice
-
-        codNotice.style.display =
-          "block";
-
-
-        // Hide online notice
-
-        onlineNotice.style.display =
-          "none";
-
-
-        // Change button
-
-        payButton.textContent =
-          "Place Order — Cash on Delivery";
-
-
-      } else {
-
-        // Hide COD notice
-
-        codNotice.style.display =
-          "none";
-
-
-        // Show online notice
-
-        onlineNotice.style.display =
-          "block";
-
-
-        // Normal payment button
-
-        payButton.textContent =
-          "Continue to Payment";
-
-      }
-
-    }
-
-
-    // ==========================================
-    // CREATE ORDER NUMBER
-    // ==========================================
-
-    function generateOrderNumber() {
-
-      const randomNumber =
-        Math.floor(
-          100000 +
-          Math.random() * 900000
-        );
-
-
-      return "SS-" + randomNumber;
-
-    }
-
-
-    // ==========================================
-    // SAVE ORDER
-    // ==========================================
-
-    function saveOrder(
-      paymentMethod,
-      paymentStatus,
-      orderStatus,
-      paymentTime
-    ) {
-
-      // Create unique order number
-
-      const orderNumber =
-        generateOrderNumber();
-
-
-      // Create order object
-
-      const newOrder = {
-
-        orderNumber:
-          orderNumber,
-
-        customer:
-          customer,
-
-        products:
-          cart,
-
-        total:
-          orderTotalAmount,
-
-        paymentMethod:
-          paymentMethod,
-
-        paymentStatus:
-          paymentStatus,
-
-        orderStatus:
-          orderStatus,
-
-        paymentTime:
-          paymentTime,
-
-        createdAt:
-          paymentTime
-
-      };
-
-
-      // ======================================
-      // GET EXISTING ORDERS
-      // ======================================
-
-      let orders =
-        JSON.parse(
-          localStorage.getItem(
-            "shopSphereOrders"
-          )
-        ) || [];
-
-
-      // ======================================
-      // ADD NEW ORDER
-      // ======================================
-
-      orders.push(newOrder);
-
-
-      // ======================================
-      // SAVE ALL ORDERS
-      // ======================================
-
-      localStorage.setItem(
-        "shopSphereOrders",
-        JSON.stringify(orders)
-      );
-
-
-      // ======================================
-      // SAVE LATEST ORDER
-      // ======================================
-
-      localStorage.setItem(
-        "shopSphereOrderNumber",
-        orderNumber
-      );
-
-
-      localStorage.setItem(
-        "shopSphereOrderStatus",
-        orderStatus
-      );
-
-
-      localStorage.setItem(
-        "shopSpherePaymentMethod",
-        paymentMethod
-      );
-
-
-      localStorage.setItem(
-        "shopSpherePaymentStatus",
-        paymentStatus
-      );
-
-
-      localStorage.setItem(
-        "shopSpherePaymentTime",
-        paymentTime
-      );
-
-
-      // ======================================
-      // GO TO SUCCESS PAGE
-      // ======================================
-
-      window.location.href =
-        "success.html";
-
-    }
-
-
-    // ==========================================
-    // PROCESS PAYMENT / COD
-    // ==========================================
-
-    function processPayment() {
+  payButton.addEventListener(
+    "click",
+    function() {
 
       if (cart.length === 0) {
 
@@ -936,132 +849,85 @@
         selectedMethod.value;
 
 
-      // ========================================
+      // ======================================
       // CASH ON DELIVERY
-      // ========================================
+      // ======================================
 
       if (
         paymentMethod ===
         "Cash on Delivery"
       ) {
 
-        payButton.disabled = true;
+        this.disabled = true;
 
-        payButton.textContent =
+        this.textContent =
           "Placing Order...";
 
 
-        const paymentTime =
-          new Date().toISOString();
-
-
-        const paymentStatus =
-          "UNPAID";
-
-
-        const orderStatus =
-          "Pending";
-
-
         /*
-          COD does NOT simulate payment.
-          The order is created immediately.
+          IMPORTANT:
+
+          COD does NOT go through
+          any payment process.
+
+          It immediately creates the order
+          as UNPAID + Pending.
         */
 
-        saveOrder(
-          paymentMethod,
-          paymentStatus,
-          orderStatus,
-          paymentTime
+        createOrder(
+          "Cash on Delivery",
+          "UNPAID",
+          "Pending"
         );
-
 
         return;
 
       }
 
 
-      // ========================================
+      // ======================================
       // ONLINE PAYMENT
-      // ========================================
+      // ======================================
 
-      payButton.disabled = true;
+      this.disabled = true;
 
-      payButton.textContent =
+      this.textContent =
         "Processing Payment...";
 
 
-      const paymentTime =
-        new Date().toISOString();
+      setTimeout(() => {
 
-
-      const paymentStatus =
-        "PAID";
-
-
-      const orderStatus =
-        "Processing";
-
-
-      // ========================================
-      // SAVE PAYMENT INFORMATION
-      // ========================================
-
-      localStorage.setItem(
-        "shopSpherePaymentMethod",
-        paymentMethod
-      );
-
-
-      localStorage.setItem(
-        "shopSpherePaymentTime",
-        paymentTime
-      );
-
-
-      localStorage.setItem(
-        "shopSpherePaymentStatus",
-        paymentStatus
-      );
-
-
-      // ========================================
-      // SIMULATE PAYMENT
-      // ========================================
-
-      setTimeout(function() {
-
-        saveOrder(
+        createOrder(
           paymentMethod,
-          paymentStatus,
-          orderStatus,
-          paymentTime
+          "PAID",
+          "Processing"
         );
 
       }, 1500);
 
     }
+  );
 
 
-    // ==========================================
-    // INITIAL PAYMENT STATE
-    // ==========================================
+  // ==========================================
+  // INITIAL STATE
+  // ==========================================
 
-    const initialMethod =
-      document.querySelector(
-        'input[name="paymentMethod"]:checked'
-      );
+  const initialMethod =
+    document.querySelector(
+      'input[name="paymentMethod"]:checked'
+    );
 
 
-    if (initialMethod) {
+  if (initialMethod) {
 
-      updatePaymentInterface(
-        initialMethod.value
-      );
+    updatePaymentInterface(
+      initialMethod.value
+    );
 
-    }
+  }
 
-  </script>
+</script>
 
 </body>
 </html>
