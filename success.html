@@ -272,6 +272,9 @@
       text-align: center;
       font-weight: 800;
       transition: 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
     }
 
     .btn-primary {
@@ -294,6 +297,34 @@
       transform: translateY(-1px);
     }
 
+    /* WHATSAPP BUTTON */
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .whatsapp-btn:hover {
+      background: #1ebe5d;
+      transform: translateY(-1px);
+    }
+
+    .whatsapp-icon {
+      font-size: 20px;
+    }
+
+    .whatsapp-note {
+      margin-top: 12px;
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     .empty {
       text-align: center;
       padding: 30px 10px;
@@ -310,6 +341,7 @@
     }
 
     @media (max-width: 750px) {
+
       .navbar {
         padding: 16px 5%;
       }
@@ -360,7 +392,9 @@
 <body>
 
   <!-- NAVBAR -->
+
   <nav class="navbar">
+
     <a href="index.html" class="logo">
       Shop<span>Sphere</span>
     </a>
@@ -370,12 +404,14 @@
       <a href="products.html">Shop</a>
       <a href="cart.html">Cart</a>
     </div>
+
   </nav>
 
 
   <main class="container">
 
     <!-- SUCCESS HEADER -->
+
     <section class="success-header">
 
       <div class="success-icon">
@@ -399,62 +435,103 @@
     <div class="grid">
 
       <!-- PRODUCTS -->
+
       <section class="card">
 
         <h2>🛍️ Products Purchased</h2>
 
         <div id="productsList">
+
           <div class="empty">
             Loading products...
           </div>
+
         </div>
 
       </section>
 
 
       <!-- ORDER SUMMARY -->
+
       <section class="card">
 
         <h2>Order Summary</h2>
 
         <div class="summary-row">
+
           <span>Order Number</span>
-          <span id="summaryOrderNumber">-</span>
+
+          <span id="summaryOrderNumber">
+            -
+          </span>
+
         </div>
 
+
         <div class="summary-row">
+
           <span>Payment Status</span>
 
           <span>
+
             <span class="status">
+
               <span class="status-dot"></span>
+
               PAID
+
             </span>
+
           </span>
+
         </div>
 
+
         <div class="summary-row">
+
           <span>Order Status</span>
-          <span>Processing</span>
+
+          <span>
+            Processing
+          </span>
+
         </div>
 
+
         <div class="summary-row">
+
           <span>Payment Method</span>
-          <span id="paymentMethod">-</span>
+
+          <span id="paymentMethod">
+            -
+          </span>
+
         </div>
+
 
         <div class="total-row">
-          <strong>Total Paid</strong>
-          <span class="total-price" id="totalPrice">
+
+          <strong>
+            Total Paid
+          </strong>
+
+          <span
+            class="total-price"
+            id="totalPrice"
+          >
             TSh 0
           </span>
+
         </div>
 
 
         <!-- CUSTOMER -->
+
         <div class="customer-box">
 
-          <h3>Customer Information</h3>
+          <h3>
+            Customer Information
+          </h3>
 
           <p>
             <strong>Name:</strong>
@@ -484,15 +561,48 @@
 
 
     <!-- BUTTONS -->
+
     <div class="buttons">
 
-      <a href="products.html" class="btn btn-primary">
+      <a
+        href="products.html"
+        class="btn btn-primary"
+      >
         Continue Shopping
       </a>
 
-      <a href="history.html" class="btn btn-secondary">
+
+      <a
+        href="history.html"
+        class="btn btn-secondary"
+      >
         Track Order
       </a>
+
+
+      <!-- WHATSAPP -->
+
+      <button
+        id="whatsappButton"
+        class="btn whatsapp-btn"
+        type="button"
+      >
+
+        <span class="whatsapp-icon">
+          💬
+        </span>
+
+        Send Order via WhatsApp
+
+      </button>
+
+    </div>
+
+
+    <div class="whatsapp-note">
+
+      Your order details will be prepared automatically
+      and opened in WhatsApp.
 
     </div>
 
@@ -500,7 +610,9 @@
 
 
   <footer>
+
     © 2026 ShopSphere. All rights reserved.
+
   </footer>
 
 
@@ -511,17 +623,32 @@
     // ==========================================
 
     const cart =
-      JSON.parse(localStorage.getItem("shopSphereCart")) || [];
+      JSON.parse(
+        localStorage.getItem("shopSphereCart")
+      ) || [];
+
 
     const customer =
-      JSON.parse(localStorage.getItem("shopSphereCustomer")) || {};
+      JSON.parse(
+        localStorage.getItem("shopSphereCustomer")
+      ) || {};
+
 
     const orderNumber =
-      localStorage.getItem("shopSphereOrderNumber") ||
-      "SS-" + Math.floor(100000 + Math.random() * 900000);
+      localStorage.getItem(
+        "shopSphereOrderNumber"
+      ) ||
+      "SS-" +
+      Math.floor(
+        100000 +
+        Math.random() * 900000
+      );
+
 
     const paymentMethod =
-      localStorage.getItem("shopSpherePaymentMethod") ||
+      localStorage.getItem(
+        "shopSpherePaymentMethod"
+      ) ||
       "Mobile Money";
 
 
@@ -541,8 +668,10 @@
 
     function formatMoney(amount) {
 
-      return "TSh " +
-        Number(amount || 0).toLocaleString("en-TZ");
+      return (
+        "TSh " +
+        Number(amount || 0).toLocaleString("en-TZ")
+      );
 
     }
 
@@ -551,10 +680,15 @@
     // DISPLAY ORDER NUMBER
     // ==========================================
 
-    document.getElementById("orderNumber").textContent =
+    document.getElementById(
+      "orderNumber"
+    ).textContent =
       "Order: " + orderNumber;
 
-    document.getElementById("summaryOrderNumber").textContent =
+
+    document.getElementById(
+      "summaryOrderNumber"
+    ).textContent =
       orderNumber;
 
 
@@ -562,7 +696,9 @@
     // DISPLAY PAYMENT METHOD
     // ==========================================
 
-    document.getElementById("paymentMethod").textContent =
+    document.getElementById(
+      "paymentMethod"
+    ).textContent =
       paymentMethod;
 
 
@@ -570,17 +706,33 @@
     // DISPLAY CUSTOMER INFORMATION
     // ==========================================
 
-    document.getElementById("customerName").textContent =
-      customer.fullName || customer.name || "-";
+    document.getElementById(
+      "customerName"
+    ).textContent =
+      customer.fullName ||
+      customer.name ||
+      "-";
 
-    document.getElementById("customerPhone").textContent =
-      customer.phone || "-";
 
-    document.getElementById("customerEmail").textContent =
-      customer.email || "-";
+    document.getElementById(
+      "customerPhone"
+    ).textContent =
+      customer.phone ||
+      "-";
 
-    document.getElementById("customerAddress").textContent =
-      customer.address || "-";
+
+    document.getElementById(
+      "customerEmail"
+    ).textContent =
+      customer.email ||
+      "-";
+
+
+    document.getElementById(
+      "customerAddress"
+    ).textContent =
+      customer.address ||
+      "-";
 
 
     // ==========================================
@@ -588,56 +740,81 @@
     // ==========================================
 
     const productsList =
-      document.getElementById("productsList");
+      document.getElementById(
+        "productsList"
+      );
+
 
     let total = 0;
+
 
     if (!cart.length) {
 
       productsList.innerHTML = `
+
         <div class="empty">
+
           No products found for this order.
+
         </div>
+
       `;
 
     } else {
 
       productsList.innerHTML = "";
 
+
       cart.forEach(item => {
 
         const quantity =
           Number(item.quantity) || 1;
 
+
         const price =
           Number(item.price) || 0;
+
 
         const itemTotal =
           price * quantity;
 
+
         total += itemTotal;
 
 
-        const product = document.createElement("div");
+        const product =
+          document.createElement("div");
 
-        product.className = "product";
+
+        product.className =
+          "product";
 
 
+        // ======================================
         // IMAGE
+        // ======================================
 
         let imageHTML = "";
 
-        if (item.image_url || item.image) {
+
+        if (
+          item.image_url ||
+          item.image
+        ) {
 
           const image =
-            item.image_url || item.image;
+            item.image_url ||
+            item.image;
+
 
           imageHTML = `
+
             <img
               src="${image}"
               alt="${item.name || "Product"}"
               onerror="this.style.display='none'"
             >
+
           `;
 
         }
@@ -646,8 +823,11 @@
         product.innerHTML = `
 
           <div class="product-image">
+
             ${imageHTML}
+
           </div>
+
 
           <div class="product-info">
 
@@ -655,9 +835,11 @@
               ${item.name || "Product"}
             </h3>
 
+
             <p>
               Quantity: ${quantity}
             </p>
+
 
             <p>
               Unit Price: ${formatMoney(price)}
@@ -665,14 +847,19 @@
 
           </div>
 
+
           <div class="product-price">
+
             ${formatMoney(itemTotal)}
+
           </div>
 
         `;
 
 
-        productsList.appendChild(product);
+        productsList.appendChild(
+          product
+        );
 
       });
 
@@ -683,9 +870,151 @@
     // DISPLAY TOTAL
     // ==========================================
 
-    document.getElementById("totalPrice").textContent =
+    document.getElementById(
+      "totalPrice"
+    ).textContent =
       formatMoney(total);
 
+
+    // ==========================================
+    // WHATSAPP ORDER MESSAGE
+    // ==========================================
+
+    const whatsappButton =
+      document.getElementById(
+        "whatsappButton"
+      );
+
+
+    whatsappButton.addEventListener(
+      "click",
+      function() {
+
+        // --------------------------------------
+        // WHATSAPP NUMBER
+        // --------------------------------------
+
+        const whatsappNumber =
+          "255749809425";
+
+
+        // --------------------------------------
+        // CUSTOMER DATA
+        // --------------------------------------
+
+        const customerName =
+          customer.fullName ||
+          customer.name ||
+          "-";
+
+
+        const customerPhone =
+          customer.phone ||
+          "-";
+
+
+        const customerEmail =
+          customer.email ||
+          "-";
+
+
+        const customerAddress =
+          customer.address ||
+          "-";
+
+
+        // --------------------------------------
+        // BUILD PRODUCTS MESSAGE
+        // --------------------------------------
+
+        let productsMessage = "";
+
+
+        if (cart.length === 0) {
+
+          productsMessage =
+            "- No products found";
+
+        } else {
+
+          cart.forEach(item => {
+
+            const quantity =
+              Number(item.quantity) || 1;
+
+
+            const price =
+              Number(item.price) || 0;
+
+
+            const itemTotal =
+              price * quantity;
+
+
+            productsMessage +=
+              "• " +
+              (item.name || "Product") +
+              " x" +
+              quantity +
+              " — " +
+              formatMoney(itemTotal) +
+              "\n";
+
+          });
+
+        }
+
+
+        // --------------------------------------
+        // CREATE WHATSAPP MESSAGE
+        // --------------------------------------
+
+        const message =
+
+`Hello ShopSphere 👋
+
+I have completed an order.
+
+Order Number: ${orderNumber}
+
+Customer: ${customerName}
+Phone: ${customerPhone}
+Email: ${customerEmail}
+Delivery Address: ${customerAddress}
+
+Products:
+${productsMessage}
+Total: ${formatMoney(total)}
+
+Payment Method: ${paymentMethod}
+Payment Status: PAID
+Order Status: Processing
+
+Please confirm my order. Thank you.`;
+
+
+        // --------------------------------------
+        // CREATE WHATSAPP URL
+        // --------------------------------------
+
+        const whatsappURL =
+          "https://wa.me/" +
+          whatsappNumber +
+          "?text=" +
+          encodeURIComponent(message);
+
+
+        // --------------------------------------
+        // OPEN WHATSAPP
+        // --------------------------------------
+
+        window.open(
+          whatsappURL,
+          "_blank"
+        );
+
+      }
+    );
 
   </script>
 
