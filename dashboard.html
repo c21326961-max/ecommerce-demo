@@ -246,6 +246,8 @@
       padding: 30px 10px;
     }
 
+    /* STATUS BADGES */
+
     .status {
       display: inline-block;
       padding: 6px 10px;
@@ -267,6 +269,52 @@
     .status-pending {
       background: #fee2e2;
       color: #991b1b;
+    }
+
+    .status-shipped {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .status-delivered {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-cancelled {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* STATUS SELECT */
+
+    .status-select {
+      min-width: 125px;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background: white;
+      color: #111827;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .status-select:hover {
+      border-color: #22c55e;
+    }
+
+    .status-select:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+    }
+
+    /* STATUS COLUMN */
+
+    .status-cell {
+      min-width: 160px;
     }
 
     /* QUICK ACTIONS */
@@ -330,7 +378,7 @@
       background: #dcfce7;
     }
 
-    /* REFRESH MESSAGE */
+    /* DASHBOARD MESSAGE */
 
     .dashboard-message {
       display: none;
@@ -444,7 +492,6 @@
         🏠 Dashboard
       </a>
 
-      <!-- FIXED: ADMIN PRODUCTS -->
       <a href="admin-products.html">
         📦 Products
       </a>
@@ -682,7 +729,7 @@
                   </th>
 
                   <th>
-                    Status
+                    Order Status
                   </th>
 
                 </tr>
@@ -724,7 +771,6 @@
 
           <div class="quick-actions">
 
-            <!-- VIEW PRODUCTS -->
             <a
               href="admin-products.html"
               class="quick-action"
@@ -748,7 +794,6 @@
 
             </a>
 
-            <!-- ORDER HISTORY -->
             <a
               href="history.html"
               class="quick-action"
@@ -772,7 +817,6 @@
 
             </a>
 
-            <!-- FIXED ADD PRODUCT -->
             <a
               href="admin-products.html"
               class="quick-action add-product-action"
@@ -796,7 +840,6 @@
 
             </a>
 
-            <!-- VIEW STORE -->
             <a
               href="index.html"
               class="quick-action"
@@ -1010,15 +1053,134 @@
 
       }
 
-      if (
-        cleanStatus === "pending"
-      ) {
+      if (cleanStatus === "pending") {
 
         return "status-pending";
 
       }
 
+      if (cleanStatus === "shipped") {
+
+        return "status-shipped";
+
+      }
+
+      if (cleanStatus === "delivered") {
+
+        return "status-delivered";
+
+      }
+
+      if (
+        cleanStatus === "cancelled" ||
+        cleanStatus === "canceled"
+      ) {
+
+        return "status-cancelled";
+
+      }
+
       return "status-processing";
+
+    }
+
+    /* =========================================
+       UPDATE ORDER STATUS
+    ========================================= */
+
+    function updateOrderStatus(
+      orderNumber,
+      newStatus
+    ) {
+
+      const orders = getOrders();
+
+      const orderIndex =
+        orders.findIndex(
+          order =>
+            String(order.orderNumber) ===
+            String(orderNumber)
+        );
+
+      if (orderIndex === -1) {
+
+        showDashboardMessage(
+          "Order not found."
+        );
+
+        return;
+
+      }
+
+      orders[orderIndex].orderStatus =
+        newStatus;
+
+      localStorage.setItem(
+        "shopSphereOrders",
+        JSON.stringify(orders)
+      );
+
+      /*
+        Also update the latest order status
+        used by the customer tracking page.
+      */
+
+      const latestOrderNumber =
+        localStorage.getItem(
+          "shopSphereOrderNumber"
+        );
+
+      if (
+        String(latestOrderNumber) ===
+        String(orderNumber)
+      ) {
+
+        localStorage.setItem(
+          "shopSphereOrderStatus",
+          newStatus
+        );
+
+      }
+
+      showDashboardMessage(
+        `Order #${orderNumber} status changed to ${newStatus}.`
+      );
+
+      loadDashboard();
+
+    }
+
+    /* =========================================
+       DASHBOARD MESSAGE
+    ========================================= */
+
+    function showDashboardMessage(message) {
+
+      const messageBox =
+        document.getElementById(
+          "dashboardMessage"
+        );
+
+      messageBox.textContent =
+        message;
+
+      messageBox.style.display =
+        "block";
+
+      clearTimeout(
+        window.dashboardMessageTimer
+      );
+
+      window.dashboardMessageTimer =
+        setTimeout(
+          function() {
+
+            messageBox.style.display =
+              "none";
+
+          },
+          3000
+        );
 
     }
 
@@ -1131,12 +1293,51 @@
                 </span>
               </td>
 
-              <td>
-                <span
-                  class="status ${getStatusClass(orderStatus)}"
+              <td class="status-cell">
+
+                <select
+                  class="status-select"
+                  data-order-number="${escapeHtml(orderNumber)}"
+                  aria-label="Change order status"
                 >
-                  ${escapeHtml(orderStatus)}
-                </span>
+
+                  <option
+                    value="Pending"
+                    ${orderStatus === "Pending" ? "selected" : ""}
+                  >
+                    Pending
+                  </option>
+
+                  <option
+                    value="Processing"
+                    ${orderStatus === "Processing" ? "selected" : ""}
+                  >
+                    Processing
+                  </option>
+
+                  <option
+                    value="Shipped"
+                    ${orderStatus === "Shipped" ? "selected" : ""}
+                  >
+                    Shipped
+                  </option>
+
+                  <option
+                    value="Delivered"
+                    ${orderStatus === "Delivered" ? "selected" : ""}
+                  >
+                    Delivered
+                  </option>
+
+                  <option
+                    value="Cancelled"
+                    ${orderStatus === "Cancelled" ? "selected" : ""}
+                  >
+                    Cancelled
+                  </option>
+
+                </select>
+
               </td>
 
             </tr>
@@ -1144,6 +1345,34 @@
           `;
 
         }).join("");
+
+      /* =========================================
+         STATUS CHANGE LISTENERS
+      ========================================= */
+
+      document
+        .querySelectorAll(".status-select")
+        .forEach(select => {
+
+          select.addEventListener(
+            "change",
+            function() {
+
+              const orderNumber =
+                this.dataset.orderNumber;
+
+              const newStatus =
+                this.value;
+
+              updateOrderStatus(
+                orderNumber,
+                newStatus
+              );
+
+            }
+          );
+
+        });
 
     }
 
