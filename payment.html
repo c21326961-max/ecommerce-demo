@@ -1,1465 +1,2713 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <title>Payment | ShopSphere</title>
+  <title>Place Order | ShopSphere</title>
 
+  <meta
+    name="description"
+    content="Complete your ShopSphere order with Cash on Delivery."
+  >
+
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#111827">
 
   <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #111827;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --primary: #111827;
+      --primary-hover: #1f2937;
+      --success: #16a34a;
+      --success-dark: #166534;
+      --danger: #dc2626;
+      --whatsapp: #25d366;
+      --whatsapp-dark: #128c7e;
+      --radius: 18px;
+      --shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+      --max-width: 1150px;
+    }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: #f5f7fb;
-      color: #1f2937;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      line-height: 1.5;
     }
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    button,
+    input {
+      font: inherit;
     }
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
+    button {
+      cursor: pointer;
     }
 
-    .logo span {
-      color: #22c55e;
-    }
-
-    nav a {
-      color: white;
+    a {
+      color: inherit;
       text-decoration: none;
-      margin-left: 22px;
-      font-size: 14px;
     }
 
-    nav a:hover {
-      color: #22c55e;
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(17, 24, 39, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 0 20px;
+    .nav-inner {
+      width: min(calc(100% - 32px), var(--max-width));
+      min-height: 70px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    .page-title {
-      text-align: center;
-      margin-bottom: 35px;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
     }
 
-    .page-title h1 {
-      font-size: 34px;
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      background: white;
       color: #111827;
-      margin-bottom: 10px;
+
+      border-radius: 11px;
+      font-weight: 900;
     }
 
-    .page-title p {
-      color: #6b7280;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .nav-links a {
+      color: #dbeafe;
+
+      padding: 9px 12px;
+      border-radius: 9px;
+
+      font-size: 0.94rem;
+      font-weight: 600;
+
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .cart-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .cart-count {
+      min-width: 22px;
+      height: 22px;
+
+      padding: 0 6px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 999px;
+
+      background: #2563eb;
+      color: white;
+
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .menu-button {
+      display: none;
+
+      width: 44px;
+      height: 44px;
+
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+
+      background: transparent;
+      color: white;
+
+      font-size: 1.3rem;
+    }
+
+    /* =========================
+       PAGE HEADER
+    ========================== */
+
+    .page-header {
+      background:
+        linear-gradient(
+          135deg,
+          #111827,
+          #1e293b
+        );
+
+      color: white;
+      padding: 48px 16px;
+    }
+
+    .page-header-inner {
+      width: min(100%, var(--max-width));
+      margin: auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      margin-bottom: 16px;
+
+      color: #cbd5e1;
+      font-size: 0.88rem;
+    }
+
+    .breadcrumb a:hover {
+      color: white;
+    }
+
+    .page-header h1 {
+      margin-bottom: 10px;
+
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+
+      letter-spacing: -0.04em;
+    }
+
+    .page-header p {
+      max-width: 680px;
+
+      color: #cbd5e1;
+      font-size: 1rem;
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    main {
+      width: min(calc(100% - 32px), var(--max-width));
+
+      margin: 36px auto 70px;
     }
 
     .payment-layout {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 25px;
+      grid-template-columns:
+        minmax(0, 1.25fr)
+        minmax(320px, 0.8fr);
+
+      gap: 26px;
+
+      align-items: start;
     }
 
     .card {
-      background: white;
-      padding: 28px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
     }
 
-    .card h2 {
-      font-size: 21px;
-      margin-bottom: 22px;
-      color: #111827;
+    .card-header {
+      padding: 24px 26px 18px;
+
+      border-bottom: 1px solid var(--border);
     }
 
-    .payment-method {
-      border: 2px solid #e5e7eb;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      cursor: pointer;
-      transition: 0.2s;
+    .card-header h2 {
+      margin-bottom: 5px;
+
+      font-size: 1.2rem;
     }
 
-    .payment-method:hover {
-      border-color: #22c55e;
+    .card-header p {
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
-    .payment-method.active {
-      border-color: #22c55e;
+    .card-body {
+      padding: 26px;
+    }
+
+    /* =========================
+       COD METHOD
+    ========================== */
+
+    .cod-method {
+      border: 2px solid #22c55e;
+
       background: #f0fdf4;
-    }
 
-    .payment-method label {
+      border-radius: 15px;
+
+      padding: 20px;
+
       display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      font-weight: bold;
+      gap: 15px;
+      align-items: flex-start;
     }
 
-    .payment-method input {
-      width: 18px;
-      height: 18px;
-      accent-color: #22c55e;
+    .cod-icon {
+      width: 50px;
+      height: 50px;
+
+      flex: 0 0 50px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      background: #dcfce7;
+
+      font-size: 1.5rem;
     }
 
-    .method-description {
-      margin-top: 8px;
-      margin-left: 30px;
-      color: #6b7280;
-      font-size: 14px;
-      line-height: 1.5;
-    }
+    .cod-content h3 {
+      margin-bottom: 5px;
 
-    .notice {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .cod-notice {
-      display: none;
-      background: #ecfdf3;
-      border: 1px solid #86efac;
-      color: #166534;
-      padding: 16px;
-      border-radius: 10px;
-      margin-top: 20px;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .cod-notice strong {
       color: #14532d;
+      font-size: 1rem;
     }
 
-    .order-item {
+    .cod-content p {
+      color: #166534;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .cod-badge {
+      display: inline-flex;
+
+      margin-top: 12px;
+
+      padding: 5px 10px;
+
+      border-radius: 999px;
+
+      background: #bbf7d0;
+      color: #166534;
+
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    /* =========================
+       ORDER INFO
+    ========================== */
+
+    .order-info {
+      margin-top: 24px;
+
+      padding: 18px;
+
+      border-radius: 13px;
+
+      background: var(--surface-soft);
+
+      border: 1px solid var(--border);
+    }
+
+    .info-row {
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      padding: 13px 0;
-      border-bottom: 1px solid #e5e7eb;
+
+      padding: 9px 0;
+
+      font-size: 0.9rem;
+    }
+
+    .info-row + .info-row {
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .info-label {
+      color: var(--muted);
+    }
+
+    .info-value {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    /* =========================
+       WHATSAPP NOTICE
+    ========================== */
+
+    .whatsapp-notice {
+      margin-top: 24px;
+
+      padding: 17px;
+
+      border-radius: 13px;
+
+      background: #ecfdf5;
+
+      border: 1px solid #a7f3d0;
+
+      color: #065f46;
+
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .whatsapp-notice strong {
+      color: #064e3b;
+    }
+
+    /* =========================
+       BUTTON
+    ========================== */
+
+    .place-order-button {
+      width: 100%;
+
+      min-height: 54px;
+
+      margin-top: 25px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: var(--whatsapp);
+      color: white;
+
+      font-size: 1rem;
+      font-weight: 800;
+
+      box-shadow:
+        0 8px 20px rgba(37, 211, 102, 0.22);
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .place-order-button:hover {
+      background: var(--whatsapp-dark);
+      transform: translateY(-1px);
+    }
+
+    .place-order-button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .back-link {
+      display: inline-block;
+
+      margin-top: 18px;
+
+      color: #475569;
+
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      color: #111827;
+    }
+
+    /* =========================
+       SUMMARY
+    ========================== */
+
+    .summary-card {
+      position: sticky;
+      top: 92px;
+
+      overflow: hidden;
+    }
+
+    .summary-header {
+      padding: 22px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-header h2 {
+      font-size: 1.15rem;
+    }
+
+    .order-items {
+      padding: 8px 22px;
+    }
+
+    .order-item {
+      display: grid;
+
+      grid-template-columns:
+        64px
+        minmax(0, 1fr)
+        auto;
+
+      gap: 12px;
+
+      align-items: center;
+
+      padding: 15px 0;
+
+      border-bottom: 1px solid #eef2f7;
     }
 
     .order-item:last-child {
       border-bottom: none;
     }
 
+    .product-image {
+      width: 64px;
+      height: 64px;
+
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      background: #f1f5f9;
+
+      border: 1px solid var(--border);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .placeholder {
+      width: 100%;
+      height: 100%;
+
+      display: grid;
+      place-items: center;
+
+      color: #94a3b8;
+
+      font-size: 1.3rem;
+    }
+
     .item-name {
-      font-weight: bold;
-    }
+      overflow: hidden;
 
-    .item-quantity {
-      color: #6b7280;
-      font-size: 14px;
-      margin-top: 4px;
-    }
+      margin-bottom: 3px;
 
-    .item-price {
-      font-weight: bold;
+      font-size: 0.9rem;
+      font-weight: 750;
+
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .total {
+    .item-meta {
+      color: var(--muted);
+      font-size: 0.77rem;
+    }
+
+    .item-price {
+      white-space: nowrap;
+
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .summary-total {
+      padding: 20px 22px;
+
+      background: var(--surface-soft);
+
+      border-top: 1px solid var(--border);
+    }
+
+    .total-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 2px solid #111827;
-      font-size: 21px;
-      font-weight: bold;
+
+      gap: 15px;
+
+      color: #475569;
+
+      font-size: 0.9rem;
     }
 
-    .pay-button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 16px;
-      background: #22c55e;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
+    .total-row strong {
+      color: var(--text);
     }
 
-    .pay-button:hover {
-      background: #16a34a;
+    .grand-total {
+      margin-top: 15px;
+      padding-top: 15px;
+
+      border-top: 1px dashed #cbd5e1;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .pay-button:disabled {
-      background: #9ca3af;
-      cursor: not-allowed;
+    .grand-total span {
+      font-weight: 800;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 20px;
-      color: #374151;
-      text-decoration: none;
-      font-size: 14px;
+    .grand-total strong {
+      color: #16a34a;
+
+      font-size: 1.3rem;
     }
 
-    .back-link:hover {
-      color: #22c55e;
-    }
+    /* =========================
+       EMPTY
+    ========================== */
 
-    .empty {
+    .empty-card {
+      max-width: 650px;
+
+      margin: 60px auto;
+
+      padding: 45px 25px;
+
       text-align: center;
-      padding: 40px 20px;
-      color: #6b7280;
     }
+
+    .empty-icon {
+      width: 68px;
+      height: 68px;
+
+      margin: 0 auto 18px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: #f1f5f9;
+
+      font-size: 1.8rem;
+    }
+
+    .empty-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .empty-card p {
+      margin-bottom: 22px;
+
+      color: var(--muted);
+    }
+
+    .shop-button {
+      display: inline-flex;
+
+      min-height: 46px;
+
+      padding: 0 18px;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background: #111827;
+      color: white;
+
+      font-weight: 800;
+    }
+
+    .shop-button:hover {
+      background: #1f2937;
+    }
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast {
+      position: fixed;
+
+      left: 50%;
+      bottom: 24px;
+
+      z-index: 9999;
+
+      width: min(calc(100% - 30px), 430px);
+
+      padding: 14px 17px;
+
+      border-radius: 12px;
+
+      background: #111827;
+      color: white;
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,0.2);
+
+      transform:
+        translate(-50%, 120px);
+
+      opacity: 0;
+      pointer-events: none;
+
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .toast.show {
+      transform:
+        translate(-50%, 0);
+
+      opacity: 1;
+    }
+
+    .toast.error {
+      background: #991b1b;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
 
     footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: #6b7280;
-      font-size: 14px;
+      background: #0f172a;
+      color: #cbd5e1;
+
+      padding: 32px 16px;
     }
 
-    @media (max-width: 800px) {
+    .footer-inner {
+      width: min(100%, var(--max-width));
+
+      margin: auto;
+
+      display: flex;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      color: white;
+      font-weight: 800;
+    }
+
+    .footer-text {
+      font-size: 0.82rem;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
 
       .payment-layout {
         grid-template-columns: 1fr;
       }
 
-      header {
-        padding: 16px 20px;
-      }
-
-      nav a {
-        margin-left: 10px;
-      }
-
-      .page-title h1 {
-        font-size: 28px;
+      .summary-card {
+        position: static;
       }
 
     }
 
+    @media (max-width: 760px) {
+
+      .nav-inner {
+        min-height: 64px;
+      }
+
+      .menu-button {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        display: none;
+
+        position: absolute;
+
+        left: 16px;
+        right: 16px;
+        top: 72px;
+
+        padding: 10px;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        background: #111827;
+
+        border:
+          1px solid
+          rgba(255,255,255,0.1);
+
+        border-radius: 14px;
+
+        box-shadow:
+          0 18px 40px
+          rgba(0,0,0,0.25);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .page-header {
+        padding: 38px 16px;
+      }
+
+      main {
+        width: min(calc(100% - 20px), var(--max-width));
+
+        margin-top: 22px;
+      }
+
+      .card-body {
+        padding: 20px;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .brand {
+        font-size: 1.08rem;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .order-item {
+        grid-template-columns:
+          55px
+          minmax(0, 1fr);
+      }
+
+      .product-image {
+        width: 55px;
+        height: 55px;
+      }
+
+      .item-price {
+        grid-column: 2;
+      }
+
+      .cod-method {
+        padding: 16px;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
+    }
   </style>
-
 </head>
-
 
 <body>
 
+  <!-- =========================
+       NAVBAR
+  ========================== -->
 
-<header>
+  <nav class="navbar">
 
-  <div class="logo">
-    Shop<span>Sphere</span>
-  </div>
+    <div class="nav-inner">
 
-
-  <nav>
-
-    <a href="index.html">
-      Home
-    </a>
-
-    <a href="products.html">
-      Shop
-    </a>
-
-    <a href="cart.html">
-      Cart
-    </a>
-
-  </nav>
-
-</header>
-
-
-<div class="container">
-
-
-  <div class="page-title">
-
-    <h1>
-      Payment
-    </h1>
-
-    <p>
-      Choose your preferred payment method to complete your order.
-    </p>
-
-  </div>
-
-
-  <div
-    id="emptyMessage"
-    class="card empty"
-    style="display:none;"
-  >
-
-    <h2>
-      Your cart is empty
-    </h2>
-
-    <p>
-      Please add products before making a payment.
-    </p>
-
-    <br>
-
-    <a
-      href="products.html"
-      class="back-link"
-    >
-      ← Continue Shopping
-    </a>
-
-  </div>
-
-
-  <div
-    id="paymentContent"
-    class="payment-layout"
-  >
-
-
-    <!-- =========================================
-         PAYMENT METHODS
-    ========================================== -->
-
-    <div class="card">
-
-      <h2>
-        Choose Payment Method
-      </h2>
-
-
-      <!-- MOBILE MONEY -->
-
-      <div class="payment-method active">
-
-        <label>
-
-          <input
-            type="radio"
-            name="paymentMethod"
-            value="Mobile Money"
-            checked
-          >
-
-          <span>
-            📱 Mobile Money
-          </span>
-
-        </label>
-
-
-        <div class="method-description">
-          Pay using mobile money services.
-        </div>
-
-      </div>
-
-
-      <!-- CARD -->
-
-      <div class="payment-method">
-
-        <label>
-
-          <input
-            type="radio"
-            name="paymentMethod"
-            value="Card Payment"
-          >
-
-          <span>
-            💳 Card Payment
-          </span>
-
-        </label>
-
-
-        <div class="method-description">
-          Pay securely using your debit or credit card.
-        </div>
-
-      </div>
-
-
-      <!-- BANK -->
-
-      <div class="payment-method">
-
-        <label>
-
-          <input
-            type="radio"
-            name="paymentMethod"
-            value="Bank Payment"
-          >
-
-          <span>
-            🏦 Bank Payment
-          </span>
-
-        </label>
-
-
-        <div class="method-description">
-          Make payment directly through your bank.
-        </div>
-
-      </div>
-
-
-      <!-- CASH ON DELIVERY -->
-
-      <div
-        class="payment-method"
-        id="codMethod"
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="ShopSphere Home"
       >
-
-        <label>
-
-          <input
-            type="radio"
-            name="paymentMethod"
-            value="Cash on Delivery"
-          >
-
-          <span>
-            💵 Cash on Delivery
-          </span>
-
-        </label>
-
-
-        <div class="method-description">
-          Pay when you receive or collect your order.
-          No online payment is required now.
-        </div>
-
-      </div>
-
-
-      <!-- ONLINE NOTICE -->
-
-      <div
-        class="notice"
-        id="onlineNotice"
-      >
-
-        <strong>
-          Demo Payment
-        </strong>
-
-        <br>
-
-        This is a demonstration website.
-        No real money will be charged.
-        Clicking the payment button will simulate
-        a successful payment.
-
-      </div>
-
-
-      <!-- COD NOTICE -->
-
-      <div
-        class="cod-notice"
-        id="codNotice"
-      >
-
-        <strong>
-          💵 Cash on Delivery selected
-        </strong>
-
-        <br><br>
-
-        You do not need to make an online payment now.
-
-        <br>
-
-        Your order will be recorded as
-        <strong>UNPAID</strong> and
-        <strong>Pending</strong>.
-
-        <br>
-
-        You will pay the full order amount when
-        you receive or collect your order.
-
-      </div>
-
-
-      <!-- BUTTON -->
+        <span class="brand-mark">S</span>
+        <span>ShopSphere</span>
+      </a>
 
       <button
         type="button"
-        class="pay-button"
-        id="payButton"
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
       >
-        Continue to Payment
+        ☰
       </button>
 
-
-      <a
-        href="checkout.html"
-        class="back-link"
+      <div
+        class="nav-links"
+        id="navLinks"
       >
-        ← Back to Checkout
-      </a>
 
-    </div>
+        <a href="index.html">
+          Home
+        </a>
 
+        <a href="products.html">
+          Shop
+        </a>
 
+        <a href="history.html">
+          Track Order
+        </a>
 
-    <!-- =========================================
-         ORDER SUMMARY
-    ========================================== -->
+        <a
+          href="cart.html"
+          class="cart-nav"
+        >
+          Cart
 
-    <div class="card">
+          <span
+            class="cart-count"
+            id="cartCount"
+          >
+            0
+          </span>
 
-      <h2>
-        Order Summary
-      </h2>
-
-
-      <div id="orderItems"></div>
-
-
-      <div class="total">
-
-        <span>
-          Total
-        </span>
-
-        <span id="orderTotal">
-          TSh 0
-        </span>
+        </a>
 
       </div>
 
     </div>
 
-  </div>
-
-</div>
+  </nav>
 
 
-<footer>
-  © 2026 ShopSphere. All rights reserved.
-</footer>
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="page-header">
+
+    <div class="page-header-inner">
+
+      <div class="breadcrumb">
+
+        <a href="checkout.html">
+          Checkout
+        </a>
+
+        <span>›</span>
+
+        <span>
+          Place Order
+        </span>
+
+      </div>
+
+      <h1>
+        Place Your Order
+      </h1>
+
+      <p>
+        Your order will be placed using
+        Cash on Delivery. You will pay when
+        you receive or collect your order.
+      </p>
+
+    </div>
+
+  </header>
 
 
+  <!-- =========================
+       MAIN
+  ========================== -->
 
-<script>
+  <main>
+
+    <!-- EMPTY CART -->
+
+    <section
+      id="emptyMessage"
+      class="card empty-card"
+      hidden
+    >
+
+      <div class="empty-icon">
+        🛒
+      </div>
+
+      <h2>
+        Your cart is empty
+      </h2>
+
+      <p>
+        Please add products to your cart
+        before placing an order.
+      </p>
+
+      <a
+        href="products.html"
+        class="shop-button"
+      >
+        Continue Shopping
+      </a>
+
+    </section>
 
 
-  // ==========================================
-  // GET CART
-  // ==========================================
+    <!-- PAYMENT CONTENT -->
 
-  const cart =
-    JSON.parse(
-      localStorage.getItem(
-        "shopSphereCart"
-      )
-    ) || [];
+    <section
+      id="paymentContent"
+      class="payment-layout"
+      hidden
+    >
+
+      <!-- =========================
+           LEFT
+      ========================== -->
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <h2>
+            Payment Method
+          </h2>
+
+          <p>
+            Your selected payment method is
+            Cash on Delivery.
+          </p>
+
+        </div>
 
 
+        <div class="card-body">
 
-  // ==========================================
-  // GET CUSTOMER
-  // ==========================================
+          <!-- COD -->
 
-  const customer =
-    JSON.parse(
-      localStorage.getItem(
-        "shopSphereCustomer"
-      )
-    ) || {};
+          <div class="cod-method">
+
+            <div class="cod-icon">
+              💵
+            </div>
+
+            <div class="cod-content">
+
+              <h3>
+                Cash on Delivery
+              </h3>
+
+              <p>
+                No online payment is required.
+                Place your order now and pay the
+                full amount when your order is
+                delivered or collected.
+              </p>
+
+              <span class="cod-badge">
+                PAYMENT AFTER DELIVERY
+              </span>
+
+            </div>
+
+          </div>
 
 
+          <!-- CUSTOMER INFO -->
 
-  // ==========================================
-  // ELEMENTS
-  // ==========================================
+          <div class="order-info">
 
-  const paymentContent =
+            <div class="info-row">
+
+              <span class="info-label">
+                Customer
+              </span>
+
+              <span
+                class="info-value"
+                id="customerName"
+              >
+                —
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Phone
+              </span>
+
+              <span
+                class="info-value"
+                id="customerPhone"
+              >
+                —
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Delivery Address
+              </span>
+
+              <span
+                class="info-value"
+                id="customerAddress"
+              >
+                —
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span class="info-label">
+                Payment
+              </span>
+
+              <span class="info-value">
+                Cash on Delivery
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+
+          <div class="whatsapp-notice">
+
+            <strong>
+              📱 WhatsApp Order Confirmation
+            </strong>
+
+            <br>
+
+            After placing the order, WhatsApp
+            will open with your order details
+            already prepared.
+
+            <br><br>
+
+            Simply review the message and press
+            <strong>Send</strong> to confirm your
+            order with the seller.
+
+          </div>
+
+
+          <!-- PLACE ORDER -->
+
+          <button
+            type="button"
+            class="place-order-button"
+            id="placeOrderButton"
+          >
+            📱 Place Order & Continue to WhatsApp
+          </button>
+
+
+          <a
+            href="checkout.html"
+            class="back-link"
+          >
+            ← Back to Checkout
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           RIGHT SUMMARY
+      ========================== -->
+
+      <aside class="card summary-card">
+
+        <div class="summary-header">
+
+          <h2>
+            Order Summary
+          </h2>
+
+        </div>
+
+
+        <div
+          class="order-items"
+          id="orderItems"
+        ></div>
+
+
+        <div class="summary-total">
+
+          <div class="total-row">
+
+            <span>
+              Total Items
+            </span>
+
+            <strong id="totalItems">
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="grand-total">
+
+            <span>
+              Total
+            </span>
+
+            <strong id="orderTotal">
+              TZS 0
+            </strong>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div>
+
+        <div class="footer-brand">
+          ShopSphere
+        </div>
+
+        <div class="footer-text">
+          Simple, modern and convenient online shopping.
+        </div>
+
+      </div>
+
+      <div class="footer-text">
+
+        ©
+        <span id="year"></span>
+        ShopSphere.
+        All rights reserved.
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- TOAST -->
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <script>
+
+    "use strict";
+
+
+    /* ==================================================
+       SETTINGS
+    ================================================== */
+
+    /*
+      IMPORTANT:
+
+      Replace the number below with the WhatsApp
+      number that should receive ShopSphere orders.
+
+      FORMAT:
+
+      Tanzania example:
+      2557XXXXXXXX
+
+      Do NOT put:
+      +
+      spaces
+      brackets
+      hyphens
+
+      Example format only:
+      2557XXXXXXXX
+    */
+
+    const WHATSAPP_NUMBER =
+      "2557XXXXXXXX";
+
+
+    /* ==================================================
+       STORAGE KEYS
+    ================================================== */
+
+    const CART_KEY =
+      "shopSphereCart";
+
+    const CUSTOMER_KEY =
+      "shopSphereCustomer";
+
+    const ORDERS_KEY =
+      "shopSphereOrders";
+
+    const ORDER_ID_KEY =
+      "shopSphereOrderId";
+
+    const ORDER_NUMBER_KEY =
+      "shopSphereOrderNumber";
+
+    const ORDER_STATUS_KEY =
+      "shopSphereOrderStatus";
+
+    const PAYMENT_METHOD_KEY =
+      "shopSpherePaymentMethod";
+
+    const PAYMENT_STATUS_KEY =
+      "shopSpherePaymentStatus";
+
+    const PAYMENT_TIME_KEY =
+      "shopSpherePaymentTime";
+
+
+    /* ==================================================
+       ELEMENTS
+    ================================================== */
+
+    const paymentContent =
+      document.getElementById(
+        "paymentContent"
+      );
+
+    const emptyMessage =
+      document.getElementById(
+        "emptyMessage"
+      );
+
+    const orderItems =
+      document.getElementById(
+        "orderItems"
+      );
+
+    const orderTotal =
+      document.getElementById(
+        "orderTotal"
+      );
+
+    const totalItems =
+      document.getElementById(
+        "totalItems"
+      );
+
+    const placeOrderButton =
+      document.getElementById(
+        "placeOrderButton"
+      );
+
+    const cartCount =
+      document.getElementById(
+        "cartCount"
+      );
+
+    const customerName =
+      document.getElementById(
+        "customerName"
+      );
+
+    const customerPhone =
+      document.getElementById(
+        "customerPhone"
+      );
+
+    const customerAddress =
+      document.getElementById(
+        "customerAddress"
+      );
+
+    const toast =
+      document.getElementById(
+        "toast"
+      );
+
+
+    /* ==================================================
+       YEAR
+    ================================================== */
+
     document.getElementById(
-      "paymentContent"
-    );
+      "year"
+    ).textContent =
+      new Date().getFullYear();
 
 
-  const emptyMessage =
-    document.getElementById(
-      "emptyMessage"
-    );
+    /* ==================================================
+       MOBILE MENU
+    ================================================== */
+
+    const menuButton =
+      document.getElementById(
+        "menuButton"
+      );
+
+    const navLinks =
+      document.getElementById(
+        "navLinks"
+      );
 
 
-  const orderItems =
-    document.getElementById(
-      "orderItems"
-    );
+    menuButton.addEventListener(
+      "click",
+      () => {
 
-
-  const orderTotal =
-    document.getElementById(
-      "orderTotal"
-    );
-
-
-  const payButton =
-    document.getElementById(
-      "payButton"
-    );
-
-
-  const onlineNotice =
-    document.getElementById(
-      "onlineNotice"
-    );
-
-
-  const codNotice =
-    document.getElementById(
-      "codNotice"
-    );
-
-
-
-  // ==========================================
-  // TOTAL
-  // ==========================================
-
-  let orderTotalAmount = 0;
-
-
-
-  // ==========================================
-  // CHECK CART
-  // ==========================================
-
-  if (
-    cart.length === 0
-  ) {
-
-    paymentContent.style.display =
-      "none";
-
-    emptyMessage.style.display =
-      "block";
-
-  } else {
-
-    cart.forEach(
-      item => {
-
-        const quantity =
-          Number(
-            item.quantity
-          ) || 1;
-
-
-        const price =
-          Number(
-            item.price
-          ) || 0;
-
-
-        const itemTotal =
-          price * quantity;
-
-
-        orderTotalAmount +=
-          itemTotal;
-
-
-        const itemElement =
-          document.createElement(
-            "div"
+        const open =
+          navLinks.classList.toggle(
+            "open"
           );
 
-
-        itemElement.className =
-          "order-item";
-
-
-        itemElement.innerHTML = `
-
-          <div>
-
-            <div class="item-name">
-              ${escapeHtml(item.name || "Product")}
-            </div>
-
-            <div class="item-quantity">
-              Quantity: ${quantity}
-            </div>
-
-          </div>
-
-          <div class="item-price">
-            TSh ${itemTotal.toLocaleString()}
-          </div>
-
-        `;
-
-
-        orderItems.appendChild(
-          itemElement
+        menuButton.setAttribute(
+          "aria-expanded",
+          String(open)
         );
+
+        menuButton.setAttribute(
+          "aria-label",
+          open
+            ? "Close navigation menu"
+            : "Open navigation menu"
+        );
+
+        menuButton.textContent =
+          open
+            ? "✕"
+            : "☰";
 
       }
     );
 
 
-    orderTotal.textContent =
-      "TSh " +
-      orderTotalAmount.toLocaleString();
+    /* ==================================================
+       ESCAPE HTML
+    ================================================== */
 
-  }
+    function escapeHTML(value) {
 
-
-
-  // ==========================================
-  // ESCAPE HTML
-  // ==========================================
-
-  function escapeHtml(value) {
-
-    return String(value)
-
-      .replace(
-        /&/g,
-        "&amp;"
+      return String(
+        value ?? ""
       )
-
-      .replace(
-        /</g,
-        "&lt;"
-      )
-
-      .replace(
-        />/g,
-        "&gt;"
-      )
-
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-  }
-
-
-
-  // ==========================================
-  // GET EXISTING ORDERS
-  // ==========================================
-
-  function getExistingOrders() {
-
-    try {
-
-      const saved =
-        JSON.parse(
-          localStorage.getItem(
-            "shopSphereOrders"
-          )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
         );
-
-      return Array.isArray(saved)
-        ? saved
-        : [];
-
-    } catch (error) {
-
-      console.error(
-        "Could not read existing orders:",
-        error
-      );
-
-      return [];
 
     }
 
-  }
+
+    /* ==================================================
+       FORMAT MONEY
+    ================================================== */
+
+    function formatTZS(value) {
+
+      return (
+        new Intl.NumberFormat(
+          "en-TZ",
+          {
+            maximumFractionDigits: 0
+          }
+        ).format(
+          Number(value) || 0
+        ) +
+        " TZS"
+      );
+
+    }
 
 
+    /* ==================================================
+       GET CART
+    ================================================== */
 
-  // ==========================================
-  // GENERATE INTERNAL UNIQUE ORDER ID
-  // ==========================================
+    function getCart() {
 
-  function generateOrderId() {
+      try {
 
-    let id = "";
+        const raw =
+          localStorage.getItem(
+            CART_KEY
+          );
 
-    if (
-      window.crypto &&
-      crypto.randomUUID
-    ) {
+        if (!raw) {
+          return [];
+        }
 
-      id =
-        crypto.randomUUID();
+        const parsed =
+          JSON.parse(raw);
 
-    } else {
+        if (!Array.isArray(parsed)) {
+          return [];
+        }
 
-      id =
+        return parsed.filter(
+          item =>
+            item &&
+            item.id &&
+            Number(item.quantity) > 0
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Cart error:",
+          error
+        );
+
+        return [];
+
+      }
+
+    }
+
+
+    /* ==================================================
+       GET CUSTOMER
+    ================================================== */
+
+    function getCustomer() {
+
+      try {
+
+        const raw =
+          localStorage.getItem(
+            CUSTOMER_KEY
+          );
+
+        if (!raw) {
+          return {};
+        }
+
+        const customer =
+          JSON.parse(raw);
+
+        return customer &&
+          typeof customer === "object"
+          ? customer
+          : {};
+
+      } catch (error) {
+
+        return {};
+
+      }
+
+    }
+
+
+    /* ==================================================
+       GET ORDERS
+    ================================================== */
+
+    function getOrders() {
+
+      try {
+
+        const raw =
+          localStorage.getItem(
+            ORDERS_KEY
+          );
+
+        if (!raw) {
+          return [];
+        }
+
+        const orders =
+          JSON.parse(raw);
+
+        return Array.isArray(orders)
+          ? orders
+          : [];
+
+      } catch (error) {
+
+        console.error(
+          "Orders error:",
+          error
+        );
+
+        return [];
+
+      }
+
+    }
+
+
+    /* ==================================================
+       SAVE ORDERS
+    ================================================== */
+
+    function saveOrders(orders) {
+
+      localStorage.setItem(
+        ORDERS_KEY,
+        JSON.stringify(orders)
+      );
+
+    }
+
+
+    /* ==================================================
+       GENERATE INTERNAL ORDER ID
+    ================================================== */
+
+    function generateOrderId() {
+
+      if (
+        window.crypto &&
+        typeof crypto.randomUUID ===
+          "function"
+      ) {
+
+        return crypto.randomUUID();
+
+      }
+
+      return (
         Date.now().toString(36) +
         "-" +
         Math.random()
           .toString(36)
-          .substring(2, 12);
+          .substring(2, 12)
+      );
 
     }
 
-    return id;
 
-  }
+    /* ==================================================
+       GENERATE 6 DIGIT ORDER NUMBER
+    ================================================== */
 
+    function generateOrderNumber() {
 
+      const orders =
+        getOrders();
 
-  // ==========================================
-  // GENERATE UNIQUE 6-DIGIT ORDER NUMBER
-  // ==========================================
-
-  function generateUniqueOrderNumber() {
-
-    const existingOrders =
-      getExistingOrders();
-
-
-    const existingNumbers =
-      new Set(
-        existingOrders
-          .map(
-            order =>
-              String(
-                order.orderNumber || ""
-              ).trim()
-          )
-          .filter(
-            number =>
-              number.length > 0
-          )
-      );
-
-
-    let orderNumber;
-
-
-    /*
-      ORDER NUMBER FORMAT:
-
-      Exactly 6 digits.
-
-      Examples:
-
-      583214
-      105934
-      762418
-
-      No letters.
-      No SS-.
-      No date.
-      No symbols.
-    */
-
-    do {
-
-      orderNumber =
-        String(
-          Math.floor(
-            100000 +
-            Math.random() * 900000
-          )
+      const existingNumbers =
+        new Set(
+          orders
+            .map(
+              order =>
+                String(
+                  order.orderNumber || ""
+                )
+            )
+            .filter(Boolean)
         );
 
-    } while (
-      existingNumbers.has(
-        orderNumber
-      )
-    );
+
+      let number;
 
 
-    return orderNumber;
+      do {
 
-  }
-
-
-
-  // ==========================================
-  // CREATE & SAVE ORDER
-  // ==========================================
-
-  function createOrder(
-    paymentMethod,
-    paymentStatus,
-    orderStatus
-  ) {
-
-
-    // ======================================
-    // CREATE INTERNAL UNIQUE ID
-    // ======================================
-
-    const orderId =
-      generateOrderId();
-
-
-
-    // ======================================
-    // CREATE UNIQUE 6-DIGIT ORDER NUMBER
-    // ======================================
-
-    const orderNumber =
-      generateUniqueOrderNumber();
-
-
-
-    const orderTime =
-      new Date().toISOString();
-
-
-
-    /*
-      Payment time:
-
-      PAID
-      = actual simulated payment time
-
-      UNPAID
-      = null because customer has
-        not paid yet.
-    */
-
-    const paymentTime =
-      paymentStatus === "PAID"
-        ? orderTime
-        : null;
-
-
-
-    const newOrder = {
-
-      /*
-        Internal ID.
-
-        Dashboard uses this ID to identify
-        the exact order.
-      */
-
-      orderId:
-        orderId,
-
-
-      /*
-        Customer-facing order number.
-
-        Exactly 6 digits.
-      */
-
-      orderNumber:
-        orderNumber,
-
-
-      customer:
-        customer,
-
-
-      products:
-        cart,
-
-
-      total:
-        orderTotalAmount,
-
-
-      paymentMethod:
-        paymentMethod,
-
-
-      paymentStatus:
-        paymentStatus,
-
-
-      orderStatus:
-        orderStatus,
-
-
-      paymentTime:
-        paymentTime,
-
-
-      createdAt:
-        orderTime
-
-    };
-
-
-
-    // ======================================
-    // GET CURRENT ORDERS
-    // ======================================
-
-    let orders =
-      getExistingOrders();
-
-
-
-    // ======================================
-    // FINAL ORDER NUMBER SAFETY CHECK
-    // ======================================
-
-    const duplicateOrderNumber =
-      orders.some(
-        order =>
+        number =
           String(
-            order.orderNumber || ""
-          ) ===
-          String(
-            orderNumber
-          )
+            Math.floor(
+              100000 +
+              Math.random() *
+              900000
+            )
+          );
+
+      } while (
+        existingNumbers.has(number)
       );
 
 
-    if (
-      duplicateOrderNumber
+      return number;
+
+    }
+
+
+    /* ==================================================
+       CALCULATE TOTAL
+    ================================================== */
+
+    function calculateTotal(
+      cart
     ) {
 
-      /*
-        Extremely unlikely because
-        generateUniqueOrderNumber()
-        already checked.
+      return cart.reduce(
+        (total, item) => {
 
-        If it happens, do not save
-        a duplicate.
-      */
+          const price =
+            Number(item.price) || 0;
 
-      alert(
-        "Order Number conflict detected. Please try again."
-      );
+          const quantity =
+            Number(item.quantity) || 0;
 
-      payButton.disabled =
-        false;
-
-      payButton.textContent =
-        paymentMethod === "Cash on Delivery"
-          ? "Place Order — Cash on Delivery"
-          : "Continue to Payment";
-
-      return;
-
-    }
-
-
-
-    // ======================================
-    // CHECK INTERNAL ID
-    // ======================================
-
-    const duplicateOrderId =
-      orders.some(
-        order =>
-          String(
-            order.orderId || ""
-          ) ===
-          String(
-            orderId
-          )
-      );
-
-
-    if (
-      duplicateOrderId
-    ) {
-
-      alert(
-        "Order ID conflict detected. Please try again."
-      );
-
-      payButton.disabled =
-        false;
-
-      payButton.textContent =
-        paymentMethod === "Cash on Delivery"
-          ? "Place Order — Cash on Delivery"
-          : "Continue to Payment";
-
-      return;
-
-    }
-
-
-
-    // ======================================
-    // ADD ORDER
-    // ======================================
-
-    orders.push(
-      newOrder
-    );
-
-
-
-    // ======================================
-    // SAVE ORDERS
-    // ======================================
-
-    localStorage.setItem(
-      "shopSphereOrders",
-      JSON.stringify(
-        orders
-      )
-    );
-
-
-
-    // ======================================
-    // SAVE LATEST ORDER INFORMATION
-    // ======================================
-
-    localStorage.setItem(
-      "shopSphereOrderId",
-      orderId
-    );
-
-
-    localStorage.setItem(
-      "shopSphereOrderNumber",
-      orderNumber
-    );
-
-
-    localStorage.setItem(
-      "shopSphereOrderStatus",
-      orderStatus
-    );
-
-
-    localStorage.setItem(
-      "shopSpherePaymentMethod",
-      paymentMethod
-    );
-
-
-    localStorage.setItem(
-      "shopSpherePaymentStatus",
-      paymentStatus
-    );
-
-
-
-    /*
-      For COD there is no payment yet,
-      therefore remove old payment time.
-
-      For PAID, save the payment time.
-    */
-
-    if (
-      paymentTime
-    ) {
-
-      localStorage.setItem(
-        "shopSpherePaymentTime",
-        paymentTime
-      );
-
-    } else {
-
-      localStorage.removeItem(
-        "shopSpherePaymentTime"
-      );
-
-    }
-
-
-
-    // ======================================
-    // CLEAR CART
-    // ======================================
-
-    localStorage.removeItem(
-      "shopSphereCart"
-    );
-
-
-
-    // ======================================
-    // GO TO SUCCESS PAGE
-    // ======================================
-
-    window.location.replace(
-      "success.html"
-    );
-
-  }
-
-
-
-  // ==========================================
-  // PAYMENT METHOD SELECTION
-  // ==========================================
-
-  document
-    .querySelectorAll(
-      ".payment-method"
-    )
-    .forEach(
-      method => {
-
-        method.addEventListener(
-          "click",
-          function() {
-
-            const radio =
-              this.querySelector(
-                'input[type="radio"]'
-              );
-
-
-            if (!radio) {
-              return;
-            }
-
-
-            document
-              .querySelectorAll(
-                ".payment-method"
-              )
-              .forEach(
-                item => {
-
-                  item.classList.remove(
-                    "active"
-                  );
-
-                }
-              );
-
-
-            this.classList.add(
-              "active"
-            );
-
-
-            radio.checked =
-              true;
-
-
-            updatePaymentInterface(
-              radio.value
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-
-  // ==========================================
-  // UPDATE PAYMENT INTERFACE
-  // ==========================================
-
-  function updatePaymentInterface(
-    paymentMethod
-  ) {
-
-    if (
-      paymentMethod ===
-      "Cash on Delivery"
-    ) {
-
-      codNotice.style.display =
-        "block";
-
-
-      onlineNotice.style.display =
-        "none";
-
-
-      payButton.textContent =
-        "Place Order — Cash on Delivery";
-
-    } else {
-
-      codNotice.style.display =
-        "none";
-
-
-      onlineNotice.style.display =
-        "block";
-
-
-      payButton.textContent =
-        "Continue to Payment";
-
-    }
-
-  }
-
-
-
-  // ==========================================
-  // BUTTON CLICK
-  // ==========================================
-
-  payButton.addEventListener(
-    "click",
-    function() {
-
-      if (
-        cart.length === 0
-      ) {
-
-        alert(
-          "Your cart is empty."
-        );
-
-        return;
-
-      }
-
-
-      const selectedMethod =
-        document.querySelector(
-          'input[name="paymentMethod"]:checked'
-        );
-
-
-      if (!selectedMethod) {
-
-        alert(
-          "Please choose a payment method."
-        );
-
-        return;
-
-      }
-
-
-      const paymentMethod =
-        selectedMethod.value;
-
-
-
-      // ======================================
-      // CASH ON DELIVERY
-      // ======================================
-
-      if (
-        paymentMethod ===
-        "Cash on Delivery"
-      ) {
-
-        this.disabled =
-          true;
-
-
-        this.textContent =
-          "Placing Order...";
-
-
-        createOrder(
-          "Cash on Delivery",
-          "UNPAID",
-          "Pending"
-        );
-
-
-        return;
-
-      }
-
-
-
-      // ======================================
-      // ONLINE PAYMENT
-      // ======================================
-
-      this.disabled =
-        true;
-
-
-      this.textContent =
-        "Processing Payment...";
-
-
-      setTimeout(
-        () => {
-
-          createOrder(
-            paymentMethod,
-            "PAID",
-            "Processing"
+          return (
+            total +
+            price * quantity
           );
 
         },
-        1500
+        0
       );
 
     }
-  );
 
 
+    /* ==================================================
+       TOTAL ITEMS
+    ================================================== */
 
-  // ==========================================
-  // INITIAL STATE
-  // ==========================================
+    function calculateItems(
+      cart
+    ) {
 
-  const initialMethod =
-    document.querySelector(
-      'input[name="paymentMethod"]:checked'
+      return cart.reduce(
+        (total, item) => {
+
+          return (
+            total +
+            Number(item.quantity || 0)
+          );
+
+        },
+        0
+      );
+
+    }
+
+
+    /* ==================================================
+       SAFE IMAGE URL
+    ================================================== */
+
+    function safeImageURL(
+      url
+    ) {
+
+      if (!url) {
+        return false;
+      }
+
+      try {
+
+        const parsed =
+          new URL(
+            url,
+            window.location.href
+          );
+
+        return (
+          parsed.protocol ===
+            "http:" ||
+          parsed.protocol ===
+            "https:"
+        );
+
+      } catch (error) {
+
+        return false;
+
+      }
+
+    }
+
+
+    /* ==================================================
+       RENDER SUMMARY
+    ================================================== */
+
+    function renderSummary(
+      cart
+    ) {
+
+      orderItems.innerHTML = "";
+
+      const fragment =
+        document.createDocumentFragment();
+
+
+      cart.forEach(
+        item => {
+
+          const quantity =
+            Number(
+              item.quantity
+            ) || 0;
+
+          const price =
+            Number(
+              item.price
+            ) || 0;
+
+          const lineTotal =
+            price * quantity;
+
+          const imageURL =
+            item.image_url ||
+            item.image ||
+            "";
+
+
+          const element =
+            document.createElement(
+              "div"
+            );
+
+          element.className =
+            "order-item";
+
+
+          let imageHTML =
+            `
+              <div class="placeholder">
+                🛍️
+              </div>
+            `;
+
+
+          if (
+            safeImageURL(
+              imageURL
+            )
+          ) {
+
+            imageHTML =
+              `
+                <img
+                  src="${escapeHTML(imageURL)}"
+                  alt="${escapeHTML(item.name || "Product")}"
+                  loading="lazy"
+                  decoding="async"
+                  width="64"
+                  height="64"
+                >
+              `;
+
+          }
+
+
+          element.innerHTML =
+            `
+              <div class="product-image">
+                ${imageHTML}
+              </div>
+
+              <div>
+
+                <div class="item-name">
+                  ${escapeHTML(
+                    item.name ||
+                    "Product"
+                  )}
+                </div>
+
+                <div class="item-meta">
+                  Qty ${quantity}
+                  ${item.category
+                    ? " · " +
+                      escapeHTML(
+                        item.category
+                      )
+                    : ""}
+                </div>
+
+              </div>
+
+              <div class="item-price">
+                ${formatTZS(
+                  lineTotal
+                )}
+              </div>
+            `;
+
+
+          fragment.appendChild(
+            element
+          );
+
+        }
+      );
+
+
+      orderItems.appendChild(
+        fragment
+      );
+
+    }
+
+
+    /* ==================================================
+       SHOW TOAST
+    ================================================== */
+
+    function showToast(
+      message,
+      type = "normal"
+    ) {
+
+      toast.textContent =
+        message;
+
+      toast.className =
+        "toast show";
+
+      if (
+        type === "error"
+      ) {
+
+        toast.classList.add(
+          "error"
+        );
+
+      }
+
+      clearTimeout(
+        showToast.timer
+      );
+
+      showToast.timer =
+        setTimeout(
+          () => {
+
+            toast.className =
+              "toast";
+
+          },
+          3000
+        );
+
+    }
+
+
+    /* ==================================================
+       CHECK CUSTOMER
+    ================================================== */
+
+    function customerIsValid(
+      customer
+    ) {
+
+      return (
+        customer &&
+        String(
+          customer.fullName || ""
+        ).trim().length >= 2 &&
+        String(
+          customer.phone || ""
+        ).trim().length >= 7 &&
+        String(
+          customer.address || ""
+        ).trim().length >= 5
+      );
+
+    }
+
+
+    /* ==================================================
+       CREATE ORDER
+    ================================================== */
+
+    function createOrder(
+      cart,
+      customer
+    ) {
+
+      const orders =
+        getOrders();
+
+
+      const orderId =
+        generateOrderId();
+
+
+      const orderNumber =
+        generateOrderNumber();
+
+
+      const createdAt =
+        new Date().toISOString();
+
+
+      const newOrder = {
+
+        orderId:
+          orderId,
+
+        orderNumber:
+          orderNumber,
+
+        customer: {
+          fullName:
+            String(
+              customer.fullName ||
+              ""
+            ).trim(),
+
+          phone:
+            String(
+              customer.phone ||
+              ""
+            ).trim(),
+
+          email:
+            String(
+              customer.email ||
+              ""
+            ).trim(),
+
+          address:
+            String(
+              customer.address ||
+              ""
+            ).trim(),
+
+          notes:
+            String(
+              customer.notes ||
+              ""
+            ).trim()
+        },
+
+        products:
+          cart,
+
+        total:
+          calculateTotal(
+            cart
+          ),
+
+        paymentMethod:
+          "Cash on Delivery",
+
+        paymentStatus:
+          "UNPAID",
+
+        orderStatus:
+          "Pending",
+
+        paymentTime:
+          null,
+
+        createdAt:
+          createdAt
+
+      };
+
+
+      orders.push(
+        newOrder
+      );
+
+
+      saveOrders(
+        orders
+      );
+
+
+      /* ==========================================
+         SAVE CURRENT ORDER
+      ========================================== */
+
+      localStorage.setItem(
+        ORDER_ID_KEY,
+        orderId
+      );
+
+      localStorage.setItem(
+        ORDER_NUMBER_KEY,
+        orderNumber
+      );
+
+      localStorage.setItem(
+        ORDER_STATUS_KEY,
+        "Pending"
+      );
+
+      localStorage.setItem(
+        PAYMENT_METHOD_KEY,
+        "Cash on Delivery"
+      );
+
+      localStorage.setItem(
+        PAYMENT_STATUS_KEY,
+        "UNPAID"
+      );
+
+      localStorage.removeItem(
+        PAYMENT_TIME_KEY
+      );
+
+
+      return newOrder;
+
+    }
+
+
+    /* ==================================================
+       CREATE WHATSAPP MESSAGE
+    ================================================== */
+
+    function createWhatsAppMessage(
+      order
+    ) {
+
+      const customer =
+        order.customer || {};
+
+
+      let message = "";
+
+
+      message +=
+        "🛍️ *NEW SHOPSPHERE ORDER*";
+
+
+      message +=
+        "\n\n";
+
+
+      message +=
+        "📦 *Order Number:* " +
+        order.orderNumber;
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "📅 *Date:* " +
+        new Date(
+          order.createdAt
+        ).toLocaleString(
+          "en-TZ"
+        );
+
+
+      message +=
+        "\n\n";
+
+
+      message +=
+        "👤 *CUSTOMER DETAILS*";
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "Name: " +
+        customer.fullName;
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "Phone: " +
+        customer.phone;
+
+
+      if (
+        customer.email
+      ) {
+
+        message +=
+          "\n" +
+          "Email: " +
+          customer.email;
+
+      }
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "Address: " +
+        customer.address;
+
+
+      if (
+        customer.notes
+      ) {
+
+        message +=
+          "\n";
+
+
+        message +=
+          "Notes: " +
+          customer.notes;
+
+      }
+
+
+      message +=
+        "\n\n";
+
+
+      message +=
+        "🛒 *ORDER ITEMS*";
+
+
+      message +=
+        "\n";
+
+
+      order.products.forEach(
+        (item, index) => {
+
+          const quantity =
+            Number(
+              item.quantity
+            ) || 0;
+
+          const price =
+            Number(
+              item.price
+            ) || 0;
+
+          const lineTotal =
+            price *
+            quantity;
+
+
+          message +=
+            "\n" +
+            (
+              index + 1
+            ) +
+            ". " +
+            item.name;
+
+
+          message +=
+            "\n   Qty: " +
+            quantity;
+
+
+          message +=
+            "\n   Price: " +
+            formatTZS(
+              price
+            );
+
+
+          message +=
+            "\n   Total: " +
+            formatTZS(
+              lineTotal
+            );
+
+
+          message +=
+            "\n";
+
+        }
+      );
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "💰 *ORDER TOTAL:* " +
+        formatTZS(
+          order.total
+        );
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "💵 *Payment:* Cash on Delivery";
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "⏳ *Status:* Pending";
+
+
+      message +=
+        "\n";
+
+
+      message +=
+        "💳 *Payment Status:* UNPAID";
+
+
+      message +=
+        "\n\n";
+
+
+      message +=
+        "Please confirm this order. " +
+        "Customer will pay upon delivery/collection.";
+
+
+      return message;
+
+    }
+
+
+    /* ==================================================
+       OPEN WHATSAPP
+    ================================================== */
+
+    function openWhatsApp(
+      order
+    ) {
+
+      const message =
+        createWhatsAppMessage(
+          order
+        );
+
+
+      const encodedMessage =
+        encodeURIComponent(
+          message
+        );
+
+
+      /*
+        IMPORTANT:
+
+        WhatsApp number must be in
+        international format without +.
+
+        Example:
+
+        2557XXXXXXXX
+      */
+
+      const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodedMessage;
+
+
+      window.open(
+        whatsappURL,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+
+
+    /* ==================================================
+       INITIALIZE
+    ================================================== */
+
+    const cart =
+      getCart();
+
+    const customer =
+      getCustomer();
+
+
+    /* ==================================================
+       CART COUNT
+    ================================================== */
+
+    cartCount.textContent =
+      String(
+        calculateItems(
+          cart
+        )
+      );
+
+
+    /* ==================================================
+       EMPTY CART
+    ================================================== */
+
+    if (
+      cart.length === 0
+    ) {
+
+      emptyMessage.hidden =
+        false;
+
+      paymentContent.hidden =
+        true;
+
+    } else {
+
+      emptyMessage.hidden =
+        true;
+
+      paymentContent.hidden =
+        false;
+
+
+      /* ============================
+         CUSTOMER
+      ============================ */
+
+      customerName.textContent =
+        customer.fullName ||
+        "Not provided";
+
+
+      customerPhone.textContent =
+        customer.phone ||
+        "Not provided";
+
+
+      customerAddress.textContent =
+        customer.address ||
+        "Not provided";
+
+
+      /* ============================
+         SUMMARY
+      ============================ */
+
+      renderSummary(
+        cart
+      );
+
+
+      totalItems.textContent =
+        calculateItems(
+          cart
+        );
+
+
+      orderTotal.textContent =
+        formatTZS(
+          calculateTotal(
+            cart
+          )
+        );
+
+    }
+
+
+    /* ==================================================
+       PLACE ORDER
+    ================================================== */
+
+    placeOrderButton.addEventListener(
+      "click",
+      () => {
+
+        const currentCart =
+          getCart();
+
+
+        const currentCustomer =
+          getCustomer();
+
+
+        /* ======================================
+           CHECK CART
+        ====================================== */
+
+        if (
+          currentCart.length === 0
+        ) {
+
+          showToast(
+            "Your cart is empty.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* ======================================
+           CHECK CUSTOMER
+        ====================================== */
+
+        if (
+          !customerIsValid(
+            currentCustomer
+          )
+        ) {
+
+          showToast(
+            "Customer information is incomplete. Please return to Checkout.",
+            "error"
+          );
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "checkout.html";
+
+            },
+            1200
+          );
+
+          return;
+
+        }
+
+
+        /* ======================================
+           PREVENT DOUBLE CLICK
+        ====================================== */
+
+        placeOrderButton.disabled =
+          true;
+
+
+        placeOrderButton.textContent =
+          "Creating Order...";
+
+
+        try {
+
+          /* ====================================
+             CREATE ORDER
+          ==================================== */
+
+          const order =
+            createOrder(
+              currentCart,
+              currentCustomer
+            );
+
+
+          /* ====================================
+             CLEAR CART
+          ==================================== */
+
+          localStorage.removeItem(
+            CART_KEY
+          );
+
+
+          /* ====================================
+             OPEN WHATSAPP
+          ==================================== */
+
+          openWhatsApp(
+            order
+          );
+
+
+          /* ====================================
+             SUCCESS PAGE
+
+             Small delay gives browser time
+             to open WhatsApp.
+          ==================================== */
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "success.html";
+
+            },
+            700
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Order creation failed:",
+            error
+          );
+
+
+          placeOrderButton.disabled =
+            false;
+
+
+          placeOrderButton.textContent =
+            "📱 Place Order & Continue to WhatsApp";
+
+
+          showToast(
+            "Unable to create your order. Please try again.",
+            "error"
+          );
+
+        }
+
+      }
     );
 
 
-  if (initialMethod) {
+    /* ==================================================
+       CLOSE MOBILE MENU
+    ================================================== */
 
-    updatePaymentInterface(
-      initialMethod.value
-    );
+    navLinks
+      .querySelectorAll("a")
+      .forEach(
+        link => {
 
-  }
+          link.addEventListener(
+            "click",
+            () => {
 
+              navLinks.classList.remove(
+                "open"
+              );
 
-</script>
+              menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+              menuButton.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+              );
+
+              menuButton.textContent =
+                "☰";
+
+            }
+          );
+
+        }
+      );
+
+  </script>
 
 </body>
 </html>
