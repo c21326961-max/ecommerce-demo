@@ -142,10 +142,33 @@
     .status {
       padding: 8px 14px;
       border-radius: 20px;
-      background: #dcfce7;
-      color: #15803d;
       font-weight: bold;
       font-size: 13px;
+    }
+
+    .status.pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status.processing {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .status.shipped {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .status.delivered {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status.cancelled {
+      background: #fee2e2;
+      color: #b91c1c;
     }
 
     .details {
@@ -170,6 +193,16 @@
     .detail-value {
       font-weight: bold;
       color: #111827;
+    }
+
+    .payment-paid {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .payment-unpaid {
+      color: #d97706;
+      font-weight: bold;
     }
 
     .section-title {
@@ -362,7 +395,10 @@
           #SS-000000
         </div>
 
-        <div class="status">
+        <div
+          class="status processing"
+          id="orderStatusBadge"
+        >
           PROCESSING
         </div>
 
@@ -377,7 +413,10 @@
             Customer
           </div>
 
-          <div class="detail-value" id="customerName">
+          <div
+            class="detail-value"
+            id="customerName"
+          >
             -
           </div>
 
@@ -390,7 +429,10 @@
             Phone
           </div>
 
-          <div class="detail-value" id="customerPhone">
+          <div
+            class="detail-value"
+            id="customerPhone"
+          >
             -
           </div>
 
@@ -403,7 +445,10 @@
             Payment Method
           </div>
 
-          <div class="detail-value" id="paymentMethod">
+          <div
+            class="detail-value"
+            id="paymentMethod"
+          >
             -
           </div>
 
@@ -416,10 +461,11 @@
             Payment Status
           </div>
 
-          <div class="detail-value">
-            <span style="color:#16a34a;">
-              PAID
-            </span>
+          <div
+            class="detail-value"
+            id="paymentStatus"
+          >
+            -
           </div>
 
         </div>
@@ -476,33 +522,26 @@
 
   <script>
 
+    // ==========================================
+    // GET LATEST SAVED DATA
+    // ==========================================
+
     const savedOrderNumber =
-      localStorage.getItem("shopSphereOrderNumber");
-
-
-    const customer =
-      JSON.parse(
-        localStorage.getItem("shopSphereCustomer")
-      ) || {};
-
-
-    const cart =
-      JSON.parse(
-        localStorage.getItem("shopSphereCart")
-      ) || [];
-
-
-    const paymentMethod =
       localStorage.getItem(
-        "shopSpherePaymentMethod"
-      ) || "-";
+        "shopSphereOrderNumber"
+      );
 
 
     const searchInput =
-      document.getElementById("orderSearch");
+      document.getElementById(
+        "orderSearch"
+      );
 
 
-    // Automatically show latest order number
+    // ==========================================
+    // AUTO-FILL LATEST ORDER NUMBER
+    // ==========================================
+
     if (savedOrderNumber) {
 
       searchInput.value =
@@ -510,6 +549,139 @@
 
     }
 
+
+    // ==========================================
+    // FORMAT MONEY
+    // ==========================================
+
+    function formatMoney(amount) {
+
+      return (
+        "TSh " +
+        Number(amount || 0).toLocaleString("en-TZ")
+      );
+
+    }
+
+
+    // ==========================================
+    // GET ORDER FROM LOCAL STORAGE
+    // ==========================================
+
+    function getOrder(orderNumber) {
+
+      const savedOrders =
+        JSON.parse(
+          localStorage.getItem(
+            "shopSphereOrders"
+          )
+        ) || [];
+
+
+      const foundOrder =
+        savedOrders.find(
+          order =>
+            String(order.orderNumber).toUpperCase() ===
+            String(orderNumber).toUpperCase()
+        );
+
+
+      if (foundOrder) {
+
+        return foundOrder;
+
+      }
+
+
+      // ----------------------------------------
+      // BACKUP FOR OLD ORDERS
+      // ----------------------------------------
+
+      const customer =
+        JSON.parse(
+          localStorage.getItem(
+            "shopSphereCustomer"
+          )
+        ) || {};
+
+
+      const cart =
+        JSON.parse(
+          localStorage.getItem(
+            "shopSphereCart"
+          )
+        ) || [];
+
+
+      const paymentMethod =
+        localStorage.getItem(
+          "shopSpherePaymentMethod"
+        ) || "-";
+
+
+      const paymentStatus =
+        localStorage.getItem(
+          "shopSpherePaymentStatus"
+        ) ||
+        (
+          paymentMethod ===
+          "Cash on Delivery"
+            ? "UNPAID"
+            : "PAID"
+        );
+
+
+      const orderStatus =
+        localStorage.getItem(
+          "shopSphereOrderStatus"
+        ) ||
+        (
+          paymentMethod ===
+          "Cash on Delivery"
+            ? "Pending"
+            : "Processing"
+        );
+
+
+      if (
+        savedOrderNumber &&
+        String(orderNumber).toUpperCase() ===
+        String(savedOrderNumber).toUpperCase()
+      ) {
+
+        return {
+
+          orderNumber:
+            savedOrderNumber,
+
+          customer:
+            customer,
+
+          products:
+            cart,
+
+          paymentMethod:
+            paymentMethod,
+
+          paymentStatus:
+            paymentStatus,
+
+          orderStatus:
+            orderStatus
+
+        };
+
+      }
+
+
+      return null;
+
+    }
+
+
+    // ==========================================
+    // SEARCH ORDER
+    // ==========================================
 
     function searchOrder() {
 
@@ -519,31 +691,37 @@
 
       if (!enteredNumber) {
 
-        alert("Please enter your order number.");
+        alert(
+          "Please enter your order number."
+        );
 
         return;
 
       }
 
 
-      if (
-        savedOrderNumber &&
-        enteredNumber.toUpperCase() ===
-        savedOrderNumber.toUpperCase()
-      ) {
+      const order =
+        getOrder(
+          enteredNumber
+        );
 
-        showOrder();
+
+      if (order) {
+
+        showOrder(order);
 
       } else {
 
         document.getElementById(
           "orderCard"
-        ).style.display = "none";
+        ).style.display =
+          "none";
 
 
         document.getElementById(
           "notFound"
-        ).style.display = "block";
+        ).style.display =
+          "block";
 
 
         document.getElementById(
@@ -564,41 +742,208 @@
     }
 
 
-    function showOrder() {
+    // ==========================================
+    // SHOW ORDER
+    // ==========================================
+
+    function showOrder(order) {
 
       document.getElementById(
         "notFound"
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
 
       document.getElementById(
         "orderCard"
-      ).style.display = "block";
+      ).style.display =
+        "block";
 
+
+      // ----------------------------------------
+      // ORDER NUMBER
+      // ----------------------------------------
 
       document.getElementById(
         "displayOrderNumber"
       ).textContent =
-        "#" + savedOrderNumber;
+        "#" +
+        order.orderNumber;
+
+
+      // ----------------------------------------
+      // CUSTOMER
+      // ----------------------------------------
+
+      const customer =
+        order.customer || {};
 
 
       document.getElementById(
         "customerName"
       ).textContent =
-        customer.fullName || "-";
+        customer.fullName ||
+        customer.name ||
+        "-";
 
 
       document.getElementById(
         "customerPhone"
       ).textContent =
-        customer.phone || "-";
+        customer.phone ||
+        "-";
+
+
+      // ----------------------------------------
+      // PAYMENT METHOD
+      // ----------------------------------------
+
+      const method =
+        order.paymentMethod ||
+        "-";
 
 
       document.getElementById(
         "paymentMethod"
       ).textContent =
-        paymentMethod;
+        method;
 
+
+      // ----------------------------------------
+      // PAYMENT STATUS
+      // ----------------------------------------
+
+      let paymentStatus =
+        order.paymentStatus ||
+        (
+          method ===
+          "Cash on Delivery"
+            ? "UNPAID"
+            : "PAID"
+        );
+
+
+      const paymentStatusElement =
+        document.getElementById(
+          "paymentStatus"
+        );
+
+
+      paymentStatusElement.textContent =
+        paymentStatus;
+
+
+      if (
+        paymentStatus.toUpperCase() ===
+        "PAID"
+      ) {
+
+        paymentStatusElement.className =
+          "detail-value payment-paid";
+
+      } else {
+
+        paymentStatusElement.className =
+          "detail-value payment-unpaid";
+
+      }
+
+
+      // ----------------------------------------
+      // ORDER STATUS
+      // ----------------------------------------
+
+      let orderStatus =
+        order.orderStatus ||
+        (
+          method ===
+          "Cash on Delivery"
+            ? "Pending"
+            : "Processing"
+        );
+
+
+      const statusBadge =
+        document.getElementById(
+          "orderStatusBadge"
+        );
+
+
+      statusBadge.textContent =
+        orderStatus.toUpperCase();
+
+
+      // Remove old status classes
+
+      statusBadge.className =
+        "status";
+
+
+      // Add correct status class
+
+      const normalizedStatus =
+        orderStatus
+          .toLowerCase()
+          .trim();
+
+
+      if (
+        normalizedStatus ===
+        "pending"
+      ) {
+
+        statusBadge.classList.add(
+          "pending"
+        );
+
+      } else if (
+        normalizedStatus ===
+        "processing"
+      ) {
+
+        statusBadge.classList.add(
+          "processing"
+        );
+
+      } else if (
+        normalizedStatus ===
+        "shipped"
+      ) {
+
+        statusBadge.classList.add(
+          "shipped"
+        );
+
+      } else if (
+        normalizedStatus ===
+        "delivered"
+      ) {
+
+        statusBadge.classList.add(
+          "delivered"
+        );
+
+      } else if (
+        normalizedStatus ===
+        "cancelled"
+      ) {
+
+        statusBadge.classList.add(
+          "cancelled"
+        );
+
+      } else {
+
+        statusBadge.classList.add(
+          "processing"
+        );
+
+      }
+
+
+      // ----------------------------------------
+      // PRODUCTS
+      // ----------------------------------------
 
       const itemsContainer =
         document.getElementById(
@@ -606,78 +951,133 @@
         );
 
 
-      itemsContainer.innerHTML = "";
+      itemsContainer.innerHTML =
+        "";
+
+
+      const products =
+        order.products ||
+        order.cart ||
+        [];
 
 
       let total = 0;
 
 
-      cart.forEach(item => {
+      if (!products.length) {
 
-        const quantity =
-          Number(item.quantity) || 1;
+        itemsContainer.innerHTML = `
 
-
-        const price =
-          Number(item.price) || 0;
-
-
-        const itemTotal =
-          price * quantity;
-
-
-        total += itemTotal;
-
-
-        const itemElement =
-          document.createElement("div");
-
-
-        itemElement.className = "item";
-
-
-        itemElement.innerHTML = `
-
-          <div>
-
-            <div class="item-name">
-              ${item.name}
-            </div>
-
-            <div class="item-info">
-              Quantity: ${quantity}
-            </div>
-
-          </div>
-
-          <div class="item-price">
-            TSh ${itemTotal.toLocaleString()}
+          <div
+            style="
+              padding:20px 0;
+              color:#6b7280;
+            "
+          >
+            No products found for this order.
           </div>
 
         `;
 
+      } else {
 
-        itemsContainer.appendChild(
-          itemElement
+        products.forEach(item => {
+
+          const quantity =
+            Number(
+              item.quantity
+            ) || 1;
+
+
+          const price =
+            Number(
+              item.price
+            ) || 0;
+
+
+          const itemTotal =
+            price *
+            quantity;
+
+
+          total +=
+            itemTotal;
+
+
+          const itemElement =
+            document.createElement(
+              "div"
+            );
+
+
+          itemElement.className =
+            "item";
+
+
+          itemElement.innerHTML = `
+
+            <div>
+
+              <div class="item-name">
+                ${item.name || "Product"}
+              </div>
+
+              <div class="item-info">
+                Quantity: ${quantity}
+              </div>
+
+            </div>
+
+            <div class="item-price">
+              ${formatMoney(itemTotal)}
+            </div>
+
+          `;
+
+
+          itemsContainer.appendChild(
+            itemElement
+          );
+
+        });
+
+      }
+
+
+      // ----------------------------------------
+      // TOTAL
+      // ----------------------------------------
+
+      const savedTotal =
+        Number(
+          order.total
         );
-
-      });
 
 
       document.getElementById(
         "orderTotal"
       ).textContent =
-        "TSh " + total.toLocaleString();
+        formatMoney(
+          savedTotal > 0
+            ? savedTotal
+            : total
+        );
 
     }
 
 
-    // Allow Enter key
+    // ==========================================
+    // ENTER KEY
+    // ==========================================
+
     searchInput.addEventListener(
       "keydown",
       function(event) {
 
-        if (event.key === "Enter") {
+        if (
+          event.key ===
+          "Enter"
+        ) {
 
           searchOrder();
 
@@ -686,6 +1086,20 @@
       }
     );
 
+
+    // ==========================================
+    // AUTO SHOW LATEST ORDER
+    // ==========================================
+
+    if (savedOrderNumber) {
+
+      showOrder(
+        getOrder(
+          savedOrderNumber
+        )
+      );
+
+    }
 
   </script>
 
