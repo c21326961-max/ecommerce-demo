@@ -26,7 +26,6 @@
       color: #1f2937;
     }
 
-
     header {
       background: #111827;
       color: white;
@@ -36,17 +35,14 @@
       align-items: center;
     }
 
-
     .logo {
       font-size: 24px;
       font-weight: bold;
     }
 
-
     .logo span {
       color: #22c55e;
     }
-
 
     nav a {
       color: white;
@@ -55,11 +51,9 @@
       font-size: 14px;
     }
 
-
     nav a:hover {
       color: #22c55e;
     }
-
 
     .container {
       max-width: 1100px;
@@ -67,12 +61,10 @@
       padding: 0 20px;
     }
 
-
     .page-title {
       text-align: center;
       margin-bottom: 35px;
     }
-
 
     .page-title h1 {
       font-size: 34px;
@@ -80,18 +72,15 @@
       margin-bottom: 10px;
     }
 
-
     .page-title p {
       color: #6b7280;
     }
-
 
     .payment-layout {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 25px;
     }
-
 
     .card {
       background: white;
@@ -100,13 +89,11 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.07);
     }
 
-
     .card h2 {
       font-size: 21px;
       margin-bottom: 22px;
       color: #111827;
     }
-
 
     .payment-method {
       border: 2px solid #e5e7eb;
@@ -117,17 +104,14 @@
       transition: 0.2s;
     }
 
-
     .payment-method:hover {
       border-color: #22c55e;
     }
-
 
     .payment-method.active {
       border-color: #22c55e;
       background: #f0fdf4;
     }
-
 
     .payment-method label {
       display: flex;
@@ -137,13 +121,11 @@
       font-weight: bold;
     }
 
-
     .payment-method input {
       width: 18px;
       height: 18px;
       accent-color: #22c55e;
     }
-
 
     .method-description {
       margin-top: 8px;
@@ -152,7 +134,6 @@
       font-size: 14px;
       line-height: 1.5;
     }
-
 
     .notice {
       background: #fff7ed;
@@ -164,7 +145,6 @@
       line-height: 1.5;
       font-size: 14px;
     }
-
 
     .cod-notice {
       display: none;
@@ -178,11 +158,9 @@
       font-size: 14px;
     }
 
-
     .cod-notice strong {
       color: #14532d;
     }
-
 
     .order-item {
       display: flex;
@@ -192,16 +170,13 @@
       border-bottom: 1px solid #e5e7eb;
     }
 
-
     .order-item:last-child {
       border-bottom: none;
     }
 
-
     .item-name {
       font-weight: bold;
     }
-
 
     .item-quantity {
       color: #6b7280;
@@ -209,12 +184,10 @@
       margin-top: 4px;
     }
 
-
     .item-price {
       font-weight: bold;
       white-space: nowrap;
     }
-
 
     .total {
       display: flex;
@@ -225,7 +198,6 @@
       font-size: 21px;
       font-weight: bold;
     }
-
 
     .pay-button {
       width: 100%;
@@ -240,17 +212,14 @@
       cursor: pointer;
     }
 
-
     .pay-button:hover {
       background: #16a34a;
     }
-
 
     .pay-button:disabled {
       background: #9ca3af;
       cursor: not-allowed;
     }
-
 
     .back-link {
       display: inline-block;
@@ -260,11 +229,9 @@
       font-size: 14px;
     }
 
-
     .back-link:hover {
       color: #22c55e;
     }
-
 
     .empty {
       text-align: center;
@@ -272,14 +239,12 @@
       color: #6b7280;
     }
 
-
     footer {
       text-align: center;
       padding: 30px 20px;
       color: #6b7280;
       font-size: 14px;
     }
-
 
     @media (max-width: 800px) {
 
@@ -856,7 +821,40 @@
 
 
   // ==========================================
-  // GENERATE UNIQUE ORDER NUMBER
+  // GENERATE INTERNAL UNIQUE ORDER ID
+  // ==========================================
+
+  function generateOrderId() {
+
+    let id = "";
+
+    if (
+      window.crypto &&
+      crypto.randomUUID
+    ) {
+
+      id =
+        crypto.randomUUID();
+
+    } else {
+
+      id =
+        Date.now().toString(36) +
+        "-" +
+        Math.random()
+          .toString(36)
+          .substring(2, 12);
+
+    }
+
+    return id;
+
+  }
+
+
+
+  // ==========================================
+  // GENERATE UNIQUE 6-DIGIT ORDER NUMBER
   // ==========================================
 
   function generateUniqueOrderNumber() {
@@ -867,100 +865,49 @@
 
     const existingNumbers =
       new Set(
-        existingOrders.map(
-          order =>
-            String(
-              order.orderNumber || ""
-            )
-        )
+        existingOrders
+          .map(
+            order =>
+              String(
+                order.orderNumber || ""
+              ).trim()
+          )
+          .filter(
+            number =>
+              number.length > 0
+          )
       );
 
 
-    let orderNumber = "";
+    let orderNumber;
 
 
     /*
-      Format:
+      ORDER NUMBER FORMAT:
 
-      SS-YYYYMMDD-HHMMSS-RRRR
+      Exactly 6 digits.
 
-      Example:
+      Examples:
 
-      SS-20261006-031522-4827
+      583214
+      105934
+      762418
 
-      Timestamp makes the number
-      highly unique.
-
-      Random section provides
-      additional protection.
+      No letters.
+      No SS-.
+      No date.
+      No symbols.
     */
-
 
     do {
 
-      const now =
-        new Date();
-
-
-      const year =
-        now.getFullYear();
-
-
-      const month =
-        String(
-          now.getMonth() + 1
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const day =
-        String(
-          now.getDate()
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const hours =
-        String(
-          now.getHours()
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const minutes =
-        String(
-          now.getMinutes()
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const seconds =
-        String(
-          now.getSeconds()
-        ).padStart(
-          2,
-          "0"
-        );
-
-
-      const random =
-        Math.floor(
-          1000 +
-          Math.random() * 9000
-        );
-
-
       orderNumber =
-        `SS-${year}${month}${day}-${hours}${minutes}${seconds}-${random}`;
-
+        String(
+          Math.floor(
+            100000 +
+            Math.random() * 900000
+          )
+        );
 
     } while (
       existingNumbers.has(
@@ -985,39 +932,98 @@
     orderStatus
   ) {
 
+
+    // ======================================
+    // CREATE INTERNAL UNIQUE ID
+    // ======================================
+
+    const orderId =
+      generateOrderId();
+
+
+
+    // ======================================
+    // CREATE UNIQUE 6-DIGIT ORDER NUMBER
+    // ======================================
+
     const orderNumber =
       generateUniqueOrderNumber();
+
 
 
     const orderTime =
       new Date().toISOString();
 
 
+
+    /*
+      Payment time:
+
+      PAID
+      = actual simulated payment time
+
+      UNPAID
+      = null because customer has
+        not paid yet.
+    */
+
+    const paymentTime =
+      paymentStatus === "PAID"
+        ? orderTime
+        : null;
+
+
+
     const newOrder = {
+
+      /*
+        Internal ID.
+
+        Dashboard uses this ID to identify
+        the exact order.
+      */
+
+      orderId:
+        orderId,
+
+
+      /*
+        Customer-facing order number.
+
+        Exactly 6 digits.
+      */
 
       orderNumber:
         orderNumber,
 
+
       customer:
         customer,
+
 
       products:
         cart,
 
+
       total:
         orderTotalAmount,
+
 
       paymentMethod:
         paymentMethod,
 
+
       paymentStatus:
         paymentStatus,
+
 
       orderStatus:
         orderStatus,
 
+
       paymentTime:
-        orderTime,
+        paymentTime,
+
 
       createdAt:
         orderTime
@@ -1025,21 +1031,25 @@
     };
 
 
+
+    // ======================================
+    // GET CURRENT ORDERS
+    // ======================================
+
     let orders =
       getExistingOrders();
 
 
-    /*
-      Final safety check.
-      Never save an order if the
-      generated Order Number already exists.
-    */
 
-    const duplicate =
+    // ======================================
+    // FINAL ORDER NUMBER SAFETY CHECK
+    // ======================================
+
+    const duplicateOrderNumber =
       orders.some(
         order =>
           String(
-            order.orderNumber
+            order.orderNumber || ""
           ) ===
           String(
             orderNumber
@@ -1047,21 +1057,88 @@
       );
 
 
-    if (duplicate) {
+    if (
+      duplicateOrderNumber
+    ) {
+
+      /*
+        Extremely unlikely because
+        generateUniqueOrderNumber()
+        already checked.
+
+        If it happens, do not save
+        a duplicate.
+      */
 
       alert(
         "Order Number conflict detected. Please try again."
       );
+
+      payButton.disabled =
+        false;
+
+      payButton.textContent =
+        paymentMethod === "Cash on Delivery"
+          ? "Place Order — Cash on Delivery"
+          : "Continue to Payment";
 
       return;
 
     }
 
 
+
+    // ======================================
+    // CHECK INTERNAL ID
+    // ======================================
+
+    const duplicateOrderId =
+      orders.some(
+        order =>
+          String(
+            order.orderId || ""
+          ) ===
+          String(
+            orderId
+          )
+      );
+
+
+    if (
+      duplicateOrderId
+    ) {
+
+      alert(
+        "Order ID conflict detected. Please try again."
+      );
+
+      payButton.disabled =
+        false;
+
+      payButton.textContent =
+        paymentMethod === "Cash on Delivery"
+          ? "Place Order — Cash on Delivery"
+          : "Continue to Payment";
+
+      return;
+
+    }
+
+
+
+    // ======================================
+    // ADD ORDER
+    // ======================================
+
     orders.push(
       newOrder
     );
 
+
+
+    // ======================================
+    // SAVE ORDERS
+    // ======================================
 
     localStorage.setItem(
       "shopSphereOrders",
@@ -1071,9 +1148,16 @@
     );
 
 
+
     // ======================================
     // SAVE LATEST ORDER INFORMATION
     // ======================================
+
+    localStorage.setItem(
+      "shopSphereOrderId",
+      orderId
+    );
+
 
     localStorage.setItem(
       "shopSphereOrderNumber",
@@ -1099,10 +1183,31 @@
     );
 
 
-    localStorage.setItem(
-      "shopSpherePaymentTime",
-      orderTime
-    );
+
+    /*
+      For COD there is no payment yet,
+      therefore remove old payment time.
+
+      For PAID, save the payment time.
+    */
+
+    if (
+      paymentTime
+    ) {
+
+      localStorage.setItem(
+        "shopSpherePaymentTime",
+        paymentTime
+      );
+
+    } else {
+
+      localStorage.removeItem(
+        "shopSpherePaymentTime"
+      );
+
+    }
+
 
 
     // ======================================
@@ -1112,6 +1217,7 @@
     localStorage.removeItem(
       "shopSphereCart"
     );
+
 
 
     // ======================================
