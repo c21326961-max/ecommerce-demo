@@ -314,6 +314,22 @@
       color: #6b7280;
     }
 
+    /* ADD PRODUCT SPECIAL */
+
+    .add-product-action {
+      border: 2px solid #22c55e;
+      background: #f0fdf4;
+    }
+
+    .add-product-action .quick-icon {
+      background: #22c55e;
+      color: white;
+    }
+
+    .add-product-action:hover {
+      background: #dcfce7;
+    }
+
     /* REFRESH MESSAGE */
 
     .dashboard-message {
@@ -408,9 +424,7 @@
 
 </head>
 
-
 <body>
-
 
   <!-- SIDEBAR -->
 
@@ -420,36 +434,28 @@
       Shop<span>Sphere</span>
     </div>
 
-
     <div class="menu-title">
       Main Menu
     </div>
 
-
     <div class="menu">
 
-      <a
-        href="dashboard.html"
-        class="active"
-      >
+      <a href="dashboard.html" class="active">
         🏠 Dashboard
       </a>
 
-
-      <a href="products.html">
+      <!-- FIXED: ADMIN PRODUCTS -->
+      <a href="admin-products.html">
         📦 Products
       </a>
-
 
       <a href="history.html">
         🛒 Orders
       </a>
 
-
       <a href="history.html">
         📋 Order History
       </a>
-
 
       <a href="history.html">
         👥 Customers
@@ -457,11 +463,9 @@
 
     </div>
 
-
     <div class="menu-title">
       Management
     </div>
-
 
     <div class="menu">
 
@@ -469,16 +473,13 @@
         💰 Sales
       </a>
 
-
       <a href="#">
         📊 Reports
       </a>
 
-
       <a href="#">
         ⚙️ Settings
       </a>
-
 
       <a href="index.html">
         🌐 View Store
@@ -488,12 +489,9 @@
 
   </aside>
 
-
-
   <!-- MAIN -->
 
   <main class="main">
-
 
     <!-- TOPBAR -->
 
@@ -502,7 +500,6 @@
       <h1>
         Admin Dashboard
       </h1>
-
 
       <div class="admin-user">
 
@@ -518,12 +515,9 @@
 
     </div>
 
-
-
     <!-- CONTENT -->
 
     <div class="content">
-
 
       <div class="welcome">
 
@@ -537,18 +531,14 @@
 
       </div>
 
-
       <div
         id="dashboardMessage"
         class="dashboard-message"
       ></div>
 
-
-
       <!-- STATS -->
 
       <div class="stats">
-
 
         <div class="stat-card">
 
@@ -573,8 +563,6 @@
 
         </div>
 
-
-
         <div class="stat-card">
 
           <div class="stat-top">
@@ -598,8 +586,6 @@
 
         </div>
 
-
-
         <div class="stat-card">
 
           <div class="stat-top">
@@ -622,8 +608,6 @@
           </div>
 
         </div>
-
-
 
         <div class="stat-card">
 
@@ -650,12 +634,9 @@
 
       </div>
 
-
-
       <!-- DASHBOARD GRID -->
 
       <div class="dashboard-grid">
-
 
         <!-- RECENT ORDERS -->
 
@@ -675,7 +656,6 @@
             </a>
 
           </div>
-
 
           <div class="table-container">
 
@@ -709,7 +689,6 @@
 
               </thead>
 
-
               <tbody id="ordersTable">
 
                 <tr>
@@ -731,8 +710,6 @@
 
         </div>
 
-
-
         <!-- QUICK ACTIONS -->
 
         <div class="panel">
@@ -745,12 +722,11 @@
 
           </div>
 
-
           <div class="quick-actions">
 
-
+            <!-- VIEW PRODUCTS -->
             <a
-              href="products.html"
+              href="admin-products.html"
               class="quick-action"
             >
 
@@ -761,7 +737,7 @@
               <div>
 
                 <strong>
-                  View Products
+                  Products
                 </strong>
 
                 <small>
@@ -772,8 +748,7 @@
 
             </a>
 
-
-
+            <!-- ORDER HISTORY -->
             <a
               href="history.html"
               class="quick-action"
@@ -797,11 +772,10 @@
 
             </a>
 
-
-
+            <!-- FIXED ADD PRODUCT -->
             <a
-              href="products.html"
-              class="quick-action"
+              href="admin-products.html"
+              class="quick-action add-product-action"
             >
 
               <div class="quick-icon">
@@ -822,8 +796,7 @@
 
             </a>
 
-
-
+            <!-- VIEW STORE -->
             <a
               href="index.html"
               class="quick-action"
@@ -857,8 +830,6 @@
 
   </main>
 
-
-
   <script>
 
     /*
@@ -867,28 +838,13 @@
       Data source:
       - Products: Supabase
       - Orders: localStorage (shopSphereOrders)
-
-      Orders are created by payment.html.
     */
-
-
-    /* =========================================
-       SUPABASE
-    ========================================= */
 
     const SUPABASE_URL =
       "https://ienquzigbawhvthnirtj.supabase.co";
 
-    /*
-      Publishable Supabase key:
-      Tumia key yako ile ile uliyoweka kwenye
-      products.html / admin-products.html.
-    */
-
     const SUPABASE_KEY =
       localStorage.getItem("shopSphereSupabaseKey") || "";
-
-
 
     /* =========================================
        FORMAT MONEY
@@ -896,11 +852,10 @@
 
     function formatMoney(amount) {
 
-      return "TSh " + Number(amount || 0).toLocaleString();
+      return "TSh " +
+        Number(amount || 0).toLocaleString();
 
     }
-
-
 
     /* =========================================
        GET ORDERS
@@ -934,8 +889,6 @@
 
     }
 
-
-
     /* =========================================
        CUSTOMER COUNT
     ========================================= */
@@ -957,7 +910,9 @@
         if (identifier) {
 
           customers.add(
-            String(identifier).toLowerCase().trim()
+            String(identifier)
+              .toLowerCase()
+              .trim()
           );
 
         }
@@ -968,20 +923,11 @@
 
     }
 
-
-
     /* =========================================
        CALCULATE ORDER TOTAL
     ========================================= */
 
     function getOrderTotal(order) {
-
-      /*
-        payment.html already saves:
-        total: orderTotalAmount
-
-        So use that first.
-      */
 
       if (
         order.total !== undefined &&
@@ -992,12 +938,6 @@
         return Number(order.total);
 
       }
-
-
-      /*
-        Backup calculation in case
-        an older order has no total.
-      */
 
       let total = 0;
 
@@ -1018,8 +958,6 @@
 
     }
 
-
-
     /* =========================================
        TOTAL SALES
     ========================================= */
@@ -1034,10 +972,6 @@
           String(
             order.paymentStatus || ""
           ).toUpperCase();
-
-        /*
-          Count paid orders as sales.
-        */
 
         if (
           paymentStatus === "PAID" ||
@@ -1054,8 +988,6 @@
       return sales;
 
     }
-
-
 
     /* =========================================
        STATUS CLASS
@@ -1090,8 +1022,6 @@
 
     }
 
-
-
     /* =========================================
        DISPLAY RECENT ORDERS
     ========================================= */
@@ -1102,7 +1032,6 @@
         document.getElementById(
           "ordersTable"
         );
-
 
       if (!orders.length) {
 
@@ -1124,11 +1053,6 @@
         return;
 
       }
-
-
-      /*
-        Newest orders first.
-      */
 
       const sortedOrders =
         [...orders].sort(
@@ -1153,14 +1077,8 @@
           }
         );
 
-
-      /*
-        Show latest 10 orders.
-      */
-
       const recentOrders =
         sortedOrders.slice(0, 10);
-
 
       table.innerHTML =
         recentOrders.map(order => {
@@ -1186,7 +1104,6 @@
           const orderStatus =
             order.orderStatus ||
             "Processing";
-
 
           return `
 
@@ -1230,8 +1147,6 @@
 
     }
 
-
-
     /* =========================================
        HTML SECURITY
     ========================================= */
@@ -1247,20 +1162,11 @@
 
     }
 
-
-
     /* =========================================
        LOAD PRODUCT COUNT FROM SUPABASE
     ========================================= */
 
     async function loadProductCount() {
-
-      /*
-        If there is no key stored here,
-        keep the demo count as 4.
-
-        This avoids breaking the dashboard.
-      */
 
       if (!SUPABASE_KEY) {
 
@@ -1271,7 +1177,6 @@
         return;
 
       }
-
 
       try {
 
@@ -1289,7 +1194,6 @@
             }
           );
 
-
         if (!response.ok) {
 
           throw new Error(
@@ -1298,10 +1202,8 @@
 
         }
 
-
         const products =
           await response.json();
-
 
         document.getElementById(
           "totalProducts"
@@ -1310,17 +1212,12 @@
             ? products.length
             : 0;
 
-
       } catch (error) {
 
         console.error(
           "Product count error:",
           error
         );
-
-        /*
-          Current demo has 4 products.
-        */
 
         document.getElementById(
           "totalProducts"
@@ -1329,8 +1226,6 @@
       }
 
     }
-
-
 
     /* =========================================
        LOAD DASHBOARD
@@ -1341,30 +1236,15 @@
       const orders =
         getOrders();
 
-
-      /*
-        TOTAL ORDERS
-      */
-
       document.getElementById(
         "totalOrders"
       ).textContent =
         orders.length;
 
-
-      /*
-        TOTAL CUSTOMERS
-      */
-
       document.getElementById(
         "totalCustomers"
       ).textContent =
         getUniqueCustomers(orders);
-
-
-      /*
-        TOTAL SALES
-      */
 
       document.getElementById(
         "totalSales"
@@ -1373,23 +1253,11 @@
           getTotalSales(orders)
         );
 
-
-      /*
-        RECENT ORDERS
-      */
-
       displayRecentOrders(orders);
-
-
-      /*
-        PRODUCTS
-      */
 
       await loadProductCount();
 
     }
-
-
 
     /* =========================================
        AUTO REFRESH
@@ -1397,20 +1265,10 @@
 
     loadDashboard();
 
-
-    /*
-      Refresh dashboard every 5 seconds.
-
-      This means if another tab creates
-      an order, the dashboard can update.
-    */
-
     setInterval(
       loadDashboard,
       5000
     );
-
-
 
     /* =========================================
        LISTEN FOR STORAGE CHANGES
@@ -1432,7 +1290,6 @@
     );
 
   </script>
-
 
 </body>
 </html>
