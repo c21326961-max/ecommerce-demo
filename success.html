@@ -223,19 +223,46 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      background: #dcfce7;
-      color: #15803d;
       padding: 7px 13px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 800;
     }
 
+    .status.paid {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status.unpaid {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
     .status-dot {
       width: 8px;
       height: 8px;
-      background: #22c55e;
       border-radius: 50%;
+    }
+
+    .status.paid .status-dot {
+      background: #22c55e;
+    }
+
+    .status.unpaid .status-dot {
+      background: #f59e0b;
+    }
+
+    .cod-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      color: #166534;
+      font-size: 14px;
+      line-height: 1.5;
+      display: none;
     }
 
     .customer-box {
@@ -418,9 +445,11 @@
         ✓
       </div>
 
-      <h1>Payment Successful!</h1>
+      <h1 id="successTitle">
+        Payment Successful!
+      </h1>
 
-      <p>
+      <p id="successMessage">
         Thank you for your order. Your payment has been received
         and your order is now being processed.
       </p>
@@ -472,9 +501,9 @@
 
           <span>Payment Status</span>
 
-          <span>
+          <span id="paymentStatusContainer">
 
-            <span class="status">
+            <span class="status paid" id="paymentStatus">
 
               <span class="status-dot"></span>
 
@@ -491,7 +520,7 @@
 
           <span>Order Status</span>
 
-          <span>
+          <span id="orderStatus">
             Processing
           </span>
 
@@ -511,7 +540,7 @@
 
         <div class="total-row">
 
-          <strong>
+          <strong id="totalLabel">
             Total Paid
           </strong>
 
@@ -522,6 +551,18 @@
             TSh 0
           </span>
 
+        </div>
+
+
+        <!-- COD NOTICE -->
+
+        <div
+          class="cod-note"
+          id="codNote"
+        >
+          <strong>💵 Cash on Delivery</strong><br>
+          Your order has been placed successfully.
+          You will pay when you receive or collect your order.
         </div>
 
 
@@ -649,7 +690,87 @@
       localStorage.getItem(
         "shopSpherePaymentMethod"
       ) ||
+      customer.paymentMethod ||
       "Mobile Money";
+
+
+    // ==========================================
+    // GET ORDER INFORMATION
+    // ==========================================
+
+    const savedOrders =
+      JSON.parse(
+        localStorage.getItem("shopSphereOrders")
+      ) || [];
+
+
+    const currentOrder =
+      savedOrders.find(
+        order =>
+          order.orderNumber === orderNumber
+      ) ||
+      null;
+
+
+    // ==========================================
+    // PAYMENT STATUS
+    // ==========================================
+
+    let paymentStatus =
+      localStorage.getItem(
+        "shopSpherePaymentStatus"
+      ) ||
+      (
+        currentOrder &&
+        currentOrder.paymentStatus
+      ) ||
+      "PAID";
+
+
+    // ==========================================
+    // ORDER STATUS
+    // ==========================================
+
+    let orderStatus =
+      localStorage.getItem(
+        "shopSphereOrderStatus"
+      ) ||
+      (
+        currentOrder &&
+        currentOrder.orderStatus
+      ) ||
+      "Processing";
+
+
+    // ==========================================
+    // CHECK COD
+    // ==========================================
+
+    const isCOD =
+      paymentMethod === "Cash on Delivery";
+
+
+    if (isCOD) {
+
+      paymentStatus = "UNPAID";
+
+      orderStatus =
+        currentOrder &&
+        currentOrder.orderStatus
+          ? currentOrder.orderStatus
+          : "Pending";
+
+      localStorage.setItem(
+        "shopSpherePaymentStatus",
+        "UNPAID"
+      );
+
+      localStorage.setItem(
+        "shopSphereOrderStatus",
+        orderStatus
+      );
+
+    }
 
 
     // ==========================================
@@ -700,6 +821,102 @@
       "paymentMethod"
     ).textContent =
       paymentMethod;
+
+
+    // ==========================================
+    // DISPLAY PAYMENT STATUS
+    // ==========================================
+
+    const paymentStatusElement =
+      document.getElementById(
+        "paymentStatus"
+      );
+
+
+    if (paymentStatus === "PAID") {
+
+      paymentStatusElement.className =
+        "status paid";
+
+
+      paymentStatusElement.innerHTML = `
+
+        <span class="status-dot"></span>
+
+        PAID
+
+      `;
+
+    } else {
+
+      paymentStatusElement.className =
+        "status unpaid";
+
+
+      paymentStatusElement.innerHTML = `
+
+        <span class="status-dot"></span>
+
+        UNPAID
+
+      `;
+
+    }
+
+
+    // ==========================================
+    // DISPLAY ORDER STATUS
+    // ==========================================
+
+    document.getElementById(
+      "orderStatus"
+    ).textContent =
+      orderStatus;
+
+
+    // ==========================================
+    // COD / ONLINE UI
+    // ==========================================
+
+    if (isCOD) {
+
+      document.getElementById(
+        "successTitle"
+      ).textContent =
+        "Order Placed Successfully!";
+
+
+      document.getElementById(
+        "successMessage"
+      ).textContent =
+        "Thank you for your order. Your order has been received and is waiting for processing.";
+
+
+      document.getElementById(
+        "totalLabel"
+      ).textContent =
+        "Order Total";
+
+
+      document.getElementById(
+        "codNote"
+      ).style.display =
+        "block";
+
+    } else {
+
+      document.getElementById(
+        "successTitle"
+      ).textContent =
+        "Payment Successful!";
+
+
+      document.getElementById(
+        "successMessage"
+      ).textContent =
+        "Thank you for your order. Your payment has been received and your order is now being processed.";
+
+    }
 
 
     // ==========================================
@@ -966,6 +1183,22 @@
 
 
         // --------------------------------------
+        // PAYMENT / ORDER TEXT
+        // --------------------------------------
+
+        const whatsappPaymentStatus =
+          isCOD
+            ? "UNPAID"
+            : "PAID";
+
+
+        const whatsappOrderStatus =
+          isCOD
+            ? orderStatus
+            : "Processing";
+
+
+        // --------------------------------------
         // CREATE WHATSAPP MESSAGE
         // --------------------------------------
 
@@ -973,7 +1206,7 @@
 
 `Hello ShopSphere 👋
 
-I have completed an order.
+I have placed an order.
 
 Order Number: ${orderNumber}
 
@@ -987,10 +1220,12 @@ ${productsMessage}
 Total: ${formatMoney(total)}
 
 Payment Method: ${paymentMethod}
-Payment Status: PAID
-Order Status: Processing
+Payment Status: ${whatsappPaymentStatus}
+Order Status: ${whatsappOrderStatus}
 
-Please confirm my order. Thank you.`;
+${isCOD
+  ? "I will pay when I receive or collect the order."
+  : "Please confirm my order. Thank you."}`;
 
 
         // --------------------------------------
