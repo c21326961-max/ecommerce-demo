@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Admin Dashboard | ShopSphere</title>
+
+  <!-- =========================================
+       SHEETJS - EXCEL EXPORT
+  ========================================= -->
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
 
   <style>
 
@@ -19,6 +31,7 @@
       background: #f5f7fb;
       color: #1f2937;
     }
+
 
     /* =========================================
        SIDEBAR
@@ -70,6 +83,7 @@
       color: white;
     }
 
+
     /* =========================================
        MAIN
     ========================================= */
@@ -78,6 +92,7 @@
       margin-left: 250px;
       min-height: 100vh;
     }
+
 
     /* =========================================
        TOPBAR
@@ -119,6 +134,7 @@
       font-weight: bold;
     }
 
+
     /* =========================================
        CONTENT
     ========================================= */
@@ -140,6 +156,7 @@
       color: #6b7280;
     }
 
+
     /* =========================================
        DASHBOARD MESSAGE
     ========================================= */
@@ -154,6 +171,7 @@
       margin-bottom: 20px;
       font-size: 14px;
     }
+
 
     /* =========================================
        STATS
@@ -203,6 +221,7 @@
       word-break: break-word;
     }
 
+
     /* =========================================
        GRID
     ========================================= */
@@ -224,6 +243,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 15px;
       margin-bottom: 20px;
     }
 
@@ -241,6 +261,34 @@
     .view-all:hover {
       text-decoration: underline;
     }
+
+
+    /* =========================================
+       EXCEL BUTTON
+    ========================================= */
+
+    .export-excel-btn {
+      border: none;
+      background: #166534;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    .export-excel-btn:hover {
+      background: #15803d;
+      transform: translateY(-1px);
+    }
+
+    .export-excel-btn:active {
+      transform: translateY(0);
+    }
+
 
     /* =========================================
        TABLE
@@ -274,6 +322,7 @@
       color: #6b7280;
       padding: 30px 10px;
     }
+
 
     /* =========================================
        STATUS BADGES
@@ -317,6 +366,59 @@
       color: #991b1b;
     }
 
+
+    /* =========================================
+       PAYMENT METHOD SMALL TEXT
+    ========================================= */
+
+    .payment-method-small {
+      display: block;
+      color: #6b7280;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+
+    /* =========================================
+       CASH RECEIVED BUTTON
+    ========================================= */
+
+    .cash-received-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .cash-received-btn:hover {
+      background: #16a34a;
+      color: white;
+    }
+
+    .cash-received-btn:disabled {
+      background: #d1d5db;
+      color: #6b7280;
+      cursor: not-allowed;
+    }
+
+
+    /* =========================================
+       ACTION BUTTONS
+    ========================================= */
+
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+
     /* =========================================
        STATUS SELECT
     ========================================= */
@@ -348,12 +450,13 @@
       box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
     }
 
+
     /* =========================================
        DELETE BUTTON
     ========================================= */
 
     .action-cell {
-      min-width: 110px;
+      min-width: 150px;
     }
 
     .delete-order-btn {
@@ -362,16 +465,18 @@
       border-radius: 8px;
       background: #fee2e2;
       color: #991b1b;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: bold;
       cursor: pointer;
       transition: 0.2s;
+      width: 100%;
     }
 
     .delete-order-btn:hover {
       background: #dc2626;
       color: white;
     }
+
 
     /* =========================================
        QUICK ACTIONS
@@ -420,6 +525,7 @@
       color: #6b7280;
     }
 
+
     /* =========================================
        ADD PRODUCT SPECIAL
     ========================================= */
@@ -438,6 +544,7 @@
       background: #dcfce7;
     }
 
+
     /* =========================================
        RESPONSIVE
     ========================================= */
@@ -453,6 +560,7 @@
       }
 
     }
+
 
     @media (max-width: 700px) {
 
@@ -515,13 +623,24 @@
         padding: 18px;
       }
 
+      .panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .export-excel-btn {
+        width: 100%;
+      }
+
     }
 
   </style>
 
 </head>
 
+
 <body>
+
 
   <!-- =========================================
        SIDEBAR
@@ -533,27 +652,36 @@
       Shop<span>Sphere</span>
     </div>
 
+
     <div class="menu-title">
       Main Menu
     </div>
 
+
     <div class="menu">
 
-      <a href="dashboard.html" class="active">
+      <a
+        href="dashboard.html"
+        class="active"
+      >
         🏠 Dashboard
       </a>
+
 
       <a href="admin-products.html">
         📦 Products
       </a>
 
+
       <a href="history.html">
         🛒 Orders
       </a>
 
+
       <a href="history.html">
         📋 Order History
       </a>
+
 
       <a href="history.html">
         👥 Customers
@@ -561,9 +689,11 @@
 
     </div>
 
+
     <div class="menu-title">
       Management
     </div>
+
 
     <div class="menu">
 
@@ -571,13 +701,16 @@
         💰 Sales
       </a>
 
+
       <a href="#">
         📊 Reports
       </a>
 
+
       <a href="#">
         ⚙️ Settings
       </a>
+
 
       <a href="index.html">
         🌐 View Store
@@ -587,19 +720,25 @@
 
   </aside>
 
+
+
   <!-- =========================================
        MAIN
   ========================================= -->
 
   <main class="main">
 
-    <!-- TOPBAR -->
+
+    <!-- =========================================
+         TOPBAR
+    ========================================= -->
 
     <div class="topbar">
 
       <h1>
         Admin Dashboard
       </h1>
+
 
       <div class="admin-user">
 
@@ -615,9 +754,14 @@
 
     </div>
 
-    <!-- CONTENT -->
+
+
+    <!-- =========================================
+         CONTENT
+    ========================================= -->
 
     <div class="content">
+
 
       <div class="welcome">
 
@@ -631,18 +775,25 @@
 
       </div>
 
-      <!-- MESSAGE -->
+
+
+      <!-- =========================================
+           MESSAGE
+      ========================================= -->
 
       <div
         id="dashboardMessage"
         class="dashboard-message"
       ></div>
 
+
+
       <!-- =========================================
            STATS
       ========================================= -->
 
       <div class="stats">
+
 
         <!-- PRODUCTS -->
 
@@ -669,6 +820,8 @@
 
         </div>
 
+
+
         <!-- ORDERS -->
 
         <div class="stat-card">
@@ -694,6 +847,8 @@
 
         </div>
 
+
+
         <!-- CUSTOMERS -->
 
         <div class="stat-card">
@@ -718,6 +873,8 @@
           </div>
 
         </div>
+
+
 
         <!-- SALES -->
 
@@ -746,11 +903,14 @@
 
       </div>
 
+
+
       <!-- =========================================
            DASHBOARD GRID
       ========================================= -->
 
       <div class="dashboard-grid">
+
 
         <!-- =====================================
              RECENT ORDERS
@@ -758,20 +918,44 @@
 
         <div class="panel">
 
+
           <div class="panel-header">
 
             <h3>
               Recent Orders
             </h3>
 
-            <a
-              href="history.html"
-              class="view-all"
+
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                gap:10px;
+                flex-wrap:wrap;
+              "
             >
-              View All
-            </a>
+
+              <button
+                type="button"
+                class="export-excel-btn"
+                onclick="exportOrdersToExcel()"
+              >
+                📊 Export to Excel
+              </button>
+
+
+              <a
+                href="history.html"
+                class="view-all"
+              >
+                View All
+              </a>
+
+            </div>
 
           </div>
+
+
 
           <div class="table-container">
 
@@ -809,6 +993,7 @@
 
               </thead>
 
+
               <tbody id="ordersTable">
 
                 <tr>
@@ -830,11 +1015,14 @@
 
         </div>
 
+
+
         <!-- =====================================
              QUICK ACTIONS
         ====================================== -->
 
         <div class="panel">
+
 
           <div class="panel-header">
 
@@ -844,7 +1032,9 @@
 
           </div>
 
+
           <div class="quick-actions">
+
 
             <!-- PRODUCTS -->
 
@@ -871,6 +1061,8 @@
 
             </a>
 
+
+
             <!-- ORDER HISTORY -->
 
             <a
@@ -895,6 +1087,8 @@
               </div>
 
             </a>
+
+
 
             <!-- ADD PRODUCT -->
 
@@ -921,6 +1115,8 @@
 
             </a>
 
+
+
             <!-- VIEW STORE -->
 
             <a
@@ -946,6 +1142,7 @@
 
             </a>
 
+
           </div>
 
         </div>
@@ -956,7 +1153,14 @@
 
   </main>
 
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================= -->
+
   <script>
+
 
     /*
       =========================================
@@ -973,14 +1177,21 @@
       Admin can:
       - View orders
       - Change order status
+      - Mark COD cash as received
       - Delete orders
+      - Export orders to Excel
     */
+
 
     const SUPABASE_URL =
       "https://ienquzigbawhvthnirtj.supabase.co";
 
+
     const SUPABASE_KEY =
-      localStorage.getItem("shopSphereSupabaseKey") || "";
+      localStorage.getItem(
+        "shopSphereSupabaseKey"
+      ) || "";
+
 
 
     /* =========================================
@@ -990,9 +1201,12 @@
     function formatMoney(amount) {
 
       return "TSh " +
-        Number(amount || 0).toLocaleString();
+        Number(
+          amount || 0
+        ).toLocaleString();
 
     }
+
 
 
     /* =========================================
@@ -1005,10 +1219,17 @@
 
         const savedOrders =
           JSON.parse(
-            localStorage.getItem("shopSphereOrders")
+            localStorage.getItem(
+              "shopSphereOrders"
+            )
           );
 
-        if (Array.isArray(savedOrders)) {
+
+        if (
+          Array.isArray(
+            savedOrders
+          )
+        ) {
 
           return savedOrders;
 
@@ -1023,126 +1244,177 @@
 
       }
 
+
       return [];
 
     }
+
 
 
     /* =========================================
        CUSTOMER COUNT
     ========================================= */
 
-    function getUniqueCustomers(orders) {
+    function getUniqueCustomers(
+      orders
+    ) {
 
       const customers =
         new Set();
 
-      orders.forEach(order => {
 
-        const customer =
-          order.customer || {};
+      orders.forEach(
+        order => {
 
-        const identifier =
-          customer.phone ||
-          customer.email ||
-          customer.fullName;
+          const customer =
+            order.customer || {};
 
-        if (identifier) {
 
-          customers.add(
-            String(identifier)
+          const identifier =
+            customer.phone ||
+            customer.email ||
+            customer.fullName;
+
+
+          if (identifier) {
+
+            customers.add(
+              String(
+                identifier
+              )
               .toLowerCase()
               .trim()
-          );
+            );
+
+          }
 
         }
+      );
 
-      });
 
       return customers.size;
 
     }
 
 
+
     /* =========================================
        CALCULATE ORDER TOTAL
     ========================================= */
 
-    function getOrderTotal(order) {
+    function getOrderTotal(
+      order
+    ) {
 
       if (
         order.total !== undefined &&
         order.total !== null &&
-        !isNaN(Number(order.total))
+        !isNaN(
+          Number(
+            order.total
+          )
+        )
       ) {
 
-        return Number(order.total);
+        return Number(
+          order.total
+        );
 
       }
 
+
       let total = 0;
 
+
       const products =
-        Array.isArray(order.products)
+        Array.isArray(
+          order.products
+        )
           ? order.products
           : [];
 
-      products.forEach(item => {
 
-        total +=
-          Number(item.price || 0) *
-          Number(item.quantity || 0);
+      products.forEach(
+        item => {
 
-      });
+          total +=
+            Number(
+              item.price || 0
+            ) *
+            Number(
+              item.quantity || 0
+            );
+
+        }
+      );
+
 
       return total;
 
     }
 
 
+
     /* =========================================
        TOTAL SALES
     ========================================= */
 
-    function getTotalSales(orders) {
+    function getTotalSales(
+      orders
+    ) {
 
       let sales = 0;
 
-      orders.forEach(order => {
 
-        const paymentStatus =
-          String(
-            order.paymentStatus || ""
-          ).toUpperCase();
+      orders.forEach(
+        order => {
 
-        if (
-          paymentStatus === "PAID" ||
-          paymentStatus === "SUCCESS" ||
-          paymentStatus === "COMPLETED"
-        ) {
+          const paymentStatus =
+            String(
+              order.paymentStatus || ""
+            )
+            .toUpperCase()
+            .trim();
 
-          sales +=
-            getOrderTotal(order);
+
+          if (
+            paymentStatus === "PAID" ||
+            paymentStatus === "SUCCESS" ||
+            paymentStatus === "COMPLETED"
+          ) {
+
+            sales +=
+              getOrderTotal(
+                order
+              );
+
+          }
 
         }
+      );
 
-      });
 
       return sales;
 
     }
 
 
+
     /* =========================================
        STATUS CLASS
     ========================================= */
 
-    function getStatusClass(status) {
+    function getStatusClass(
+      status
+    ) {
 
       const cleanStatus =
-        String(status || "")
-          .toLowerCase()
-          .trim();
+        String(
+          status || ""
+        )
+        .toLowerCase()
+        .trim();
+
 
       if (
         cleanStatus === "paid" ||
@@ -1154,6 +1426,7 @@
 
       }
 
+
       if (
         cleanStatus === "pending"
       ) {
@@ -1161,6 +1434,7 @@
         return "status-pending";
 
       }
+
 
       if (
         cleanStatus === "shipped"
@@ -1170,6 +1444,7 @@
 
       }
 
+
       if (
         cleanStatus === "delivered"
       ) {
@@ -1177,6 +1452,7 @@
         return "status-delivered";
 
       }
+
 
       if (
         cleanStatus === "cancelled" ||
@@ -1187,31 +1463,39 @@
 
       }
 
+
       return "status-processing";
 
     }
+
 
 
     /* =========================================
        SHOW DASHBOARD MESSAGE
     ========================================= */
 
-    function showDashboardMessage(message) {
+    function showDashboardMessage(
+      message
+    ) {
 
       const messageBox =
         document.getElementById(
           "dashboardMessage"
         );
 
+
       messageBox.textContent =
         message;
+
 
       messageBox.style.display =
         "block";
 
+
       clearTimeout(
         window.dashboardMessageTimer
       );
+
 
       window.dashboardMessageTimer =
         setTimeout(
@@ -1227,6 +1511,7 @@
     }
 
 
+
     /* =========================================
        UPDATE ORDER STATUS
     ========================================= */
@@ -1239,12 +1524,18 @@
       const orders =
         getOrders();
 
+
       const orderIndex =
         orders.findIndex(
           order =>
-            String(order.orderNumber) ===
-            String(orderNumber)
+            String(
+              order.orderNumber
+            ) ===
+            String(
+              orderNumber
+            )
         );
+
 
       if (
         orderIndex === -1
@@ -1258,17 +1549,24 @@
 
       }
 
+
       /* Update order */
 
-      orders[orderIndex].orderStatus =
+      orders[
+        orderIndex
+      ].orderStatus =
         newStatus;
+
 
       /* Save orders */
 
       localStorage.setItem(
         "shopSphereOrders",
-        JSON.stringify(orders)
+        JSON.stringify(
+          orders
+        )
       );
+
 
       /* Update latest order status */
 
@@ -1277,9 +1575,14 @@
           "shopSphereOrderNumber"
         );
 
+
       if (
-        String(latestOrderNumber) ===
-        String(orderNumber)
+        String(
+          latestOrderNumber
+        ) ===
+        String(
+          orderNumber
+        )
       ) {
 
         localStorage.setItem(
@@ -1289,25 +1592,120 @@
 
       }
 
+
       showDashboardMessage(
         `Order #${orderNumber} status changed to ${newStatus}.`
       );
+
 
       loadDashboard();
 
     }
 
 
+
     /* =========================================
-       DELETE ORDER
+       MARK CASH RECEIVED
     ========================================= */
 
-    function deleteOrder(orderNumber) {
+    function markCashReceived(
+      orderNumber
+    ) {
+
+      const orders =
+        getOrders();
+
+
+      const orderIndex =
+        orders.findIndex(
+          order =>
+            String(
+              order.orderNumber
+            ) ===
+            String(
+              orderNumber
+            )
+        );
+
+
+      if (
+        orderIndex === -1
+      ) {
+
+        showDashboardMessage(
+          "Order not found."
+        );
+
+        return;
+
+      }
+
+
+      const order =
+        orders[
+          orderIndex
+        ];
+
+
+      const paymentMethod =
+        String(
+          order.paymentMethod || ""
+        )
+        .trim();
+
+
+      const paymentStatus =
+        String(
+          order.paymentStatus || ""
+        )
+        .toUpperCase()
+        .trim();
+
+
+      /* Check payment method */
+
+      if (
+        paymentMethod !==
+        "Cash on Delivery"
+      ) {
+
+        showDashboardMessage(
+          "This order is not Cash on Delivery."
+        );
+
+        return;
+
+      }
+
+
+      /* Check payment status */
+
+      if (
+        paymentStatus === "PAID" ||
+        paymentStatus === "SUCCESS" ||
+        paymentStatus === "COMPLETED"
+      ) {
+
+        showDashboardMessage(
+          "This order has already been paid."
+        );
+
+        return;
+
+      }
+
+
+      const amount =
+        getOrderTotal(
+          order
+        );
+
 
       const confirmed =
         confirm(
-          `Are you sure you want to delete Order #${orderNumber}?`
+          `Confirm that cash has been received for Order #${orderNumber}?\n\nAmount: ${formatMoney(amount)}`
         );
+
 
       if (!confirmed) {
 
@@ -1315,20 +1713,149 @@
 
       }
 
+
+      /* =========================================
+         UPDATE PAYMENT
+      ========================================= */
+
+      const paymentTime =
+        new Date().toISOString();
+
+
+      orders[
+        orderIndex
+      ].paymentStatus =
+        "PAID";
+
+
+      orders[
+        orderIndex
+      ].paymentTime =
+        paymentTime;
+
+
+      /* Keep existing order status */
+
+      if (
+        !orders[
+          orderIndex
+        ].orderStatus
+      ) {
+
+        orders[
+          orderIndex
+        ].orderStatus =
+          "Pending";
+
+      }
+
+
+      /* Save */
+
+      localStorage.setItem(
+        "shopSphereOrders",
+        JSON.stringify(
+          orders
+        )
+      );
+
+
+      /* =========================================
+         UPDATE LATEST ORDER PAYMENT
+      ========================================= */
+
+      const latestOrderNumber =
+        localStorage.getItem(
+          "shopSphereOrderNumber"
+        );
+
+
+      if (
+        String(
+          latestOrderNumber
+        ) ===
+        String(
+          orderNumber
+        )
+      ) {
+
+        localStorage.setItem(
+          "shopSphereOrderStatus",
+          orders[
+            orderIndex
+          ].orderStatus
+        );
+
+
+        localStorage.setItem(
+          "shopSpherePaymentStatus",
+          "PAID"
+        );
+
+
+        localStorage.setItem(
+          "shopSpherePaymentTime",
+          paymentTime
+        );
+
+      }
+
+
+      showDashboardMessage(
+        `Cash received for Order #${orderNumber}. Payment marked as PAID.`
+      );
+
+
+      loadDashboard();
+
+    }
+
+
+
+    /* =========================================
+       DELETE ORDER
+    ========================================= */
+
+    function deleteOrder(
+      orderNumber
+    ) {
+
+      const confirmed =
+        confirm(
+          `Are you sure you want to delete Order #${orderNumber}?`
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
       const orders =
         getOrders();
+
 
       const updatedOrders =
         orders.filter(
           order =>
-            String(order.orderNumber) !==
-            String(orderNumber)
+            String(
+              order.orderNumber
+            ) !==
+            String(
+              orderNumber
+            )
         );
+
 
       localStorage.setItem(
         "shopSphereOrders",
-        JSON.stringify(updatedOrders)
+        JSON.stringify(
+          updatedOrders
+        )
       );
+
 
       /*
         If the deleted order is the latest
@@ -1341,42 +1868,66 @@
           "shopSphereOrderNumber"
         );
 
+
       if (
-        String(latestOrderNumber) ===
-        String(orderNumber)
+        String(
+          latestOrderNumber
+        ) ===
+        String(
+          orderNumber
+        )
       ) {
 
         localStorage.removeItem(
           "shopSphereOrderNumber"
         );
 
+
         localStorage.removeItem(
           "shopSphereOrderStatus"
         );
 
+
+        localStorage.removeItem(
+          "shopSpherePaymentStatus"
+        );
+
+
+        localStorage.removeItem(
+          "shopSpherePaymentTime"
+        );
+
       }
+
 
       showDashboardMessage(
         `Order #${orderNumber} deleted successfully.`
       );
+
 
       loadDashboard();
 
     }
 
 
+
     /* =========================================
        DISPLAY RECENT ORDERS
     ========================================= */
 
-    function displayRecentOrders(orders) {
+    function displayRecentOrders(
+      orders
+    ) {
 
       const table =
         document.getElementById(
           "ordersTable"
         );
 
-      if (!orders.length) {
+
+      if (
+        !orders.length
+      ) {
 
         table.innerHTML = `
 
@@ -1397,7 +1948,10 @@
 
       }
 
-      /* Sort newest first */
+
+      /* =========================================
+         SORT NEWEST FIRST
+      ========================================= */
 
       const sortedOrders =
         [...orders].sort(
@@ -1410,6 +1964,7 @@
                 0
               );
 
+
             const dateB =
               new Date(
                 b.createdAt ||
@@ -1417,12 +1972,16 @@
                 0
               );
 
+
             return dateB - dateA;
 
           }
         );
 
-      /* Show latest 10 */
+
+      /* =========================================
+         SHOW LATEST 10
+      ========================================= */
 
       const recentOrders =
         sortedOrders.slice(
@@ -1430,158 +1989,275 @@
           10
         );
 
+
       table.innerHTML =
         recentOrders
-          .map(order => {
+          .map(
+            order => {
 
-            const customer =
-              order.customer || {};
-
-            const orderNumber =
-              order.orderNumber ||
-              "N/A";
-
-            const customerName =
-              customer.fullName ||
-              "Customer";
-
-            const total =
-              getOrderTotal(order);
-
-            const paymentStatus =
-              order.paymentStatus ||
-              "PAID";
-
-            const orderStatus =
-              order.orderStatus ||
-              "Processing";
-
-            return `
-
-              <tr>
-
-                <!-- ORDER -->
-
-                <td>
-
-                  <strong>
-                    #${escapeHtml(orderNumber)}
-                  </strong>
-
-                </td>
+              const customer =
+                order.customer || {};
 
 
-                <!-- CUSTOMER -->
-
-                <td>
-
-                  ${escapeHtml(
-                    customerName
-                  )}
-
-                </td>
+              const orderNumber =
+                order.orderNumber ||
+                "N/A";
 
 
-                <!-- AMOUNT -->
-
-                <td>
-
-                  ${formatMoney(
-                    total
-                  )}
-
-                </td>
+              const customerName =
+                customer.fullName ||
+                "Customer";
 
 
-                <!-- PAYMENT -->
-
-                <td>
-
-                  <span
-                    class="status ${getStatusClass(paymentStatus)}"
-                  >
-
-                    ${escapeHtml(
-                      paymentStatus
-                    )}
-
-                  </span>
-
-                </td>
+              const total =
+                getOrderTotal(
+                  order
+                );
 
 
-                <!-- ORDER STATUS -->
-
-                <td class="status-cell">
-
-                  <select
-                    class="status-select"
-                    data-order-number="${escapeHtml(orderNumber)}"
-                    aria-label="Change order status"
-                  >
-
-                    <option
-                      value="Pending"
-                      ${orderStatus === "Pending" ? "selected" : ""}
-                    >
-                      Pending
-                    </option>
-
-                    <option
-                      value="Processing"
-                      ${orderStatus === "Processing" ? "selected" : ""}
-                    >
-                      Processing
-                    </option>
-
-                    <option
-                      value="Shipped"
-                      ${orderStatus === "Shipped" ? "selected" : ""}
-                    >
-                      Shipped
-                    </option>
-
-                    <option
-                      value="Delivered"
-                      ${orderStatus === "Delivered" ? "selected" : ""}
-                    >
-                      Delivered
-                    </option>
-
-                    <option
-                      value="Cancelled"
-                      ${orderStatus === "Cancelled" ? "selected" : ""}
-                    >
-                      Cancelled
-                    </option>
-
-                  </select>
-
-                </td>
+              const paymentStatus =
+                order.paymentStatus ||
+                "PAID";
 
 
-                <!-- DELETE -->
+              const orderStatus =
+                order.orderStatus ||
+                "Processing";
 
-                <td class="action-cell">
+
+              const paymentMethod =
+                order.paymentMethod ||
+                "Not specified";
+
+
+              const cleanPaymentStatus =
+                String(
+                  paymentStatus
+                )
+                .toUpperCase()
+                .trim();
+
+
+              const isCOD =
+                paymentMethod ===
+                "Cash on Delivery";
+
+
+              const isUnpaid =
+                cleanPaymentStatus ===
+                "UNPAID";
+
+
+              let cashButton = "";
+
+
+              /*
+                Show Cash Received only for:
+                Cash on Delivery + UNPAID
+              */
+
+              if (
+                isCOD &&
+                isUnpaid
+              ) {
+
+                cashButton = `
 
                   <button
                     type="button"
-                    class="delete-order-btn"
-                    data-order-number="${escapeHtml(orderNumber)}"
-                    title="Delete Order"
+                    class="cash-received-btn"
+                    data-cash-order-number="${escapeHtml(orderNumber)}"
                   >
-
-                    🗑️ Delete
-
+                    💵 Cash Received
                   </button>
 
-                </td>
+                `;
 
-              </tr>
+              }
 
-            `;
 
-          })
+              return `
+
+                <tr>
+
+
+                  <!-- ORDER -->
+
+                  <td>
+
+                    <strong>
+                      #${escapeHtml(orderNumber)}
+                    </strong>
+
+                  </td>
+
+
+                  <!-- CUSTOMER -->
+
+                  <td>
+
+                    ${escapeHtml(
+                      customerName
+                    )}
+
+                  </td>
+
+
+                  <!-- AMOUNT -->
+
+                  <td>
+
+                    ${formatMoney(
+                      total
+                    )}
+
+                  </td>
+
+
+                  <!-- PAYMENT -->
+
+                  <td>
+
+                    <span
+                      class="status ${getStatusClass(paymentStatus)}"
+                    >
+
+                      ${escapeHtml(
+                        paymentStatus
+                      )}
+
+                    </span>
+
+
+                    <span
+                      class="payment-method-small"
+                    >
+
+                      ${escapeHtml(
+                        paymentMethod
+                      )}
+
+                    </span>
+
+                  </td>
+
+
+                  <!-- ORDER STATUS -->
+
+                  <td
+                    class="status-cell"
+                  >
+
+                    <select
+                      class="status-select"
+                      data-order-number="${escapeHtml(orderNumber)}"
+                      aria-label="Change order status"
+                    >
+
+                      <option
+                        value="Pending"
+                        ${
+                          orderStatus ===
+                          "Pending"
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Pending
+                      </option>
+
+
+                      <option
+                        value="Processing"
+                        ${
+                          orderStatus ===
+                          "Processing"
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Processing
+                      </option>
+
+
+                      <option
+                        value="Shipped"
+                        ${
+                          orderStatus ===
+                          "Shipped"
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Shipped
+                      </option>
+
+
+                      <option
+                        value="Delivered"
+                        ${
+                          orderStatus ===
+                          "Delivered"
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Delivered
+                      </option>
+
+
+                      <option
+                        value="Cancelled"
+                        ${
+                          orderStatus ===
+                          "Cancelled"
+                            ? "selected"
+                            : ""
+                        }
+                      >
+                        Cancelled
+                      </option>
+
+                    </select>
+
+                  </td>
+
+
+                  <!-- ACTION -->
+
+                  <td
+                    class="action-cell"
+                  >
+
+                    <div
+                      class="action-buttons"
+                    >
+
+                      ${cashButton}
+
+
+                      <button
+                        type="button"
+                        class="delete-order-btn"
+                        data-order-number="${escapeHtml(orderNumber)}"
+                        title="Delete Order"
+                      >
+
+                        🗑️ Delete
+
+                      </button>
+
+                    </div>
+
+                  </td>
+
+
+                </tr>
+
+              `;
+
+            }
+          )
           .join("");
 
 
@@ -1593,27 +2269,61 @@
         .querySelectorAll(
           ".status-select"
         )
-        .forEach(select => {
+        .forEach(
+          select => {
 
-          select.addEventListener(
-            "change",
-            function() {
+            select.addEventListener(
+              "change",
+              function() {
 
-              const orderNumber =
-                this.dataset.orderNumber;
+                const orderNumber =
+                  this.dataset.orderNumber;
 
-              const newStatus =
-                this.value;
 
-              updateOrderStatus(
-                orderNumber,
-                newStatus
-              );
+                const newStatus =
+                  this.value;
 
-            }
-          );
 
-        });
+                updateOrderStatus(
+                  orderNumber,
+                  newStatus
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      /* =========================================
+         CASH RECEIVED LISTENERS
+      ========================================= */
+
+      document
+        .querySelectorAll(
+          ".cash-received-btn"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const orderNumber =
+                  this.dataset.cashOrderNumber;
+
+
+                markCashReceived(
+                  orderNumber
+                );
+
+              }
+            );
+
+          }
+        );
 
 
       /* =========================================
@@ -1624,56 +2334,65 @@
         .querySelectorAll(
           ".delete-order-btn"
         )
-        .forEach(button => {
+        .forEach(
+          button => {
 
-          button.addEventListener(
-            "click",
-            function() {
+            button.addEventListener(
+              "click",
+              function() {
 
-              const orderNumber =
-                this.dataset.orderNumber;
-
-              deleteOrder(
-                orderNumber
-              );
-
-            }
-          );
-
-        });
-
-    }
+                const orderNumber =
+                  this.dataset.orderNumber;
 
 
-    /* =========================================
-       HTML SECURITY
-    ========================================= */
+                deleteOrder(
+                  orderNumber
+                );
 
-    function escapeHtml(value) {
+              }
+            );
 
-      return String(value)
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
+          }
         );
 
     }
+
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(
+        value
+      )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+    }
+
 
 
     /* =========================================
@@ -1692,6 +2411,7 @@
         return;
 
       }
+
 
       try {
 
@@ -1714,6 +2434,7 @@
             }
           );
 
+
         if (!response.ok) {
 
           throw new Error(
@@ -1722,13 +2443,17 @@
 
         }
 
+
         const products =
           await response.json();
+
 
         document.getElementById(
           "totalProducts"
         ).textContent =
-          Array.isArray(products)
+          Array.isArray(
+            products
+          )
             ? products.length
             : 0;
 
@@ -1739,6 +2464,7 @@
           error
         );
 
+
         document.getElementById(
           "totalProducts"
         ).textContent =
@@ -1747,6 +2473,247 @@
       }
 
     }
+
+
+
+    /* =========================================
+       EXPORT ORDERS TO EXCEL
+    ========================================= */
+
+    function exportOrdersToExcel() {
+
+      const orders =
+        getOrders();
+
+
+      if (
+        !orders.length
+      ) {
+
+        alert(
+          "There are no orders to export yet."
+        );
+
+        return;
+
+      }
+
+
+      /* =========================================
+         PREPARE EXCEL DATA
+      ========================================= */
+
+      const excelData =
+        orders.map(
+          order => {
+
+            const customer =
+              order.customer || {};
+
+
+            const products =
+              Array.isArray(
+                order.products
+              )
+                ? order.products
+                : [];
+
+
+            const productText =
+              products
+                .map(
+                  item => {
+
+                    const name =
+                      item.name ||
+                      "Product";
+
+
+                    const quantity =
+                      Number(
+                        item.quantity || 1
+                      );
+
+
+                    const price =
+                      Number(
+                        item.price || 0
+                      );
+
+
+                    return `${name} x${quantity} - TSh ${price.toLocaleString()}`;
+
+                  }
+                )
+                .join(" | ");
+
+
+            const total =
+              getOrderTotal(
+                order
+              );
+
+
+            return {
+
+              "Order Number":
+                order.orderNumber ||
+                "",
+
+              "Customer":
+                customer.fullName ||
+                "",
+
+              "Phone":
+                customer.phone ||
+                "",
+
+              "Email":
+                customer.email ||
+                "",
+
+              "Delivery Address":
+                customer.address ||
+                "",
+
+              "Products":
+                productText,
+
+              "Total":
+                total,
+
+              "Payment Method":
+                order.paymentMethod ||
+                "",
+
+              "Payment Status":
+                order.paymentStatus ||
+                "",
+
+              "Order Status":
+                order.orderStatus ||
+                "",
+
+              "Order Date":
+                order.createdAt ||
+                "",
+
+              "Payment Date":
+                order.paymentTime ||
+                "",
+
+              "Notes":
+                customer.notes ||
+                ""
+
+            };
+
+          }
+        );
+
+
+      /* =========================================
+         CREATE WORKSHEET
+      ========================================= */
+
+      const worksheet =
+        XLSX.utils.json_to_sheet(
+          excelData
+        );
+
+
+      /* =========================================
+         COLUMN WIDTHS
+      ========================================= */
+
+      worksheet["!cols"] = [
+
+        {
+          wch: 16
+        },
+
+        {
+          wch: 24
+        },
+
+        {
+          wch: 16
+        },
+
+        {
+          wch: 30
+        },
+
+        {
+          wch: 35
+        },
+
+        {
+          wch: 55
+        },
+
+        {
+          wch: 16
+        },
+
+        {
+          wch: 22
+        },
+
+        {
+          wch: 18
+        },
+
+        {
+          wch: 18
+        },
+
+        {
+          wch: 25
+        },
+
+        {
+          wch: 25
+        },
+
+        {
+          wch: 35
+        }
+
+      ];
+
+
+      /* =========================================
+         CREATE WORKBOOK
+      ========================================= */
+
+      const workbook =
+        XLSX.utils.book_new();
+
+
+      XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        "Orders"
+      );
+
+
+      /* =========================================
+         DOWNLOAD
+      ========================================= */
+
+      XLSX.writeFile(
+        workbook,
+        "ShopSphere_Orders.xlsx"
+      );
+
+
+      showDashboardMessage(
+        "Orders exported to Excel successfully."
+      );
+
+    }
+
 
 
     /* =========================================
@@ -1759,7 +2726,9 @@
         getOrders();
 
 
-      /* Total Orders */
+      /* =========================================
+         TOTAL ORDERS
+      ========================================= */
 
       document.getElementById(
         "totalOrders"
@@ -1767,7 +2736,9 @@
         orders.length;
 
 
-      /* Total Customers */
+      /* =========================================
+         TOTAL CUSTOMERS
+      ========================================= */
 
       document.getElementById(
         "totalCustomers"
@@ -1777,7 +2748,9 @@
         );
 
 
-      /* Total Sales */
+      /* =========================================
+         TOTAL SALES
+      ========================================= */
 
       document.getElementById(
         "totalSales"
@@ -1789,18 +2762,23 @@
         );
 
 
-      /* Recent Orders */
+      /* =========================================
+         RECENT ORDERS
+      ========================================= */
 
       displayRecentOrders(
         orders
       );
 
 
-      /* Product Count */
+      /* =========================================
+         PRODUCT COUNT
+      ========================================= */
 
       await loadProductCount();
 
     }
+
 
 
     /* =========================================
@@ -1808,6 +2786,7 @@
     ========================================= */
 
     loadDashboard();
+
 
 
     /* =========================================
@@ -1818,6 +2797,7 @@
       loadDashboard,
       5000
     );
+
 
 
     /* =========================================
@@ -1839,6 +2819,7 @@
 
       }
     );
+
 
   </script>
 
