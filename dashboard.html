@@ -20,7 +20,9 @@
       color: #1f2937;
     }
 
-    /* SIDEBAR */
+    /* =========================================
+       SIDEBAR
+    ========================================= */
 
     .sidebar {
       position: fixed;
@@ -68,14 +70,18 @@
       color: white;
     }
 
-    /* MAIN */
+    /* =========================================
+       MAIN
+    ========================================= */
 
     .main {
       margin-left: 250px;
       min-height: 100vh;
     }
 
-    /* TOPBAR */
+    /* =========================================
+       TOPBAR
+    ========================================= */
 
     .topbar {
       background: white;
@@ -113,7 +119,9 @@
       font-weight: bold;
     }
 
-    /* CONTENT */
+    /* =========================================
+       CONTENT
+    ========================================= */
 
     .content {
       padding: 30px;
@@ -132,7 +140,24 @@
       color: #6b7280;
     }
 
-    /* STATS */
+    /* =========================================
+       DASHBOARD MESSAGE
+    ========================================= */
+
+    .dashboard-message {
+      display: none;
+      background: #ecfdf5;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    /* =========================================
+       STATS
+    ========================================= */
 
     .stats {
       display: grid;
@@ -178,7 +203,9 @@
       word-break: break-word;
     }
 
-    /* GRID */
+    /* =========================================
+       GRID
+    ========================================= */
 
     .dashboard-grid {
       display: grid;
@@ -215,7 +242,9 @@
       text-decoration: underline;
     }
 
-    /* TABLE */
+    /* =========================================
+       TABLE
+    ========================================= */
 
     .table-container {
       overflow-x: auto;
@@ -246,7 +275,9 @@
       padding: 30px 10px;
     }
 
-    /* STATUS BADGES */
+    /* =========================================
+       STATUS BADGES
+    ========================================= */
 
     .status {
       display: inline-block;
@@ -286,7 +317,13 @@
       color: #991b1b;
     }
 
-    /* STATUS SELECT */
+    /* =========================================
+       STATUS SELECT
+    ========================================= */
+
+    .status-cell {
+      min-width: 155px;
+    }
 
     .status-select {
       min-width: 125px;
@@ -311,13 +348,34 @@
       box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
     }
 
-    /* STATUS COLUMN */
+    /* =========================================
+       DELETE BUTTON
+    ========================================= */
 
-    .status-cell {
-      min-width: 160px;
+    .action-cell {
+      min-width: 110px;
     }
 
-    /* QUICK ACTIONS */
+    .delete-order-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background: #fee2e2;
+      color: #991b1b;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .delete-order-btn:hover {
+      background: #dc2626;
+      color: white;
+    }
+
+    /* =========================================
+       QUICK ACTIONS
+    ========================================= */
 
     .quick-actions {
       display: grid;
@@ -362,7 +420,9 @@
       color: #6b7280;
     }
 
-    /* ADD PRODUCT SPECIAL */
+    /* =========================================
+       ADD PRODUCT SPECIAL
+    ========================================= */
 
     .add-product-action {
       border: 2px solid #22c55e;
@@ -378,20 +438,9 @@
       background: #dcfce7;
     }
 
-    /* DASHBOARD MESSAGE */
-
-    .dashboard-message {
-      display: none;
-      background: #ecfdf5;
-      color: #166534;
-      border: 1px solid #bbf7d0;
-      padding: 12px 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-
-    /* RESPONSIVE */
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
 
     @media (max-width: 1100px) {
 
@@ -474,7 +523,9 @@
 
 <body>
 
-  <!-- SIDEBAR -->
+  <!-- =========================================
+       SIDEBAR
+  ========================================= -->
 
   <aside class="sidebar">
 
@@ -536,7 +587,9 @@
 
   </aside>
 
-  <!-- MAIN -->
+  <!-- =========================================
+       MAIN
+  ========================================= -->
 
   <main class="main">
 
@@ -578,14 +631,20 @@
 
       </div>
 
+      <!-- MESSAGE -->
+
       <div
         id="dashboardMessage"
         class="dashboard-message"
       ></div>
 
-      <!-- STATS -->
+      <!-- =========================================
+           STATS
+      ========================================= -->
 
       <div class="stats">
+
+        <!-- PRODUCTS -->
 
         <div class="stat-card">
 
@@ -610,6 +669,8 @@
 
         </div>
 
+        <!-- ORDERS -->
+
         <div class="stat-card">
 
           <div class="stat-top">
@@ -633,6 +694,8 @@
 
         </div>
 
+        <!-- CUSTOMERS -->
+
         <div class="stat-card">
 
           <div class="stat-top">
@@ -655,6 +718,8 @@
           </div>
 
         </div>
+
+        <!-- SALES -->
 
         <div class="stat-card">
 
@@ -681,11 +746,15 @@
 
       </div>
 
-      <!-- DASHBOARD GRID -->
+      <!-- =========================================
+           DASHBOARD GRID
+      ========================================= -->
 
       <div class="dashboard-grid">
 
-        <!-- RECENT ORDERS -->
+        <!-- =====================================
+             RECENT ORDERS
+        ====================================== -->
 
         <div class="panel">
 
@@ -732,6 +801,10 @@
                     Order Status
                   </th>
 
+                  <th>
+                    Action
+                  </th>
+
                 </tr>
 
               </thead>
@@ -741,7 +814,7 @@
                 <tr>
 
                   <td
-                    colspan="5"
+                    colspan="6"
                     class="empty-row"
                   >
                     No orders yet
@@ -757,7 +830,9 @@
 
         </div>
 
-        <!-- QUICK ACTIONS -->
+        <!-- =====================================
+             QUICK ACTIONS
+        ====================================== -->
 
         <div class="panel">
 
@@ -770,6 +845,8 @@
           </div>
 
           <div class="quick-actions">
+
+            <!-- PRODUCTS -->
 
             <a
               href="admin-products.html"
@@ -794,6 +871,8 @@
 
             </a>
 
+            <!-- ORDER HISTORY -->
+
             <a
               href="history.html"
               class="quick-action"
@@ -817,6 +896,8 @@
 
             </a>
 
+            <!-- ADD PRODUCT -->
+
             <a
               href="admin-products.html"
               class="quick-action add-product-action"
@@ -839,6 +920,8 @@
               </div>
 
             </a>
+
+            <!-- VIEW STORE -->
 
             <a
               href="index.html"
@@ -876,11 +959,21 @@
   <script>
 
     /*
+      =========================================
       SHOPSPHERE ADMIN DASHBOARD
+      =========================================
 
-      Data source:
-      - Products: Supabase
-      - Orders: localStorage (shopSphereOrders)
+      Products:
+      - Supabase
+
+      Orders:
+      - localStorage
+      - shopSphereOrders
+
+      Admin can:
+      - View orders
+      - Change order status
+      - Delete orders
     */
 
     const SUPABASE_URL =
@@ -888,6 +981,7 @@
 
     const SUPABASE_KEY =
       localStorage.getItem("shopSphereSupabaseKey") || "";
+
 
     /* =========================================
        FORMAT MONEY
@@ -899,6 +993,7 @@
         Number(amount || 0).toLocaleString();
 
     }
+
 
     /* =========================================
        GET ORDERS
@@ -932,13 +1027,15 @@
 
     }
 
+
     /* =========================================
        CUSTOMER COUNT
     ========================================= */
 
     function getUniqueCustomers(orders) {
 
-      const customers = new Set();
+      const customers =
+        new Set();
 
       orders.forEach(order => {
 
@@ -965,6 +1062,7 @@
       return customers.size;
 
     }
+
 
     /* =========================================
        CALCULATE ORDER TOTAL
@@ -1001,6 +1099,7 @@
 
     }
 
+
     /* =========================================
        TOTAL SALES
     ========================================= */
@@ -1022,7 +1121,8 @@
           paymentStatus === "COMPLETED"
         ) {
 
-          sales += getOrderTotal(order);
+          sales +=
+            getOrderTotal(order);
 
         }
 
@@ -1031,6 +1131,7 @@
       return sales;
 
     }
+
 
     /* =========================================
        STATUS CLASS
@@ -1053,19 +1154,25 @@
 
       }
 
-      if (cleanStatus === "pending") {
+      if (
+        cleanStatus === "pending"
+      ) {
 
         return "status-pending";
 
       }
 
-      if (cleanStatus === "shipped") {
+      if (
+        cleanStatus === "shipped"
+      ) {
 
         return "status-shipped";
 
       }
 
-      if (cleanStatus === "delivered") {
+      if (
+        cleanStatus === "delivered"
+      ) {
 
         return "status-delivered";
 
@@ -1084,74 +1191,9 @@
 
     }
 
-    /* =========================================
-       UPDATE ORDER STATUS
-    ========================================= */
-
-    function updateOrderStatus(
-      orderNumber,
-      newStatus
-    ) {
-
-      const orders = getOrders();
-
-      const orderIndex =
-        orders.findIndex(
-          order =>
-            String(order.orderNumber) ===
-            String(orderNumber)
-        );
-
-      if (orderIndex === -1) {
-
-        showDashboardMessage(
-          "Order not found."
-        );
-
-        return;
-
-      }
-
-      orders[orderIndex].orderStatus =
-        newStatus;
-
-      localStorage.setItem(
-        "shopSphereOrders",
-        JSON.stringify(orders)
-      );
-
-      /*
-        Also update the latest order status
-        used by the customer tracking page.
-      */
-
-      const latestOrderNumber =
-        localStorage.getItem(
-          "shopSphereOrderNumber"
-        );
-
-      if (
-        String(latestOrderNumber) ===
-        String(orderNumber)
-      ) {
-
-        localStorage.setItem(
-          "shopSphereOrderStatus",
-          newStatus
-        );
-
-      }
-
-      showDashboardMessage(
-        `Order #${orderNumber} status changed to ${newStatus}.`
-      );
-
-      loadDashboard();
-
-    }
 
     /* =========================================
-       DASHBOARD MESSAGE
+       SHOW DASHBOARD MESSAGE
     ========================================= */
 
     function showDashboardMessage(message) {
@@ -1184,6 +1226,145 @@
 
     }
 
+
+    /* =========================================
+       UPDATE ORDER STATUS
+    ========================================= */
+
+    function updateOrderStatus(
+      orderNumber,
+      newStatus
+    ) {
+
+      const orders =
+        getOrders();
+
+      const orderIndex =
+        orders.findIndex(
+          order =>
+            String(order.orderNumber) ===
+            String(orderNumber)
+        );
+
+      if (
+        orderIndex === -1
+      ) {
+
+        showDashboardMessage(
+          "Order not found."
+        );
+
+        return;
+
+      }
+
+      /* Update order */
+
+      orders[orderIndex].orderStatus =
+        newStatus;
+
+      /* Save orders */
+
+      localStorage.setItem(
+        "shopSphereOrders",
+        JSON.stringify(orders)
+      );
+
+      /* Update latest order status */
+
+      const latestOrderNumber =
+        localStorage.getItem(
+          "shopSphereOrderNumber"
+        );
+
+      if (
+        String(latestOrderNumber) ===
+        String(orderNumber)
+      ) {
+
+        localStorage.setItem(
+          "shopSphereOrderStatus",
+          newStatus
+        );
+
+      }
+
+      showDashboardMessage(
+        `Order #${orderNumber} status changed to ${newStatus}.`
+      );
+
+      loadDashboard();
+
+    }
+
+
+    /* =========================================
+       DELETE ORDER
+    ========================================= */
+
+    function deleteOrder(orderNumber) {
+
+      const confirmed =
+        confirm(
+          `Are you sure you want to delete Order #${orderNumber}?`
+        );
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+      const orders =
+        getOrders();
+
+      const updatedOrders =
+        orders.filter(
+          order =>
+            String(order.orderNumber) !==
+            String(orderNumber)
+        );
+
+      localStorage.setItem(
+        "shopSphereOrders",
+        JSON.stringify(updatedOrders)
+      );
+
+      /*
+        If the deleted order is the latest
+        tracked order, clear the latest
+        tracking information.
+      */
+
+      const latestOrderNumber =
+        localStorage.getItem(
+          "shopSphereOrderNumber"
+        );
+
+      if (
+        String(latestOrderNumber) ===
+        String(orderNumber)
+      ) {
+
+        localStorage.removeItem(
+          "shopSphereOrderNumber"
+        );
+
+        localStorage.removeItem(
+          "shopSphereOrderStatus"
+        );
+
+      }
+
+      showDashboardMessage(
+        `Order #${orderNumber} deleted successfully.`
+      );
+
+      loadDashboard();
+
+    }
+
+
     /* =========================================
        DISPLAY RECENT ORDERS
     ========================================= */
@@ -1202,7 +1383,7 @@
           <tr>
 
             <td
-              colspan="5"
+              colspan="6"
               class="empty-row"
             >
               No orders yet
@@ -1215,6 +1396,8 @@
         return;
 
       }
+
+      /* Sort newest first */
 
       const sortedOrders =
         [...orders].sort(
@@ -1239,119 +1422,177 @@
           }
         );
 
+      /* Show latest 10 */
+
       const recentOrders =
-        sortedOrders.slice(0, 10);
+        sortedOrders.slice(
+          0,
+          10
+        );
 
       table.innerHTML =
-        recentOrders.map(order => {
+        recentOrders
+          .map(order => {
 
-          const customer =
-            order.customer || {};
+            const customer =
+              order.customer || {};
 
-          const orderNumber =
-            order.orderNumber ||
-            "N/A";
+            const orderNumber =
+              order.orderNumber ||
+              "N/A";
 
-          const customerName =
-            customer.fullName ||
-            "Customer";
+            const customerName =
+              customer.fullName ||
+              "Customer";
 
-          const total =
-            getOrderTotal(order);
+            const total =
+              getOrderTotal(order);
 
-          const paymentStatus =
-            order.paymentStatus ||
-            "PAID";
+            const paymentStatus =
+              order.paymentStatus ||
+              "PAID";
 
-          const orderStatus =
-            order.orderStatus ||
-            "Processing";
+            const orderStatus =
+              order.orderStatus ||
+              "Processing";
 
-          return `
+            return `
 
-            <tr>
+              <tr>
 
-              <td>
-                <strong>
-                  #${escapeHtml(orderNumber)}
-                </strong>
-              </td>
+                <!-- ORDER -->
 
-              <td>
-                ${escapeHtml(customerName)}
-              </td>
+                <td>
 
-              <td>
-                ${formatMoney(total)}
-              </td>
+                  <strong>
+                    #${escapeHtml(orderNumber)}
+                  </strong>
 
-              <td>
-                <span
-                  class="status ${getStatusClass(paymentStatus)}"
-                >
-                  ${escapeHtml(paymentStatus)}
-                </span>
-              </td>
+                </td>
 
-              <td class="status-cell">
 
-                <select
-                  class="status-select"
-                  data-order-number="${escapeHtml(orderNumber)}"
-                  aria-label="Change order status"
-                >
+                <!-- CUSTOMER -->
 
-                  <option
-                    value="Pending"
-                    ${orderStatus === "Pending" ? "selected" : ""}
+                <td>
+
+                  ${escapeHtml(
+                    customerName
+                  )}
+
+                </td>
+
+
+                <!-- AMOUNT -->
+
+                <td>
+
+                  ${formatMoney(
+                    total
+                  )}
+
+                </td>
+
+
+                <!-- PAYMENT -->
+
+                <td>
+
+                  <span
+                    class="status ${getStatusClass(paymentStatus)}"
                   >
-                    Pending
-                  </option>
 
-                  <option
-                    value="Processing"
-                    ${orderStatus === "Processing" ? "selected" : ""}
+                    ${escapeHtml(
+                      paymentStatus
+                    )}
+
+                  </span>
+
+                </td>
+
+
+                <!-- ORDER STATUS -->
+
+                <td class="status-cell">
+
+                  <select
+                    class="status-select"
+                    data-order-number="${escapeHtml(orderNumber)}"
+                    aria-label="Change order status"
                   >
-                    Processing
-                  </option>
 
-                  <option
-                    value="Shipped"
-                    ${orderStatus === "Shipped" ? "selected" : ""}
+                    <option
+                      value="Pending"
+                      ${orderStatus === "Pending" ? "selected" : ""}
+                    >
+                      Pending
+                    </option>
+
+                    <option
+                      value="Processing"
+                      ${orderStatus === "Processing" ? "selected" : ""}
+                    >
+                      Processing
+                    </option>
+
+                    <option
+                      value="Shipped"
+                      ${orderStatus === "Shipped" ? "selected" : ""}
+                    >
+                      Shipped
+                    </option>
+
+                    <option
+                      value="Delivered"
+                      ${orderStatus === "Delivered" ? "selected" : ""}
+                    >
+                      Delivered
+                    </option>
+
+                    <option
+                      value="Cancelled"
+                      ${orderStatus === "Cancelled" ? "selected" : ""}
+                    >
+                      Cancelled
+                    </option>
+
+                  </select>
+
+                </td>
+
+
+                <!-- DELETE -->
+
+                <td class="action-cell">
+
+                  <button
+                    type="button"
+                    class="delete-order-btn"
+                    data-order-number="${escapeHtml(orderNumber)}"
+                    title="Delete Order"
                   >
-                    Shipped
-                  </option>
 
-                  <option
-                    value="Delivered"
-                    ${orderStatus === "Delivered" ? "selected" : ""}
-                  >
-                    Delivered
-                  </option>
+                    🗑️ Delete
 
-                  <option
-                    value="Cancelled"
-                    ${orderStatus === "Cancelled" ? "selected" : ""}
-                  >
-                    Cancelled
-                  </option>
+                  </button>
 
-                </select>
+                </td>
 
-              </td>
+              </tr>
 
-            </tr>
+            `;
 
-          `;
+          })
+          .join("");
 
-        }).join("");
 
       /* =========================================
          STATUS CHANGE LISTENERS
       ========================================= */
 
       document
-        .querySelectorAll(".status-select")
+        .querySelectorAll(
+          ".status-select"
+        )
         .forEach(select => {
 
           select.addEventListener(
@@ -1374,7 +1615,35 @@
 
         });
 
+
+      /* =========================================
+         DELETE BUTTON LISTENERS
+      ========================================= */
+
+      document
+        .querySelectorAll(
+          ".delete-order-btn"
+        )
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const orderNumber =
+                this.dataset.orderNumber;
+
+              deleteOrder(
+                orderNumber
+              );
+
+            }
+          );
+
+        });
+
     }
+
 
     /* =========================================
        HTML SECURITY
@@ -1383,13 +1652,29 @@
     function escapeHtml(value) {
 
       return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
+
 
     /* =========================================
        LOAD PRODUCT COUNT FROM SUPABASE
@@ -1401,7 +1686,8 @@
 
         document.getElementById(
           "totalProducts"
-        ).textContent = "4";
+        ).textContent =
+          "4";
 
         return;
 
@@ -1416,10 +1702,15 @@
               method: "GET",
 
               headers: {
-                "apikey": SUPABASE_KEY,
+
+                "apikey":
+                  SUPABASE_KEY,
+
                 "Authorization":
                   `Bearer ${SUPABASE_KEY}`
+
               }
+
             }
           );
 
@@ -1450,11 +1741,13 @@
 
         document.getElementById(
           "totalProducts"
-        ).textContent = "4";
+        ).textContent =
+          "4";
 
       }
 
     }
+
 
     /* =========================================
        LOAD DASHBOARD
@@ -1465,42 +1758,70 @@
       const orders =
         getOrders();
 
+
+      /* Total Orders */
+
       document.getElementById(
         "totalOrders"
       ).textContent =
         orders.length;
 
+
+      /* Total Customers */
+
       document.getElementById(
         "totalCustomers"
       ).textContent =
-        getUniqueCustomers(orders);
+        getUniqueCustomers(
+          orders
+        );
+
+
+      /* Total Sales */
 
       document.getElementById(
         "totalSales"
       ).textContent =
         formatMoney(
-          getTotalSales(orders)
+          getTotalSales(
+            orders
+          )
         );
 
-      displayRecentOrders(orders);
+
+      /* Recent Orders */
+
+      displayRecentOrders(
+        orders
+      );
+
+
+      /* Product Count */
 
       await loadProductCount();
 
     }
 
+
     /* =========================================
-       AUTO REFRESH
+       INITIAL LOAD
     ========================================= */
 
     loadDashboard();
+
+
+    /* =========================================
+       AUTO REFRESH
+    ========================================= */
 
     setInterval(
       loadDashboard,
       5000
     );
 
+
     /* =========================================
-       LISTEN FOR STORAGE CHANGES
+       STORAGE LISTENER
     ========================================= */
 
     window.addEventListener(
@@ -1508,7 +1829,8 @@
       function(event) {
 
         if (
-          event.key === "shopSphereOrders"
+          event.key ===
+          "shopSphereOrders"
         ) {
 
           loadDashboard();
