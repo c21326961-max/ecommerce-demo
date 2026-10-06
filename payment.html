@@ -125,6 +125,7 @@
       margin-left: 30px;
       color: #6b7280;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     .notice {
@@ -136,6 +137,22 @@
       margin-top: 20px;
       line-height: 1.5;
       font-size: 14px;
+    }
+
+    .cod-notice {
+      display: none;
+      background: #ecfdf3;
+      border: 1px solid #86efac;
+      color: #166534;
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 20px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .cod-notice strong {
+      color: #14532d;
     }
 
     .order-item {
@@ -223,6 +240,7 @@
     }
 
     @media (max-width: 800px) {
+
       .payment-layout {
         grid-template-columns: 1fr;
       }
@@ -238,6 +256,7 @@
       .page-title h1 {
         font-size: 28px;
       }
+
     }
   </style>
 </head>
@@ -262,16 +281,25 @@
   <div class="container">
 
     <div class="page-title">
+
       <h1>Payment</h1>
-      <p>Choose your preferred payment method to complete your order.</p>
+
+      <p>
+        Choose your preferred payment method to complete your order.
+      </p>
+
     </div>
 
 
     <div id="emptyMessage" class="card empty" style="display:none;">
 
-      <h2>Your cart is empty</h2>
+      <h2>
+        Your cart is empty
+      </h2>
 
-      <p>Please add products before making a payment.</p>
+      <p>
+        Please add products before making a payment.
+      </p>
 
       <br>
 
@@ -284,12 +312,17 @@
 
     <div id="paymentContent" class="payment-layout">
 
+
       <!-- PAYMENT METHODS -->
 
       <div class="card">
 
-        <h2>Choose Payment Method</h2>
+        <h2>
+          Choose Payment Method
+        </h2>
 
+
+        <!-- MOBILE MONEY -->
 
         <div class="payment-method active">
 
@@ -302,16 +335,22 @@
               checked
             >
 
-            <span>📱 Mobile Money</span>
+            <span>
+              📱 Mobile Money
+            </span>
 
           </label>
 
           <div class="method-description">
+
             Pay using mobile money services.
+
           </div>
 
         </div>
 
+
+        <!-- CARD -->
 
         <div class="payment-method">
 
@@ -323,16 +362,22 @@
               value="Card Payment"
             >
 
-            <span>💳 Card Payment</span>
+            <span>
+              💳 Card Payment
+            </span>
 
           </label>
 
           <div class="method-description">
+
             Pay securely using your debit or credit card.
+
           </div>
 
         </div>
 
+
+        <!-- BANK -->
 
         <div class="payment-method">
 
@@ -344,39 +389,113 @@
               value="Bank Payment"
             >
 
-            <span>🏦 Bank Payment</span>
+            <span>
+              🏦 Bank Payment
+            </span>
 
           </label>
 
           <div class="method-description">
+
             Make payment directly through your bank.
+
           </div>
 
         </div>
 
 
-        <div class="notice">
+        <!-- CASH ON DELIVERY -->
 
-          <strong>Demo Payment</strong><br>
+        <div class="payment-method" id="codMethod">
 
-          This is a demonstration website.
-          No real money will be charged.
-          Clicking the payment button will simulate a successful payment.
+          <label>
+
+            <input
+              type="radio"
+              name="paymentMethod"
+              value="Cash on Delivery"
+            >
+
+            <span>
+              💵 Cash on Delivery
+            </span>
+
+          </label>
+
+          <div class="method-description">
+
+            Pay when you receive or collect your order.
+            No online payment is required now.
+
+          </div>
 
         </div>
 
+
+        <!-- ONLINE PAYMENT NOTICE -->
+
+        <div
+          class="notice"
+          id="onlineNotice">
+
+          <strong>
+            Demo Payment
+          </strong>
+          <br>
+
+          This is a demonstration website.
+          No real money will be charged.
+          Clicking the payment button will simulate
+          a successful payment.
+
+        </div>
+
+
+        <!-- COD NOTICE -->
+
+        <div
+          class="cod-notice"
+          id="codNotice">
+
+          <strong>
+            💵 Cash on Delivery selected
+          </strong>
+
+          <br><br>
+
+          You do not need to make an online payment now.
+
+          <br>
+
+          Your order will be recorded as
+          <strong>UNPAID</strong> and
+          <strong>Pending</strong>.
+
+          <br>
+
+          You will pay the full order amount when
+          you receive or collect your order.
+
+        </div>
+
+
+        <!-- BUTTON -->
 
         <button
           class="pay-button"
           id="payButton"
           onclick="processPayment()"
         >
+
           Continue to Payment
+
         </button>
 
 
         <a href="checkout.html" class="back-link">
+
           ← Back to Checkout
+
         </a>
 
       </div>
@@ -386,13 +505,18 @@
 
       <div class="card">
 
-        <h2>Order Summary</h2>
+        <h2>
+          Order Summary
+        </h2>
 
         <div id="orderItems"></div>
 
+
         <div class="total">
 
-          <span>Total</span>
+          <span>
+            Total
+          </span>
 
           <span id="orderTotal">
             TSh 0
@@ -408,11 +532,14 @@
 
 
   <footer>
+
     © 2026 ShopSphere. All rights reserved.
+
   </footer>
 
 
   <script>
+
 
     // ==========================================
     // GET CART
@@ -434,6 +561,10 @@
       ) || {};
 
 
+    // ==========================================
+    // GET ELEMENTS
+    // ==========================================
+
     const paymentContent =
       document.getElementById("paymentContent");
 
@@ -448,6 +579,12 @@
 
     const payButton =
       document.getElementById("payButton");
+
+    const onlineNotice =
+      document.getElementById("onlineNotice");
+
+    const codNotice =
+      document.getElementById("codNotice");
 
 
     // ==========================================
@@ -550,7 +687,13 @@
             const radio =
               this.querySelector("input");
 
+
             radio.checked = true;
+
+
+            updatePaymentInterface(
+              radio.value
+            );
 
           }
         );
@@ -559,14 +702,213 @@
 
 
     // ==========================================
-    // PROCESS PAYMENT
+    // UPDATE PAYMENT INTERFACE
+    // ==========================================
+
+    function updatePaymentInterface(
+      paymentMethod
+    ) {
+
+      if (
+        paymentMethod ===
+        "Cash on Delivery"
+      ) {
+
+        // Show COD notice
+
+        codNotice.style.display =
+          "block";
+
+
+        // Hide online notice
+
+        onlineNotice.style.display =
+          "none";
+
+
+        // Change button
+
+        payButton.textContent =
+          "Place Order — Cash on Delivery";
+
+
+      } else {
+
+        // Hide COD notice
+
+        codNotice.style.display =
+          "none";
+
+
+        // Show online notice
+
+        onlineNotice.style.display =
+          "block";
+
+
+        // Normal payment button
+
+        payButton.textContent =
+          "Continue to Payment";
+
+      }
+
+    }
+
+
+    // ==========================================
+    // CREATE ORDER NUMBER
+    // ==========================================
+
+    function generateOrderNumber() {
+
+      const randomNumber =
+        Math.floor(
+          100000 +
+          Math.random() * 900000
+        );
+
+
+      return "SS-" + randomNumber;
+
+    }
+
+
+    // ==========================================
+    // SAVE ORDER
+    // ==========================================
+
+    function saveOrder(
+      paymentMethod,
+      paymentStatus,
+      orderStatus,
+      paymentTime
+    ) {
+
+      // Create unique order number
+
+      const orderNumber =
+        generateOrderNumber();
+
+
+      // Create order object
+
+      const newOrder = {
+
+        orderNumber:
+          orderNumber,
+
+        customer:
+          customer,
+
+        products:
+          cart,
+
+        total:
+          orderTotalAmount,
+
+        paymentMethod:
+          paymentMethod,
+
+        paymentStatus:
+          paymentStatus,
+
+        orderStatus:
+          orderStatus,
+
+        paymentTime:
+          paymentTime,
+
+        createdAt:
+          paymentTime
+
+      };
+
+
+      // ======================================
+      // GET EXISTING ORDERS
+      // ======================================
+
+      let orders =
+        JSON.parse(
+          localStorage.getItem(
+            "shopSphereOrders"
+          )
+        ) || [];
+
+
+      // ======================================
+      // ADD NEW ORDER
+      // ======================================
+
+      orders.push(newOrder);
+
+
+      // ======================================
+      // SAVE ALL ORDERS
+      // ======================================
+
+      localStorage.setItem(
+        "shopSphereOrders",
+        JSON.stringify(orders)
+      );
+
+
+      // ======================================
+      // SAVE LATEST ORDER
+      // ======================================
+
+      localStorage.setItem(
+        "shopSphereOrderNumber",
+        orderNumber
+      );
+
+
+      localStorage.setItem(
+        "shopSphereOrderStatus",
+        orderStatus
+      );
+
+
+      localStorage.setItem(
+        "shopSpherePaymentMethod",
+        paymentMethod
+      );
+
+
+      localStorage.setItem(
+        "shopSpherePaymentStatus",
+        paymentStatus
+      );
+
+
+      localStorage.setItem(
+        "shopSpherePaymentTime",
+        paymentTime
+      );
+
+
+      // ======================================
+      // GO TO SUCCESS PAGE
+      // ======================================
+
+      window.location.href =
+        "success.html";
+
+    }
+
+
+    // ==========================================
+    // PROCESS PAYMENT / COD
     // ==========================================
 
     function processPayment() {
 
       if (cart.length === 0) {
 
-        alert("Your cart is empty.");
+        alert(
+          "Your cart is empty."
+        );
 
         return;
 
@@ -590,17 +932,64 @@
       }
 
 
-      // Disable button
+      const paymentMethod =
+        selectedMethod.value;
+
+
+      // ========================================
+      // CASH ON DELIVERY
+      // ========================================
+
+      if (
+        paymentMethod ===
+        "Cash on Delivery"
+      ) {
+
+        payButton.disabled = true;
+
+        payButton.textContent =
+          "Placing Order...";
+
+
+        const paymentTime =
+          new Date().toISOString();
+
+
+        const paymentStatus =
+          "UNPAID";
+
+
+        const orderStatus =
+          "Pending";
+
+
+        /*
+          COD does NOT simulate payment.
+          The order is created immediately.
+        */
+
+        saveOrder(
+          paymentMethod,
+          paymentStatus,
+          orderStatus,
+          paymentTime
+        );
+
+
+        return;
+
+      }
+
+
+      // ========================================
+      // ONLINE PAYMENT
+      // ========================================
 
       payButton.disabled = true;
 
       payButton.textContent =
         "Processing Payment...";
 
-
-      // ========================================
-      // PAYMENT INFORMATION
-      // ========================================
 
       const paymentTime =
         new Date().toISOString();
@@ -612,10 +1001,6 @@
 
       const orderStatus =
         "Processing";
-
-
-      const paymentMethod =
-        selectedMethod.value;
 
 
       // ========================================
@@ -646,107 +1031,33 @@
 
       setTimeout(function() {
 
-
-        // ======================================
-        // CREATE UNIQUE ORDER NUMBER
-        // ======================================
-
-        const randomNumber =
-          Math.floor(
-            100000 +
-            Math.random() * 900000
-          );
-
-
-        const orderNumber =
-          "SS-" + randomNumber;
-
-
-        // ======================================
-        // CREATE ORDER OBJECT
-        // ======================================
-
-        const newOrder = {
-
-          orderNumber: orderNumber,
-
-          customer: customer,
-
-          products: cart,
-
-          total: orderTotalAmount,
-
-          paymentMethod: paymentMethod,
-
-          paymentStatus: paymentStatus,
-
-          orderStatus: orderStatus,
-
-          paymentTime: paymentTime,
-
-          createdAt: paymentTime
-
-        };
-
-
-        // ======================================
-        // GET EXISTING ORDERS
-        // ======================================
-
-        let orders =
-          JSON.parse(
-            localStorage.getItem(
-              "shopSphereOrders"
-            )
-          ) || [];
-
-
-        // ======================================
-        // ADD NEW ORDER
-        // ======================================
-
-        orders.push(newOrder);
-
-
-        // ======================================
-        // SAVE ALL ORDERS
-        // ======================================
-
-        localStorage.setItem(
-          "shopSphereOrders",
-          JSON.stringify(orders)
+        saveOrder(
+          paymentMethod,
+          paymentStatus,
+          orderStatus,
+          paymentTime
         );
-
-
-        // ======================================
-        // SAVE LATEST ORDER NUMBER
-        // ======================================
-
-        localStorage.setItem(
-          "shopSphereOrderNumber",
-          orderNumber
-        );
-
-
-        // ======================================
-        // SAVE ORDER STATUS
-        // ======================================
-
-        localStorage.setItem(
-          "shopSphereOrderStatus",
-          orderStatus
-        );
-
-
-        // ======================================
-        // GO TO SUCCESS PAGE
-        // ======================================
-
-        window.location.href =
-          "success.html";
-
 
       }, 1500);
+
+    }
+
+
+    // ==========================================
+    // INITIAL PAYMENT STATE
+    // ==========================================
+
+    const initialMethod =
+      document.querySelector(
+        'input[name="paymentMethod"]:checked'
+      );
+
+
+    if (initialMethod) {
+
+      updatePaymentInterface(
+        initialMethod.value
+      );
 
     }
 
