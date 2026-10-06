@@ -883,31 +883,12 @@
 
   <div class="products-info">
 
-    <span id="productsCount">
-      Loading products...
-    </span>
+    <span id="productsCount"></span>
 
   </div>
 
 
-  <section
-    class="state show"
-    id="loadingState"
-  >
-
-    <div class="state-icon">
-      ⏳
-    </div>
-
-    <h2>
-      Loading products
-    </h2>
-
-    <p>
-      Please wait while we load the latest products.
-    </p>
-
-  </section>
+  <!-- LOADING MESSAGE REMOVED -->
 
 
   <section
@@ -1861,7 +1842,13 @@
 
   function showLoading() {
 
-    loadingState.classList.add(
+    /*
+      Loading message imeondolewa.
+      Ukurasa unabaki wazi mpaka products
+      zitakapopakiwa.
+    */
+
+    loadingState.classList.remove(
       "show"
     );
 
@@ -1875,6 +1862,9 @@
 
     productGrid.style.display =
       "none";
+
+    productsCount.textContent =
+      "";
 
   }
 
