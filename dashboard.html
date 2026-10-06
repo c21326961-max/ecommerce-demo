@@ -11,18 +11,29 @@
 
   <title>Admin Dashboard | ShopSphere</title>
 
+
   <!-- =========================================
        ADMIN LOGIN PROTECTION
   ========================================= -->
 
   <script>
-    const ADMIN_SESSION_KEY = "shopSphereAdminLoggedIn";
+
+    const ADMIN_SESSION_KEY =
+      "shopSphereAdminLoggedIn";
+
 
     if (
-      sessionStorage.getItem(ADMIN_SESSION_KEY) !== "true"
+      sessionStorage.getItem(
+        ADMIN_SESSION_KEY
+      ) !== "true"
     ) {
-      window.location.replace("admin-login.html");
+
+      window.location.replace(
+        "admin-login.html"
+      );
+
     }
+
   </script>
 
 
@@ -41,6 +52,7 @@
       padding: 0;
       font-family: Arial, sans-serif;
     }
+
 
     body {
       background: #f5f7fb;
@@ -65,15 +77,18 @@
       overflow-y: auto;
     }
 
+
     .logo {
       font-size: 24px;
       font-weight: bold;
       padding: 0 12px 30px;
     }
 
+
     .logo span {
       color: #22c55e;
     }
+
 
     .menu-title {
       font-size: 12px;
@@ -81,6 +96,7 @@
       margin: 15px 12px 8px;
       text-transform: uppercase;
     }
+
 
     .menu a {
       display: block;
@@ -91,6 +107,7 @@
       margin-bottom: 5px;
       transition: 0.2s;
     }
+
 
     .menu a:hover,
     .menu a.active {
@@ -123,10 +140,12 @@
       gap: 20px;
     }
 
+
     .topbar h1 {
       font-size: 24px;
       color: #111827;
     }
+
 
     .topbar-right {
       display: flex;
@@ -134,11 +153,13 @@
       gap: 18px;
     }
 
+
     .admin-user {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
 
     .admin-avatar {
       width: 40px;
@@ -152,13 +173,14 @@
       font-weight: bold;
     }
 
+
     .admin-name {
       font-weight: bold;
     }
 
 
     /* =========================================
-       LOGOUT BUTTON
+       LOGOUT
     ========================================= */
 
     .logout-btn {
@@ -174,13 +196,10 @@
       white-space: nowrap;
     }
 
+
     .logout-btn:hover {
       background: #b91c1c;
       transform: translateY(-1px);
-    }
-
-    .logout-btn:active {
-      transform: translateY(0);
     }
 
 
@@ -192,14 +211,17 @@
       padding: 30px;
     }
 
+
     .welcome {
       margin-bottom: 25px;
     }
+
 
     .welcome h2 {
       font-size: 26px;
       margin-bottom: 7px;
     }
+
 
     .welcome p {
       color: #6b7280;
@@ -207,7 +229,7 @@
 
 
     /* =========================================
-       DASHBOARD MESSAGE
+       MESSAGE
     ========================================= */
 
     .dashboard-message {
@@ -233,6 +255,7 @@
       margin-bottom: 30px;
     }
 
+
     .stat-card {
       background: white;
       padding: 22px;
@@ -240,12 +263,14 @@
       box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     }
 
+
     .stat-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
     }
+
 
     .stat-icon {
       width: 45px;
@@ -258,16 +283,139 @@
       font-size: 22px;
     }
 
+
     .stat-title {
       color: #6b7280;
       font-size: 14px;
     }
+
 
     .stat-number {
       font-size: 27px;
       font-weight: bold;
       color: #111827;
       word-break: break-word;
+    }
+
+
+    /* =========================================
+       SEARCH PANEL
+    ========================================= */
+
+    .search-panel {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+
+    .search-header h3 {
+      font-size: 19px;
+      color: #111827;
+    }
+
+
+    .search-result-count {
+      color: #6b7280;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+
+    .search-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+
+    .search-field label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #4b5563;
+    }
+
+
+    .search-field input,
+    .search-field select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      background: white;
+      color: #111827;
+      font-size: 13px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+
+    .search-field input:focus,
+    .search-field select:focus {
+      border-color: #22c55e;
+      box-shadow:
+        0 0 0 3px
+        rgba(34,197,94,0.12);
+    }
+
+
+    .search-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+
+    .search-btn {
+      border: none;
+      background: #22c55e;
+      color: white;
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+
+    .search-btn:hover {
+      background: #16a34a;
+    }
+
+
+    .clear-search-btn {
+      border: none;
+      background: #e5e7eb;
+      color: #374151;
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+
+    .clear-search-btn:hover {
+      background: #d1d5db;
     }
 
 
@@ -281,12 +429,14 @@
       gap: 25px;
     }
 
+
     .panel {
       background: white;
       border-radius: 14px;
       padding: 25px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     }
+
 
     .panel-header {
       display: flex;
@@ -296,9 +446,11 @@
       margin-bottom: 20px;
     }
 
+
     .panel-header h3 {
       font-size: 19px;
     }
+
 
     .view-all {
       color: #22c55e;
@@ -307,13 +459,14 @@
       font-weight: bold;
     }
 
+
     .view-all:hover {
       text-decoration: underline;
     }
 
 
     /* =========================================
-       EXCEL BUTTON
+       EXCEL
     ========================================= */
 
     .export-excel-btn {
@@ -329,13 +482,9 @@
       white-space: nowrap;
     }
 
+
     .export-excel-btn:hover {
       background: #15803d;
-      transform: translateY(-1px);
-    }
-
-    .export-excel-btn:active {
-      transform: translateY(0);
     }
 
 
@@ -347,10 +496,12 @@
       overflow-x: auto;
     }
 
+
     table {
       width: 100%;
       border-collapse: collapse;
     }
+
 
     th,
     td {
@@ -361,10 +512,12 @@
       white-space: nowrap;
     }
 
+
     th {
       color: #6b7280;
       font-weight: bold;
     }
+
 
     .empty-row {
       text-align: center;
@@ -374,7 +527,7 @@
 
 
     /* =========================================
-       STATUS BADGES
+       STATUS
     ========================================= */
 
     .status {
@@ -385,40 +538,42 @@
       font-weight: bold;
     }
 
+
     .status-processing {
       background: #fef3c7;
       color: #92400e;
     }
+
 
     .status-paid {
       background: #dcfce7;
       color: #166534;
     }
 
+
     .status-pending {
       background: #fee2e2;
       color: #991b1b;
     }
+
 
     .status-shipped {
       background: #dbeafe;
       color: #1d4ed8;
     }
 
+
     .status-delivered {
       background: #dcfce7;
       color: #166534;
     }
+
 
     .status-cancelled {
       background: #fee2e2;
       color: #991b1b;
     }
 
-
-    /* =========================================
-       PAYMENT METHOD SMALL TEXT
-    ========================================= */
 
     .payment-method-small {
       display: block;
@@ -429,7 +584,7 @@
 
 
     /* =========================================
-       CASH RECEIVED BUTTON
+       CASH RECEIVED
     ========================================= */
 
     .cash-received-btn {
@@ -445,21 +600,12 @@
       width: 100%;
     }
 
+
     .cash-received-btn:hover {
       background: #16a34a;
       color: white;
     }
 
-    .cash-received-btn:disabled {
-      background: #d1d5db;
-      color: #6b7280;
-      cursor: not-allowed;
-    }
-
-
-    /* =========================================
-       ACTION BUTTONS
-    ========================================= */
 
     .action-buttons {
       display: flex;
@@ -476,6 +622,7 @@
       min-width: 155px;
     }
 
+
     .status-select {
       min-width: 125px;
       padding: 8px 10px;
@@ -487,26 +634,22 @@
       font-weight: bold;
       cursor: pointer;
       outline: none;
-      transition: 0.2s;
     }
+
 
     .status-select:hover {
       border-color: #22c55e;
     }
 
-    .status-select:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
-    }
-
 
     /* =========================================
-       DELETE BUTTON
+       DELETE
     ========================================= */
 
     .action-cell {
       min-width: 150px;
     }
+
 
     .delete-order-btn {
       padding: 8px 12px;
@@ -520,6 +663,7 @@
       transition: 0.2s;
       width: 100%;
     }
+
 
     .delete-order-btn:hover {
       background: #dc2626;
@@ -536,6 +680,7 @@
       gap: 12px;
     }
 
+
     .quick-action {
       display: flex;
       align-items: center;
@@ -548,10 +693,12 @@
       transition: 0.2s;
     }
 
+
     .quick-action:hover {
       border-color: #22c55e;
       background: #f0fdf4;
     }
+
 
     .quick-icon {
       width: 40px;
@@ -565,32 +712,27 @@
       flex-shrink: 0;
     }
 
+
     .quick-action strong {
       display: block;
       margin-bottom: 3px;
     }
+
 
     .quick-action small {
       color: #6b7280;
     }
 
 
-    /* =========================================
-       ADD PRODUCT SPECIAL
-    ========================================= */
-
     .add-product-action {
       border: 2px solid #22c55e;
       background: #f0fdf4;
     }
 
+
     .add-product-action .quick-icon {
       background: #22c55e;
       color: white;
-    }
-
-    .add-product-action:hover {
-      background: #dcfce7;
     }
 
 
@@ -604,8 +746,14 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+
       .dashboard-grid {
         grid-template-columns: 1fr;
+      }
+
+
+      .search-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
     }
@@ -618,11 +766,13 @@
         padding: 20px 10px;
       }
 
+
       .logo {
         font-size: 0;
         text-align: center;
         padding-bottom: 25px;
       }
+
 
       .logo::after {
         content: "S";
@@ -630,9 +780,11 @@
         color: #22c55e;
       }
 
+
       .menu-title {
         display: none;
       }
+
 
       .menu a {
         font-size: 0;
@@ -640,52 +792,91 @@
         padding: 14px 5px;
       }
 
+
       .menu a::first-letter {
         font-size: 20px;
       }
 
+
       .main {
         margin-left: 70px;
       }
+
 
       .topbar {
         padding: 15px;
         gap: 10px;
       }
 
+
       .topbar h1 {
         font-size: 19px;
       }
+
 
       .topbar-right {
         gap: 8px;
       }
 
+
       .admin-name {
         display: none;
       }
+
 
       .logout-btn {
         padding: 9px 10px;
         font-size: 11px;
       }
 
+
       .content {
         padding: 20px 15px;
       }
+
 
       .stats {
         grid-template-columns: 1fr;
       }
 
+
       .panel {
         padding: 18px;
       }
+
+
+      .search-panel {
+        padding: 18px;
+      }
+
+
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .search-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+
+      .search-actions {
+        flex-direction: column;
+      }
+
+
+      .search-btn,
+      .clear-search-btn {
+        width: 100%;
+      }
+
 
       .panel-header {
         align-items: flex-start;
         flex-direction: column;
       }
+
 
       .export-excel-btn {
         width: 100%;
@@ -788,9 +979,7 @@
   <main class="main">
 
 
-    <!-- =========================================
-         TOPBAR
-    ========================================= -->
+    <!-- TOPBAR -->
 
     <div class="topbar">
 
@@ -806,6 +995,7 @@
           <div class="admin-avatar">
             A
           </div>
+
 
           <div class="admin-name">
             Administrator
@@ -828,9 +1018,7 @@
 
 
 
-    <!-- =========================================
-         CONTENT
-    ========================================= -->
+    <!-- CONTENT -->
 
     <div class="content">
 
@@ -849,9 +1037,7 @@
 
 
 
-      <!-- =========================================
-           MESSAGE
-      ========================================= -->
+      <!-- MESSAGE -->
 
       <div
         id="dashboardMessage"
@@ -860,14 +1046,10 @@
 
 
 
-      <!-- =========================================
-           STATS
-      ========================================= -->
+      <!-- STATS -->
 
       <div class="stats">
 
-
-        <!-- PRODUCTS -->
 
         <div class="stat-card">
 
@@ -883,6 +1065,7 @@
 
           </div>
 
+
           <div
             class="stat-number"
             id="totalProducts"
@@ -893,8 +1076,6 @@
         </div>
 
 
-
-        <!-- ORDERS -->
 
         <div class="stat-card">
 
@@ -910,6 +1091,7 @@
 
           </div>
 
+
           <div
             class="stat-number"
             id="totalOrders"
@@ -920,8 +1102,6 @@
         </div>
 
 
-
-        <!-- CUSTOMERS -->
 
         <div class="stat-card">
 
@@ -937,6 +1117,7 @@
 
           </div>
 
+
           <div
             class="stat-number"
             id="totalCustomers"
@@ -947,8 +1128,6 @@
         </div>
 
 
-
-        <!-- SALES -->
 
         <div class="stat-card">
 
@@ -964,6 +1143,7 @@
 
           </div>
 
+
           <div
             class="stat-number"
             id="totalSales"
@@ -978,15 +1158,299 @@
 
 
       <!-- =========================================
+           ADVANCED ORDER SEARCH
+      ========================================== -->
+
+      <div class="search-panel">
+
+        <div class="search-header">
+
+          <h3>
+            🔎 Search Orders
+          </h3>
+
+
+          <div
+            class="search-result-count"
+            id="searchResultCount"
+          >
+            Showing all orders
+          </div>
+
+        </div>
+
+
+        <div class="search-grid">
+
+
+          <!-- ORDER NUMBER -->
+
+          <div class="search-field">
+
+            <label>
+              Order Number
+            </label>
+
+            <input
+              type="text"
+              id="searchOrderNumber"
+              placeholder="e.g. SS-20261006..."
+            >
+
+          </div>
+
+
+          <!-- CUSTOMER -->
+
+          <div class="search-field">
+
+            <label>
+              Customer Name
+            </label>
+
+            <input
+              type="text"
+              id="searchCustomer"
+              placeholder="Customer name"
+            >
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="search-field">
+
+            <label>
+              Phone Number
+            </label>
+
+            <input
+              type="text"
+              id="searchPhone"
+              placeholder="Phone number"
+            >
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="search-field">
+
+            <label>
+              Email
+            </label>
+
+            <input
+              type="text"
+              id="searchEmail"
+              placeholder="Email address"
+            >
+
+          </div>
+
+
+          <!-- ADDRESS -->
+
+          <div class="search-field">
+
+            <label>
+              Delivery Address
+            </label>
+
+            <input
+              type="text"
+              id="searchAddress"
+              placeholder="Delivery address"
+            >
+
+          </div>
+
+
+          <!-- PRODUCT -->
+
+          <div class="search-field">
+
+            <label>
+              Product
+            </label>
+
+            <input
+              type="text"
+              id="searchProduct"
+              placeholder="Product name"
+            >
+
+          </div>
+
+
+          <!-- PAYMENT METHOD -->
+
+          <div class="search-field">
+
+            <label>
+              Payment Method
+            </label>
+
+            <select
+              id="searchPaymentMethod"
+            >
+
+              <option value="">
+                All Payment Methods
+              </option>
+
+              <option value="Mobile Money">
+                Mobile Money
+              </option>
+
+              <option value="Card Payment">
+                Card Payment
+              </option>
+
+              <option value="Bank Payment">
+                Bank Payment
+              </option>
+
+              <option value="Cash on Delivery">
+                Cash on Delivery
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- PAYMENT STATUS -->
+
+          <div class="search-field">
+
+            <label>
+              Payment Status
+            </label>
+
+            <select
+              id="searchPaymentStatus"
+            >
+
+              <option value="">
+                All Payment Status
+              </option>
+
+              <option value="PAID">
+                PAID
+              </option>
+
+              <option value="UNPAID">
+                UNPAID
+              </option>
+
+              <option value="SUCCESS">
+                SUCCESS
+              </option>
+
+              <option value="COMPLETED">
+                COMPLETED
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- ORDER STATUS -->
+
+          <div class="search-field">
+
+            <label>
+              Order Status
+            </label>
+
+            <select
+              id="searchOrderStatus"
+            >
+
+              <option value="">
+                All Order Status
+              </option>
+
+              <option value="Pending">
+                Pending
+              </option>
+
+              <option value="Processing">
+                Processing
+              </option>
+
+              <option value="Shipped">
+                Shipped
+              </option>
+
+              <option value="Delivered">
+                Delivered
+              </option>
+
+              <option value="Cancelled">
+                Cancelled
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- DATE -->
+
+          <div class="search-field">
+
+            <label>
+              Order Date
+            </label>
+
+            <input
+              type="date"
+              id="searchDate"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="search-actions">
+
+          <button
+            type="button"
+            class="search-btn"
+            onclick="performOrderSearch()"
+          >
+            🔎 Search Orders
+          </button>
+
+
+          <button
+            type="button"
+            class="clear-search-btn"
+            onclick="clearOrderSearch()"
+          >
+            ✕ Clear Search
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================================
            DASHBOARD GRID
-      ========================================= -->
+      ========================================== -->
 
       <div class="dashboard-grid">
 
 
-        <!-- =====================================
-             RECENT ORDERS
-        ====================================== -->
+        <!-- RECENT ORDERS -->
 
         <div class="panel">
 
@@ -994,7 +1458,7 @@
           <div class="panel-header">
 
             <h3>
-              Recent Orders
+              Orders
             </h3>
 
 
@@ -1089,9 +1553,7 @@
 
 
 
-        <!-- =====================================
-             QUICK ACTIONS
-        ====================================== -->
+        <!-- QUICK ACTIONS -->
 
         <div class="panel">
 
@@ -1107,8 +1569,6 @@
 
           <div class="quick-actions">
 
-
-            <!-- PRODUCTS -->
 
             <a
               href="admin-products.html"
@@ -1135,8 +1595,6 @@
 
 
 
-            <!-- ORDER HISTORY -->
-
             <a
               href="history.html"
               class="quick-action"
@@ -1162,8 +1620,6 @@
 
 
 
-            <!-- ADD PRODUCT -->
-
             <a
               href="admin-products.html"
               class="quick-action add-product-action"
@@ -1188,8 +1644,6 @@
             </a>
 
 
-
-            <!-- VIEW STORE -->
 
             <a
               href="index.html"
@@ -1227,1377 +1681,1249 @@
 
 
 
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================= -->
-
-  <script>
+<script>
 
 
-    /*
-      =========================================
-      SHOPSPHERE ADMIN DASHBOARD
-      =========================================
+  // =========================================
+  // ADMIN LOGOUT
+  // =========================================
 
-      Admin:
-      - Login protection
-      - Logout
+  function adminLogout() {
 
-      Products:
-      - Supabase
-
-      Orders:
-      - localStorage
-      - shopSphereOrders
-
-      Admin can:
-      - View orders
-      - Change order status
-      - Mark COD cash as received
-      - Delete orders
-      - Export orders to Excel
-    */
+    const confirmed =
+      confirm(
+        "Are you sure you want to logout?"
+      );
 
 
-    /* =========================================
-       ADMIN LOGOUT
-    ========================================= */
+    if (!confirmed) {
+      return;
+    }
 
-    function adminLogout() {
 
-      const confirmed =
-        confirm(
-          "Are you sure you want to logout?"
+    sessionStorage.removeItem(
+      "shopSphereAdminLoggedIn"
+    );
+
+
+    window.location.replace(
+      "admin-login.html"
+    );
+
+  }
+
+
+
+  // =========================================
+  // SUPABASE
+  // =========================================
+
+  const SUPABASE_URL =
+    "https://ienquzigbawhvthnirtj.supabase.co";
+
+
+  const SUPABASE_KEY =
+    localStorage.getItem(
+      "shopSphereSupabaseKey"
+    ) || "";
+
+
+
+  // =========================================
+  // FORMAT MONEY
+  // =========================================
+
+  function formatMoney(amount) {
+
+    return (
+      "TSh " +
+      Number(
+        amount || 0
+      ).toLocaleString()
+    );
+
+  }
+
+
+
+  // =========================================
+  // GET ORDERS
+  // =========================================
+
+  function getOrders() {
+
+    try {
+
+      const savedOrders =
+        JSON.parse(
+          localStorage.getItem(
+            "shopSphereOrders"
+          )
         );
 
 
-      if (!confirmed) {
-        return;
+      if (
+        Array.isArray(
+          savedOrders
+        )
+      ) {
+
+        return savedOrders;
+
       }
 
+    } catch (error) {
 
-      sessionStorage.removeItem(
-        "shopSphereAdminLoggedIn"
-      );
-
-
-      window.location.replace(
-        "admin-login.html"
+      console.error(
+        "Could not read orders:",
+        error
       );
 
     }
 
 
+    return [];
 
-    /* =========================================
-       SUPABASE
-    ========================================= */
-
-    const SUPABASE_URL =
-      "https://ienquzigbawhvthnirtj.supabase.co";
-
-
-    const SUPABASE_KEY =
-      localStorage.getItem(
-        "shopSphereSupabaseKey"
-      ) || "";
+  }
 
 
 
-    /* =========================================
-       FORMAT MONEY
-    ========================================= */
+  // =========================================
+  // UNIQUE CUSTOMERS
+  // =========================================
 
-    function formatMoney(amount) {
+  function getUniqueCustomers(
+    orders
+  ) {
 
-      return "TSh " +
-        Number(
-          amount || 0
-        ).toLocaleString();
-
-    }
+    const customers =
+      new Set();
 
 
+    orders.forEach(
+      order => {
 
-    /* =========================================
-       GET ORDERS
-    ========================================= */
+        const customer =
+          order.customer || {};
 
-    function getOrders() {
 
-      try {
+        const identifier =
+          customer.phone ||
+          customer.email ||
+          customer.fullName;
 
-        const savedOrders =
-          JSON.parse(
-            localStorage.getItem(
-              "shopSphereOrders"
+
+        if (identifier) {
+
+          customers.add(
+            String(
+              identifier
             )
+            .toLowerCase()
+            .trim()
           );
+
+        }
+
+      }
+    );
+
+
+    return customers.size;
+
+  }
+
+
+
+  // =========================================
+  // ORDER TOTAL
+  // =========================================
+
+  function getOrderTotal(
+    order
+  ) {
+
+    if (
+      order.total !== undefined &&
+      order.total !== null &&
+      !isNaN(
+        Number(
+          order.total
+        )
+      )
+    ) {
+
+      return Number(
+        order.total
+      );
+
+    }
+
+
+    let total = 0;
+
+
+    const products =
+      Array.isArray(
+        order.products
+      )
+        ? order.products
+        : [];
+
+
+    products.forEach(
+      item => {
+
+        total +=
+          Number(
+            item.price || 0
+          ) *
+          Number(
+            item.quantity || 0
+          );
+
+      }
+    );
+
+
+    return total;
+
+  }
+
+
+
+  // =========================================
+  // TOTAL SALES
+  // =========================================
+
+  function getTotalSales(
+    orders
+  ) {
+
+    let sales = 0;
+
+
+    orders.forEach(
+      order => {
+
+        const paymentStatus =
+          String(
+            order.paymentStatus || ""
+          )
+          .toUpperCase()
+          .trim();
 
 
         if (
-          Array.isArray(
-            savedOrders
-          )
+          paymentStatus === "PAID" ||
+          paymentStatus === "SUCCESS" ||
+          paymentStatus === "COMPLETED"
         ) {
 
-          return savedOrders;
+          sales +=
+            getOrderTotal(
+              order
+            );
 
         }
 
-      } catch (error) {
-
-        console.error(
-          "Could not read orders:",
-          error
-        );
-
       }
+    );
 
 
-      return [];
+    return sales;
+
+  }
+
+
+
+  // =========================================
+  // STATUS CLASS
+  // =========================================
+
+  function getStatusClass(
+    status
+  ) {
+
+    const cleanStatus =
+      String(
+        status || ""
+      )
+      .toLowerCase()
+      .trim();
+
+
+    if (
+      cleanStatus === "paid" ||
+      cleanStatus === "success" ||
+      cleanStatus === "completed"
+    ) {
+
+      return "status-paid";
 
     }
 
 
-
-    /* =========================================
-       CUSTOMER COUNT
-    ========================================= */
-
-    function getUniqueCustomers(
-      orders
+    if (
+      cleanStatus === "pending"
     ) {
 
-      const customers =
-        new Set();
+      return "status-pending";
+
+    }
 
 
-      orders.forEach(
-        order => {
+    if (
+      cleanStatus === "shipped"
+    ) {
 
-          const customer =
-            order.customer || {};
+      return "status-shipped";
 
-
-          const identifier =
-            customer.phone ||
-            customer.email ||
-            customer.fullName;
+    }
 
 
-          if (identifier) {
+    if (
+      cleanStatus === "delivered"
+    ) {
 
-            customers.add(
-              String(
-                identifier
-              )
-              .toLowerCase()
-              .trim()
-            );
+      return "status-delivered";
 
-          }
+    }
 
-        }
+
+    if (
+      cleanStatus === "cancelled" ||
+      cleanStatus === "canceled"
+    ) {
+
+      return "status-cancelled";
+
+    }
+
+
+    return "status-processing";
+
+  }
+
+
+
+  // =========================================
+  // MESSAGE
+  // =========================================
+
+  function showDashboardMessage(
+    message
+  ) {
+
+    const messageBox =
+      document.getElementById(
+        "dashboardMessage"
       );
 
 
-      return customers.size;
-
-    }
-
+    messageBox.textContent =
+      message;
 
 
-    /* =========================================
-       CALCULATE ORDER TOTAL
-    ========================================= */
+    messageBox.style.display =
+      "block";
 
-    function getOrderTotal(
-      order
-    ) {
 
-      if (
-        order.total !== undefined &&
-        order.total !== null &&
-        !isNaN(
-          Number(
-            order.total
+    clearTimeout(
+      window.dashboardMessageTimer
+    );
+
+
+    window.dashboardMessageTimer =
+      setTimeout(
+        function() {
+
+          messageBox.style.display =
+            "none";
+
+        },
+        3000
+      );
+
+  }
+
+
+
+  // =========================================
+  // NORMALIZE TEXT
+  // =========================================
+
+  function normalizeText(
+    value
+  ) {
+
+    return String(
+      value || ""
+    )
+    .toLowerCase()
+    .trim();
+
+  }
+
+
+
+  // =========================================
+  // ORDER SEARCH
+  // =========================================
+
+  function filterOrders(
+    orders
+  ) {
+
+    const orderNumber =
+      normalizeText(
+        document.getElementById(
+          "searchOrderNumber"
+        ).value
+      );
+
+
+    const customer =
+      normalizeText(
+        document.getElementById(
+          "searchCustomer"
+        ).value
+      );
+
+
+    const phone =
+      normalizeText(
+        document.getElementById(
+          "searchPhone"
+        ).value
+      );
+
+
+    const email =
+      normalizeText(
+        document.getElementById(
+          "searchEmail"
+        ).value
+      );
+
+
+    const address =
+      normalizeText(
+        document.getElementById(
+          "searchAddress"
+        ).value
+      );
+
+
+    const product =
+      normalizeText(
+        document.getElementById(
+          "searchProduct"
+        ).value
+      );
+
+
+    const paymentMethod =
+      normalizeText(
+        document.getElementById(
+          "searchPaymentMethod"
+        ).value
+      );
+
+
+    const paymentStatus =
+      normalizeText(
+        document.getElementById(
+          "searchPaymentStatus"
+        ).value
+      );
+
+
+    const orderStatus =
+      normalizeText(
+        document.getElementById(
+          "searchOrderStatus"
+        ).value
+      );
+
+
+    const selectedDate =
+      document.getElementById(
+        "searchDate"
+      ).value;
+
+
+    return orders.filter(
+      order => {
+
+        const customerData =
+          order.customer || {};
+
+
+        const orderProducts =
+          Array.isArray(
+            order.products
           )
-        )
-      ) {
-
-        return Number(
-          order.total
-        );
-
-      }
+            ? order.products
+            : [];
 
 
-      let total = 0;
-
-
-      const products =
-        Array.isArray(
-          order.products
-        )
-          ? order.products
-          : [];
-
-
-      products.forEach(
-        item => {
-
-          total +=
-            Number(
-              item.price || 0
-            ) *
-            Number(
-              item.quantity || 0
-            );
-
-        }
-      );
-
-
-      return total;
-
-    }
-
-
-
-    /* =========================================
-       TOTAL SALES
-    ========================================= */
-
-    function getTotalSales(
-      orders
-    ) {
-
-      let sales = 0;
-
-
-      orders.forEach(
-        order => {
-
-          const paymentStatus =
-            String(
-              order.paymentStatus || ""
+        const orderProductsText =
+          orderProducts
+            .map(
+              item =>
+                normalizeText(
+                  item.name
+                )
             )
-            .toUpperCase()
-            .trim();
+            .join(" ");
+
+
+        const orderDate =
+          order.createdAt ||
+          order.paymentTime ||
+          "";
+
+
+        let dateMatches =
+          true;
+
+
+        if (
+          selectedDate
+        ) {
+
+          const dateObject =
+            new Date(
+              orderDate
+            );
 
 
           if (
-            paymentStatus === "PAID" ||
-            paymentStatus === "SUCCESS" ||
-            paymentStatus === "COMPLETED"
+            isNaN(
+              dateObject.getTime()
+            )
           ) {
 
-            sales +=
-              getOrderTotal(
-                order
+            dateMatches =
+              false;
+
+          } else {
+
+            const year =
+              dateObject
+                .getFullYear()
+                .toString();
+
+
+            const month =
+              String(
+                dateObject.getMonth() + 1
+              ).padStart(
+                2,
+                "0"
               );
+
+
+            const day =
+              String(
+                dateObject.getDate()
+              ).padStart(
+                2,
+                "0"
+              );
+
+
+            const localDate =
+              `${year}-${month}-${day}`;
+
+
+            dateMatches =
+              localDate ===
+              selectedDate;
 
           }
 
         }
-      );
 
 
-      return sales;
+        return (
 
-    }
-
-
-
-    /* =========================================
-       STATUS CLASS
-    ========================================= */
-
-    function getStatusClass(
-      status
-    ) {
-
-      const cleanStatus =
-        String(
-          status || ""
-        )
-        .toLowerCase()
-        .trim();
-
-
-      if (
-        cleanStatus === "paid" ||
-        cleanStatus === "success" ||
-        cleanStatus === "completed"
-      ) {
-
-        return "status-paid";
-
-      }
-
-
-      if (
-        cleanStatus === "pending"
-      ) {
-
-        return "status-pending";
-
-      }
-
-
-      if (
-        cleanStatus === "shipped"
-      ) {
-
-        return "status-shipped";
-
-      }
-
-
-      if (
-        cleanStatus === "delivered"
-      ) {
-
-        return "status-delivered";
-
-      }
-
-
-      if (
-        cleanStatus === "cancelled" ||
-        cleanStatus === "canceled"
-      ) {
-
-        return "status-cancelled";
-
-      }
-
-
-      return "status-processing";
-
-    }
-
-
-
-    /* =========================================
-       SHOW DASHBOARD MESSAGE
-    ========================================= */
-
-    function showDashboardMessage(
-      message
-    ) {
-
-      const messageBox =
-        document.getElementById(
-          "dashboardMessage"
-        );
-
-
-      messageBox.textContent =
-        message;
-
-
-      messageBox.style.display =
-        "block";
-
-
-      clearTimeout(
-        window.dashboardMessageTimer
-      );
-
-
-      window.dashboardMessageTimer =
-        setTimeout(
-          function() {
-
-            messageBox.style.display =
-              "none";
-
-          },
-          3000
-        );
-
-    }
-
-
-
-    /* =========================================
-       UPDATE ORDER STATUS
-    ========================================= */
-
-    function updateOrderStatus(
-      orderNumber,
-      newStatus
-    ) {
-
-      const orders =
-        getOrders();
-
-
-      const orderIndex =
-        orders.findIndex(
-          order =>
-            String(
+          (
+            !orderNumber ||
+            normalizeText(
               order.orderNumber
-            ) ===
-            String(
+            ).includes(
               orderNumber
             )
+          )
+
+          &&
+
+          (
+            !customer ||
+            normalizeText(
+              customerData.fullName
+            ).includes(
+              customer
+            )
+          )
+
+          &&
+
+          (
+            !phone ||
+            normalizeText(
+              customerData.phone
+            ).includes(
+              phone
+            )
+          )
+
+          &&
+
+          (
+            !email ||
+            normalizeText(
+              customerData.email
+            ).includes(
+              email
+            )
+          )
+
+          &&
+
+          (
+            !address ||
+            normalizeText(
+              customerData.address
+            ).includes(
+              address
+            )
+          )
+
+          &&
+
+          (
+            !product ||
+            orderProductsText.includes(
+              product
+            )
+          )
+
+          &&
+
+          (
+            !paymentMethod ||
+            normalizeText(
+              order.paymentMethod
+            ) ===
+            paymentMethod
+          )
+
+          &&
+
+          (
+            !paymentStatus ||
+            normalizeText(
+              order.paymentStatus
+            ) ===
+            paymentStatus
+          )
+
+          &&
+
+          (
+            !orderStatus ||
+            normalizeText(
+              order.orderStatus
+            ) ===
+            orderStatus
+          )
+
+          &&
+
+          dateMatches
+
         );
-
-
-      if (
-        orderIndex === -1
-      ) {
-
-        showDashboardMessage(
-          "Order not found."
-        );
-
-        return;
 
       }
+    );
 
+  }
+
+
+
+  // =========================================
+  // PERFORM SEARCH
+  // =========================================
+
+  function performOrderSearch() {
+
+    const allOrders =
+      getOrders();
+
+
+    const filteredOrders =
+      filterOrders(
+        allOrders
+      );
+
+
+    displayRecentOrders(
+      filteredOrders,
+      false
+    );
+
+
+    const resultCount =
+      document.getElementById(
+        "searchResultCount"
+      );
+
+
+    resultCount.textContent =
+      `Found ${filteredOrders.length} order${filteredOrders.length === 1 ? "" : "s"}`;
+
+  }
+
+
+
+  // =========================================
+  // CLEAR SEARCH
+  // =========================================
+
+  function clearOrderSearch() {
+
+    document.getElementById(
+      "searchOrderNumber"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchCustomer"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchPhone"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchEmail"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchAddress"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchProduct"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchPaymentMethod"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchPaymentStatus"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchOrderStatus"
+    ).value = "";
+
+
+    document.getElementById(
+      "searchDate"
+    ).value = "";
+
+
+    const orders =
+      getOrders();
+
+
+    displayRecentOrders(
+      orders,
+      true
+    );
+
+
+    document.getElementById(
+      "searchResultCount"
+    ).textContent =
+      "Showing all orders";
+
+  }
+
+
+
+  // =========================================
+  // UPDATE ORDER STATUS
+  // =========================================
+
+  function updateOrderStatus(
+    orderNumber,
+    newStatus
+  ) {
+
+    const orders =
+      getOrders();
+
+
+    const orderIndex =
+      orders.findIndex(
+        order =>
+          String(
+            order.orderNumber
+          ) ===
+          String(
+            orderNumber
+          )
+      );
+
+
+    if (
+      orderIndex === -1
+    ) {
+
+      showDashboardMessage(
+        "Order not found."
+      );
+
+      return;
+
+    }
+
+
+    orders[
+      orderIndex
+    ].orderStatus =
+      newStatus;
+
+
+    localStorage.setItem(
+      "shopSphereOrders",
+      JSON.stringify(
+        orders
+      )
+    );
+
+
+    const latestOrderNumber =
+      localStorage.getItem(
+        "shopSphereOrderNumber"
+      );
+
+
+    if (
+      String(
+        latestOrderNumber
+      ) ===
+      String(
+        orderNumber
+      )
+    ) {
+
+      localStorage.setItem(
+        "shopSphereOrderStatus",
+        newStatus
+      );
+
+    }
+
+
+    showDashboardMessage(
+      `Order #${orderNumber} status changed to ${newStatus}.`
+    );
+
+
+    refreshCurrentOrders();
+
+  }
+
+
+
+  // =========================================
+  // MARK CASH RECEIVED
+  // =========================================
+
+  function markCashReceived(
+    orderNumber
+  ) {
+
+    const orders =
+      getOrders();
+
+
+    const orderIndex =
+      orders.findIndex(
+        order =>
+          String(
+            order.orderNumber
+          ) ===
+          String(
+            orderNumber
+          )
+      );
+
+
+    if (
+      orderIndex === -1
+    ) {
+
+      showDashboardMessage(
+        "Order not found."
+      );
+
+      return;
+
+    }
+
+
+    const order =
+      orders[
+        orderIndex
+      ];
+
+
+    const paymentMethod =
+      String(
+        order.paymentMethod || ""
+      ).trim();
+
+
+    const paymentStatus =
+      String(
+        order.paymentStatus || ""
+      )
+      .toUpperCase()
+      .trim();
+
+
+    if (
+      paymentMethod !==
+      "Cash on Delivery"
+    ) {
+
+      showDashboardMessage(
+        "This order is not Cash on Delivery."
+      );
+
+      return;
+
+    }
+
+
+    if (
+      paymentStatus === "PAID" ||
+      paymentStatus === "SUCCESS" ||
+      paymentStatus === "COMPLETED"
+    ) {
+
+      showDashboardMessage(
+        "This order has already been paid."
+      );
+
+      return;
+
+    }
+
+
+    const amount =
+      getOrderTotal(
+        order
+      );
+
+
+    const confirmed =
+      confirm(
+        `Confirm that cash has been received for Order #${orderNumber}?\n\nAmount: ${formatMoney(amount)}`
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const paymentTime =
+      new Date().toISOString();
+
+
+    orders[
+      orderIndex
+    ].paymentStatus =
+      "PAID";
+
+
+    orders[
+      orderIndex
+    ].paymentTime =
+      paymentTime;
+
+
+    if (
+      !orders[
+        orderIndex
+      ].orderStatus
+    ) {
 
       orders[
         orderIndex
       ].orderStatus =
-        newStatus;
-
-
-      localStorage.setItem(
-        "shopSphereOrders",
-        JSON.stringify(
-          orders
-        )
-      );
-
-
-      const latestOrderNumber =
-        localStorage.getItem(
-          "shopSphereOrderNumber"
-        );
-
-
-      if (
-        String(
-          latestOrderNumber
-        ) ===
-        String(
-          orderNumber
-        )
-      ) {
-
-        localStorage.setItem(
-          "shopSphereOrderStatus",
-          newStatus
-        );
-
-      }
-
-
-      showDashboardMessage(
-        `Order #${orderNumber} status changed to ${newStatus}.`
-      );
-
-
-      loadDashboard();
+        "Pending";
 
     }
 
 
+    localStorage.setItem(
+      "shopSphereOrders",
+      JSON.stringify(
+        orders
+      )
+    );
 
-    /* =========================================
-       MARK CASH RECEIVED
-    ========================================= */
 
-    function markCashReceived(
-      orderNumber
+    const latestOrderNumber =
+      localStorage.getItem(
+        "shopSphereOrderNumber"
+      );
+
+
+    if (
+      String(
+        latestOrderNumber
+      ) ===
+      String(
+        orderNumber
+      )
     ) {
 
-      const orders =
-        getOrders();
-
-
-      const orderIndex =
-        orders.findIndex(
-          order =>
-            String(
-              order.orderNumber
-            ) ===
-            String(
-              orderNumber
-            )
-        );
-
-
-      if (
-        orderIndex === -1
-      ) {
-
-        showDashboardMessage(
-          "Order not found."
-        );
-
-        return;
-
-      }
-
-
-      const order =
+      localStorage.setItem(
+        "shopSphereOrderStatus",
         orders[
-          orderIndex
-        ];
-
-
-      const paymentMethod =
-        String(
-          order.paymentMethod || ""
-        )
-        .trim();
-
-
-      const paymentStatus =
-        String(
-          order.paymentStatus || ""
-        )
-        .toUpperCase()
-        .trim();
-
-
-      if (
-        paymentMethod !==
-        "Cash on Delivery"
-      ) {
-
-        showDashboardMessage(
-          "This order is not Cash on Delivery."
-        );
-
-        return;
-
-      }
-
-
-      if (
-        paymentStatus === "PAID" ||
-        paymentStatus === "SUCCESS" ||
-        paymentStatus === "COMPLETED"
-      ) {
-
-        showDashboardMessage(
-          "This order has already been paid."
-        );
-
-        return;
-
-      }
-
-
-      const amount =
-        getOrderTotal(
-          order
-        );
-
-
-      const confirmed =
-        confirm(
-          `Confirm that cash has been received for Order #${orderNumber}?\n\nAmount: ${formatMoney(amount)}`
-        );
-
-
-      if (!confirmed) {
-
-        return;
-
-      }
-
-
-      const paymentTime =
-        new Date().toISOString();
-
-
-      orders[
-        orderIndex
-      ].paymentStatus =
-        "PAID";
-
-
-      orders[
-        orderIndex
-      ].paymentTime =
-        paymentTime;
-
-
-      if (
-        !orders[
           orderIndex
         ].orderStatus
-      ) {
-
-        orders[
-          orderIndex
-        ].orderStatus =
-          "Pending";
-
-      }
+      );
 
 
       localStorage.setItem(
-        "shopSphereOrders",
-        JSON.stringify(
-          orders
-        )
+        "shopSpherePaymentStatus",
+        "PAID"
       );
 
 
-      const latestOrderNumber =
-        localStorage.getItem(
-          "shopSphereOrderNumber"
-        );
-
-
-      if (
-        String(
-          latestOrderNumber
-        ) ===
-        String(
-          orderNumber
-        )
-      ) {
-
-        localStorage.setItem(
-          "shopSphereOrderStatus",
-          orders[
-            orderIndex
-          ].orderStatus
-        );
-
-
-        localStorage.setItem(
-          "shopSpherePaymentStatus",
-          "PAID"
-        );
-
-
-        localStorage.setItem(
-          "shopSpherePaymentTime",
-          paymentTime
-        );
-
-      }
-
-
-      showDashboardMessage(
-        `Cash received for Order #${orderNumber}. Payment marked as PAID.`
+      localStorage.setItem(
+        "shopSpherePaymentTime",
+        paymentTime
       );
-
-
-      loadDashboard();
 
     }
 
 
-
-    /* =========================================
-       DELETE ORDER
-    ========================================= */
-
-    function deleteOrder(
-      orderNumber
-    ) {
-
-      const confirmed =
-        confirm(
-          `Are you sure you want to delete Order #${orderNumber}?`
-        );
+    showDashboardMessage(
+      `Cash received for Order #${orderNumber}. Payment marked as PAID.`
+    );
 
 
-      if (!confirmed) {
+    refreshCurrentOrders();
 
-        return;
-
-      }
+  }
 
 
-      const orders =
-        getOrders();
 
+  // =========================================
+  // DELETE ORDER
+  // =========================================
 
-      const updatedOrders =
-        orders.filter(
-          order =>
-            String(
-              order.orderNumber
-            ) !==
-            String(
-              orderNumber
-            )
-        );
+  function deleteOrder(
+    orderNumber
+  ) {
 
-
-      localStorage.setItem(
-        "shopSphereOrders",
-        JSON.stringify(
-          updatedOrders
-        )
+    const confirmed =
+      confirm(
+        `Are you sure you want to delete Order #${orderNumber}?`
       );
 
 
-      const latestOrderNumber =
-        localStorage.getItem(
-          "shopSphereOrderNumber"
-        );
-
-
-      if (
-        String(
-          latestOrderNumber
-        ) ===
-        String(
-          orderNumber
-        )
-      ) {
-
-        localStorage.removeItem(
-          "shopSphereOrderNumber"
-        );
-
-
-        localStorage.removeItem(
-          "shopSphereOrderStatus"
-        );
-
-
-        localStorage.removeItem(
-          "shopSpherePaymentStatus"
-        );
-
-
-        localStorage.removeItem(
-          "shopSpherePaymentTime"
-        );
-
-      }
-
-
-      showDashboardMessage(
-        `Order #${orderNumber} deleted successfully.`
-      );
-
-
-      loadDashboard();
-
+    if (!confirmed) {
+      return;
     }
 
 
-
-    /* =========================================
-       DISPLAY RECENT ORDERS
-    ========================================= */
-
-    function displayRecentOrders(
-      orders
-    ) {
-
-      const table =
-        document.getElementById(
-          "ordersTable"
-        );
-
-
-      if (
-        !orders.length
-      ) {
-
-        table.innerHTML = `
-
-          <tr>
-
-            <td
-              colspan="6"
-              class="empty-row"
-            >
-              No orders yet
-            </td>
-
-          </tr>
-
-        `;
-
-        return;
-
-      }
-
-
-      const sortedOrders =
-        [...orders].sort(
-          (a, b) => {
-
-            const dateA =
-              new Date(
-                a.createdAt ||
-                a.paymentTime ||
-                0
-              );
-
-
-            const dateB =
-              new Date(
-                b.createdAt ||
-                b.paymentTime ||
-                0
-              );
-
-
-            return dateB - dateA;
-
-          }
-        );
-
-
-      const recentOrders =
-        sortedOrders.slice(
-          0,
-          10
-        );
-
-
-      table.innerHTML =
-        recentOrders
-          .map(
-            order => {
-
-              const customer =
-                order.customer || {};
-
-
-              const orderNumber =
-                order.orderNumber ||
-                "N/A";
-
-
-              const customerName =
-                customer.fullName ||
-                "Customer";
-
-
-              const total =
-                getOrderTotal(
-                  order
-                );
-
-
-              const paymentStatus =
-                order.paymentStatus ||
-                "PAID";
-
-
-              const orderStatus =
-                order.orderStatus ||
-                "Processing";
-
-
-              const paymentMethod =
-                order.paymentMethod ||
-                "Not specified";
-
-
-              const cleanPaymentStatus =
-                String(
-                  paymentStatus
-                )
-                .toUpperCase()
-                .trim();
-
-
-              const isCOD =
-                paymentMethod ===
-                "Cash on Delivery";
-
-
-              const isUnpaid =
-                cleanPaymentStatus ===
-                "UNPAID";
-
-
-              let cashButton = "";
-
-
-              if (
-                isCOD &&
-                isUnpaid
-              ) {
-
-                cashButton = `
-
-                  <button
-                    type="button"
-                    class="cash-received-btn"
-                    data-cash-order-number="${escapeHtml(orderNumber)}"
-                  >
-                    💵 Cash Received
-                  </button>
-
-                `;
-
-              }
-
-
-              return `
-
-                <tr>
-
-                  <td>
-
-                    <strong>
-                      #${escapeHtml(orderNumber)}
-                    </strong>
-
-                  </td>
-
-
-                  <td>
-
-                    ${escapeHtml(
-                      customerName
-                    )}
-
-                  </td>
-
-
-                  <td>
-
-                    ${formatMoney(
-                      total
-                    )}
-
-                  </td>
-
-
-                  <td>
-
-                    <span
-                      class="status ${getStatusClass(paymentStatus)}"
-                    >
-
-                      ${escapeHtml(
-                        paymentStatus
-                      )}
-
-                    </span>
-
-
-                    <span
-                      class="payment-method-small"
-                    >
-
-                      ${escapeHtml(
-                        paymentMethod
-                      )}
-
-                    </span>
-
-                  </td>
-
-
-                  <td
-                    class="status-cell"
-                  >
-
-                    <select
-                      class="status-select"
-                      data-order-number="${escapeHtml(orderNumber)}"
-                      aria-label="Change order status"
-                    >
-
-                      <option
-                        value="Pending"
-                        ${
-                          orderStatus ===
-                          "Pending"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Pending
-                      </option>
-
-
-                      <option
-                        value="Processing"
-                        ${
-                          orderStatus ===
-                          "Processing"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Processing
-                      </option>
-
-
-                      <option
-                        value="Shipped"
-                        ${
-                          orderStatus ===
-                          "Shipped"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Shipped
-                      </option>
-
-
-                      <option
-                        value="Delivered"
-                        ${
-                          orderStatus ===
-                          "Delivered"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Delivered
-                      </option>
-
-
-                      <option
-                        value="Cancelled"
-                        ${
-                          orderStatus ===
-                          "Cancelled"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Cancelled
-                      </option>
-
-                    </select>
-
-                  </td>
-
-
-                  <td
-                    class="action-cell"
-                  >
-
-                    <div
-                      class="action-buttons"
-                    >
-
-                      ${cashButton}
-
-
-                      <button
-                        type="button"
-                        class="delete-order-btn"
-                        data-order-number="${escapeHtml(orderNumber)}"
-                        title="Delete Order"
-                      >
-
-                        🗑️ Delete
-
-                      </button>
-
-                    </div>
-
-                  </td>
-
-
-                </tr>
-
-              `;
-
-            }
+    const orders =
+      getOrders();
+
+
+    const updatedOrders =
+      orders.filter(
+        order =>
+          String(
+            order.orderNumber
+          ) !==
+          String(
+            orderNumber
           )
-          .join("");
+      );
 
 
-      /* =========================================
-         STATUS CHANGE LISTENERS
-      ========================================= */
-
-      document
-        .querySelectorAll(
-          ".status-select"
-        )
-        .forEach(
-          select => {
-
-            select.addEventListener(
-              "change",
-              function() {
-
-                const orderNumber =
-                  this.dataset.orderNumber;
+    localStorage.setItem(
+      "shopSphereOrders",
+      JSON.stringify(
+        updatedOrders
+      )
+    );
 
 
-                const newStatus =
-                  this.value;
+    const latestOrderNumber =
+      localStorage.getItem(
+        "shopSphereOrderNumber"
+      );
 
 
-                updateOrderStatus(
-                  orderNumber,
-                  newStatus
-                );
-
-              }
-            );
-
-          }
-        );
-
-
-      /* =========================================
-         CASH RECEIVED LISTENERS
-      ========================================= */
-
-      document
-        .querySelectorAll(
-          ".cash-received-btn"
-        )
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const orderNumber =
-                  this.dataset.cashOrderNumber;
-
-
-                markCashReceived(
-                  orderNumber
-                );
-
-              }
-            );
-
-          }
-        );
-
-
-      /* =========================================
-         DELETE BUTTON LISTENERS
-      ========================================= */
-
-      document
-        .querySelectorAll(
-          ".delete-order-btn"
-        )
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const orderNumber =
-                  this.dataset.orderNumber;
-
-
-                deleteOrder(
-                  orderNumber
-                );
-
-              }
-            );
-
-          }
-        );
-
-    }
-
-
-
-    /* =========================================
-       ESCAPE HTML
-    ========================================= */
-
-    function escapeHtml(
-      value
+    if (
+      String(
+        latestOrderNumber
+      ) ===
+      String(
+        orderNumber
+      )
     ) {
 
-      return String(
-        value
-      )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
+      localStorage.removeItem(
+        "shopSphereOrderNumber"
+      );
+
+
+      localStorage.removeItem(
+        "shopSphereOrderStatus"
+      );
+
+
+      localStorage.removeItem(
+        "shopSpherePaymentStatus"
+      );
+
+
+      localStorage.removeItem(
+        "shopSpherePaymentTime"
       );
 
     }
 
 
-
-    /* =========================================
-       LOAD PRODUCT COUNT FROM SUPABASE
-    ========================================= */
-
-    async function loadProductCount() {
-
-      if (!SUPABASE_KEY) {
-
-        document.getElementById(
-          "totalProducts"
-        ).textContent =
-          "4";
-
-        return;
-
-      }
+    showDashboardMessage(
+      `Order #${orderNumber} deleted successfully.`
+    );
 
 
-      try {
+    refreshCurrentOrders();
 
-        const response =
-          await fetch(
-            `${SUPABASE_URL}/rest/v1/products?select=id`,
-            {
-              method: "GET",
-
-              headers: {
-
-                "apikey":
-                  SUPABASE_KEY,
-
-                "Authorization":
-                  `Bearer ${SUPABASE_KEY}`
-
-              }
-
-            }
-          );
+  }
 
 
-        if (!response.ok) {
 
-          throw new Error(
-            "Supabase request failed"
-          );
+  // =========================================
+  // DISPLAY ORDERS
+  // =========================================
+
+  function displayRecentOrders(
+    orders,
+    limitRecent = true
+  ) {
+
+    const table =
+      document.getElementById(
+        "ordersTable"
+      );
+
+
+    if (
+      !orders.length
+    ) {
+
+      table.innerHTML = `
+
+        <tr>
+
+          <td
+            colspan="6"
+            class="empty-row"
+          >
+
+            No matching orders found.
+
+          </td>
+
+        </tr>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    const sortedOrders =
+      [...orders].sort(
+        (a, b) => {
+
+          const dateA =
+            new Date(
+              a.createdAt ||
+              a.paymentTime ||
+              0
+            );
+
+
+          const dateB =
+            new Date(
+              b.createdAt ||
+              b.paymentTime ||
+              0
+            );
+
+
+          return dateB - dateA;
 
         }
+      );
 
 
-        const products =
-          await response.json();
-
-
-        document.getElementById(
-          "totalProducts"
-        ).textContent =
-          Array.isArray(
-            products
+    const displayOrders =
+      limitRecent
+        ? sortedOrders.slice(
+            0,
+            10
           )
-            ? products.length
-            : 0;
-
-      } catch (error) {
-
-        console.error(
-          "Product count error:",
-          error
-        );
+        : sortedOrders;
 
 
-        document.getElementById(
-          "totalProducts"
-        ).textContent =
-          "4";
-
-      }
-
-    }
-
-
-
-    /* =========================================
-       EXPORT ORDERS TO EXCEL
-    ========================================= */
-
-    function exportOrdersToExcel() {
-
-      const orders =
-        getOrders();
-
-
-      if (
-        !orders.length
-      ) {
-
-        alert(
-          "There are no orders to export yet."
-        );
-
-        return;
-
-      }
-
-
-      const excelData =
-        orders.map(
+    table.innerHTML =
+      displayOrders
+        .map(
           order => {
 
             const customer =
               order.customer || {};
 
 
-            const products =
-              Array.isArray(
-                order.products
-              )
-                ? order.products
-                : [];
+            const orderNumber =
+              order.orderNumber ||
+              "N/A";
 
 
-            const productText =
-              products
-                .map(
-                  item => {
-
-                    const name =
-                      item.name ||
-                      "Product";
-
-
-                    const quantity =
-                      Number(
-                        item.quantity || 1
-                      );
-
-
-                    const price =
-                      Number(
-                        item.price || 0
-                      );
-
-
-                    return `${name} x${quantity} - TSh ${price.toLocaleString()}`;
-
-                  }
-                )
-                .join(" | ");
+            const customerName =
+              customer.fullName ||
+              "Customer";
 
 
             const total =
@@ -2606,200 +2932,928 @@
               );
 
 
-            return {
+            const paymentStatus =
+              order.paymentStatus ||
+              "PAID";
 
-              "Order Number":
-                order.orderNumber ||
-                "",
 
-              "Customer":
-                customer.fullName ||
-                "",
+            const orderStatus =
+              order.orderStatus ||
+              "Processing";
 
-              "Phone":
-                customer.phone ||
-                "",
 
-              "Email":
-                customer.email ||
-                "",
+            const paymentMethod =
+              order.paymentMethod ||
+              "Not specified";
 
-              "Delivery Address":
-                customer.address ||
-                "",
 
-              "Products":
-                productText,
+            const cleanPaymentStatus =
+              String(
+                paymentStatus
+              )
+              .toUpperCase()
+              .trim();
 
-              "Total":
-                total,
 
-              "Payment Method":
-                order.paymentMethod ||
-                "",
+            const isCOD =
+              paymentMethod ===
+              "Cash on Delivery";
 
-              "Payment Status":
-                order.paymentStatus ||
-                "",
 
-              "Order Status":
-                order.orderStatus ||
-                "",
+            const isUnpaid =
+              cleanPaymentStatus ===
+              "UNPAID";
 
-              "Order Date":
-                order.createdAt ||
-                "",
 
-              "Payment Date":
-                order.paymentTime ||
-                "",
+            let cashButton = "";
 
-              "Notes":
-                customer.notes ||
-                ""
 
-            };
+            if (
+              isCOD &&
+              isUnpaid
+            ) {
+
+              cashButton = `
+
+                <button
+                  type="button"
+                  class="cash-received-btn"
+                  data-cash-order-number="${escapeHtml(orderNumber)}"
+                >
+                  💵 Cash Received
+                </button>
+
+              `;
+
+            }
+
+
+            return `
+
+              <tr>
+
+
+                <td>
+
+                  <strong>
+                    #${escapeHtml(orderNumber)}
+                  </strong>
+
+                </td>
+
+
+                <td>
+
+                  ${escapeHtml(
+                    customerName
+                  )}
+
+                </td>
+
+
+                <td>
+
+                  ${formatMoney(
+                    total
+                  )}
+
+                </td>
+
+
+                <td>
+
+                  <span
+                    class="status ${getStatusClass(paymentStatus)}"
+                  >
+
+                    ${escapeHtml(
+                      paymentStatus
+                    )}
+
+                  </span>
+
+
+                  <span
+                    class="payment-method-small"
+                  >
+
+                    ${escapeHtml(
+                      paymentMethod
+                    )}
+
+                  </span>
+
+                </td>
+
+
+                <td
+                  class="status-cell"
+                >
+
+                  <select
+                    class="status-select"
+                    data-order-number="${escapeHtml(orderNumber)}"
+                    aria-label="Change order status"
+                  >
+
+                    <option
+                      value="Pending"
+                      ${
+                        orderStatus ===
+                        "Pending"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Pending
+                    </option>
+
+
+                    <option
+                      value="Processing"
+                      ${
+                        orderStatus ===
+                        "Processing"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Processing
+                    </option>
+
+
+                    <option
+                      value="Shipped"
+                      ${
+                        orderStatus ===
+                        "Shipped"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Shipped
+                    </option>
+
+
+                    <option
+                      value="Delivered"
+                      ${
+                        orderStatus ===
+                        "Delivered"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Delivered
+                    </option>
+
+
+                    <option
+                      value="Cancelled"
+                      ${
+                        orderStatus ===
+                        "Cancelled"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      Cancelled
+                    </option>
+
+                  </select>
+
+                </td>
+
+
+                <td
+                  class="action-cell"
+                >
+
+                  <div
+                    class="action-buttons"
+                  >
+
+                    ${cashButton}
+
+
+                    <button
+                      type="button"
+                      class="delete-order-btn"
+                      data-order-number="${escapeHtml(orderNumber)}"
+                      title="Delete Order"
+                    >
+
+                      🗑️ Delete
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            `;
+
+          }
+        )
+        .join("");
+
+
+    // STATUS LISTENERS
+
+    document
+      .querySelectorAll(
+        ".status-select"
+      )
+      .forEach(
+        select => {
+
+          select.addEventListener(
+            "change",
+            function() {
+
+              const orderNumber =
+                this.dataset.orderNumber;
+
+
+              const newStatus =
+                this.value;
+
+
+              updateOrderStatus(
+                orderNumber,
+                newStatus
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    // CASH LISTENERS
+
+    document
+      .querySelectorAll(
+        ".cash-received-btn"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const orderNumber =
+                this.dataset.cashOrderNumber;
+
+
+              markCashReceived(
+                orderNumber
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    // DELETE LISTENERS
+
+    document
+      .querySelectorAll(
+        ".delete-order-btn"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const orderNumber =
+                this.dataset.orderNumber;
+
+
+              deleteOrder(
+                orderNumber
+              );
+
+            }
+          );
+
+        }
+      );
+
+  }
+
+
+
+  // =========================================
+  // REFRESH CURRENT VIEW
+  // =========================================
+
+  function refreshCurrentOrders() {
+
+    const searchOrderNumber =
+      document.getElementById(
+        "searchOrderNumber"
+      ).value.trim();
+
+
+    const searchCustomer =
+      document.getElementById(
+        "searchCustomer"
+      ).value.trim();
+
+
+    const searchPhone =
+      document.getElementById(
+        "searchPhone"
+      ).value.trim();
+
+
+    const searchEmail =
+      document.getElementById(
+        "searchEmail"
+      ).value.trim();
+
+
+    const searchAddress =
+      document.getElementById(
+        "searchAddress"
+      ).value.trim();
+
+
+    const searchProduct =
+      document.getElementById(
+        "searchProduct"
+      ).value.trim();
+
+
+    const searchPaymentMethod =
+      document.getElementById(
+        "searchPaymentMethod"
+      ).value;
+
+
+    const searchPaymentStatus =
+      document.getElementById(
+        "searchPaymentStatus"
+      ).value;
+
+
+    const searchOrderStatus =
+      document.getElementById(
+        "searchOrderStatus"
+      ).value;
+
+
+    const searchDate =
+      document.getElementById(
+        "searchDate"
+      ).value;
+
+
+    const hasSearch =
+      searchOrderNumber ||
+      searchCustomer ||
+      searchPhone ||
+      searchEmail ||
+      searchAddress ||
+      searchProduct ||
+      searchPaymentMethod ||
+      searchPaymentStatus ||
+      searchOrderStatus ||
+      searchDate;
+
+
+    if (hasSearch) {
+
+      performOrderSearch();
+
+    } else {
+
+      loadDashboard();
+
+    }
+
+  }
+
+
+
+  // =========================================
+  // ESCAPE HTML
+  // =========================================
+
+  function escapeHtml(
+    value
+  ) {
+
+    return String(
+      value
+    )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+  }
+
+
+
+  // =========================================
+  // PRODUCT COUNT
+  // =========================================
+
+  async function loadProductCount() {
+
+    if (!SUPABASE_KEY) {
+
+      document.getElementById(
+        "totalProducts"
+      ).textContent =
+        "4";
+
+      return;
+
+    }
+
+
+    try {
+
+      const response =
+        await fetch(
+          `${SUPABASE_URL}/rest/v1/products?select=id`,
+          {
+            method: "GET",
+
+            headers: {
+
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                `Bearer ${SUPABASE_KEY}`
+
+            }
 
           }
         );
 
 
-      const worksheet =
-        XLSX.utils.json_to_sheet(
-          excelData
+      if (!response.ok) {
+
+        throw new Error(
+          "Supabase request failed"
         );
 
-
-      worksheet["!cols"] = [
-
-        { wch: 16 },
-        { wch: 24 },
-        { wch: 16 },
-        { wch: 30 },
-        { wch: 35 },
-        { wch: 55 },
-        { wch: 16 },
-        { wch: 22 },
-        { wch: 18 },
-        { wch: 18 },
-        { wch: 25 },
-        { wch: 25 },
-        { wch: 35 }
-
-      ];
+      }
 
 
-      const workbook =
-        XLSX.utils.book_new();
+      const products =
+        await response.json();
 
 
-      XLSX.utils.book_append_sheet(
-        workbook,
-        worksheet,
-        "Orders"
+      document.getElementById(
+        "totalProducts"
+      ).textContent =
+        Array.isArray(
+          products
+        )
+          ? products.length
+          : 0;
+
+
+    } catch (error) {
+
+      console.error(
+        "Product count error:",
+        error
       );
 
 
-      XLSX.writeFile(
-        workbook,
-        "ShopSphere_Orders.xlsx"
-      );
+      document.getElementById(
+        "totalProducts"
+      ).textContent =
+        "4";
+
+    }
+
+  }
 
 
-      showDashboardMessage(
-        "Orders exported to Excel successfully."
+
+  // =========================================
+  // EXPORT ORDERS TO EXCEL
+  // =========================================
+
+  function exportOrdersToExcel() {
+
+    const orders =
+      getOrders();
+
+
+    if (
+      !orders.length
+    ) {
+
+      alert(
+        "There are no orders to export yet."
       );
+
+      return;
 
     }
 
 
+    const excelData =
+      orders.map(
+        order => {
 
-    /* =========================================
-       LOAD DASHBOARD
-    ========================================= */
-
-    async function loadDashboard() {
-
-      const orders =
-        getOrders();
+          const customer =
+            order.customer || {};
 
 
-      document.getElementById(
-        "totalOrders"
-      ).textContent =
-        orders.length;
+          const products =
+            Array.isArray(
+              order.products
+            )
+              ? order.products
+              : [];
 
 
-      document.getElementById(
-        "totalCustomers"
-      ).textContent =
-        getUniqueCustomers(
-          orders
-        );
+          const productText =
+            products
+              .map(
+                item => {
+
+                  const name =
+                    item.name ||
+                    "Product";
 
 
-      document.getElementById(
-        "totalSales"
-      ).textContent =
-        formatMoney(
-          getTotalSales(
-            orders
-          )
-        );
+                  const quantity =
+                    Number(
+                      item.quantity || 1
+                    );
 
 
-      displayRecentOrders(
+                  const price =
+                    Number(
+                      item.price || 0
+                    );
+
+
+                  return `${name} x${quantity} - TSh ${price.toLocaleString()}`;
+
+                }
+              )
+              .join(
+                " | "
+              );
+
+
+          const total =
+            getOrderTotal(
+              order
+            );
+
+
+          return {
+
+            "Order Number":
+              order.orderNumber ||
+              "",
+
+            "Customer":
+              customer.fullName ||
+              "",
+
+            "Phone":
+              customer.phone ||
+              "",
+
+            "Email":
+              customer.email ||
+              "",
+
+            "Delivery Address":
+              customer.address ||
+              "",
+
+            "Products":
+              productText,
+
+            "Total":
+              total,
+
+            "Payment Method":
+              order.paymentMethod ||
+              "",
+
+            "Payment Status":
+              order.paymentStatus ||
+              "",
+
+            "Order Status":
+              order.orderStatus ||
+              "",
+
+            "Order Date":
+              order.createdAt ||
+              "",
+
+            "Payment Date":
+              order.paymentTime ||
+              "",
+
+            "Notes":
+              customer.notes ||
+              ""
+
+          };
+
+        }
+      );
+
+
+    const worksheet =
+      XLSX.utils.json_to_sheet(
+        excelData
+      );
+
+
+    worksheet["!cols"] = [
+
+      { wch: 30 },
+      { wch: 24 },
+      { wch: 18 },
+      { wch: 30 },
+      { wch: 35 },
+      { wch: 55 },
+      { wch: 16 },
+      { wch: 22 },
+      { wch: 18 },
+      { wch: 18 },
+      { wch: 25 },
+      { wch: 25 },
+      { wch: 35 }
+
+    ];
+
+
+    const workbook =
+      XLSX.utils.book_new();
+
+
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      "Orders"
+    );
+
+
+    XLSX.writeFile(
+      workbook,
+      "ShopSphere_Orders.xlsx"
+    );
+
+
+    showDashboardMessage(
+      "Orders exported to Excel successfully."
+    );
+
+  }
+
+
+
+  // =========================================
+  // LOAD DASHBOARD
+  // =========================================
+
+  async function loadDashboard() {
+
+    const orders =
+      getOrders();
+
+
+    document.getElementById(
+      "totalOrders"
+    ).textContent =
+      orders.length;
+
+
+    document.getElementById(
+      "totalCustomers"
+    ).textContent =
+      getUniqueCustomers(
         orders
       );
 
 
-      await loadProductCount();
-
-    }
-
-
-
-    /* =========================================
-       INITIAL LOAD
-    ========================================= */
-
-    loadDashboard();
+    document.getElementById(
+      "totalSales"
+    ).textContent =
+      formatMoney(
+        getTotalSales(
+          orders
+        )
+      );
 
 
-
-    /* =========================================
-       AUTO REFRESH
-    ========================================= */
-
-    setInterval(
-      loadDashboard,
-      5000
+    displayRecentOrders(
+      orders,
+      true
     );
 
 
+    document.getElementById(
+      "searchResultCount"
+    ).textContent =
+      `Showing ${Math.min(orders.length, 10)} recent of ${orders.length} order${orders.length === 1 ? "" : "s"}`;
 
-    /* =========================================
-       STORAGE LISTENER
-    ========================================= */
 
-    window.addEventListener(
-      "storage",
-      function(event) {
+    await loadProductCount();
 
-        if (
-          event.key ===
-          "shopSphereOrders"
-        ) {
+  }
 
-          loadDashboard();
 
-        }
+
+  // =========================================
+  // INITIAL LOAD
+  // =========================================
+
+  loadDashboard();
+
+
+
+  // =========================================
+  // AUTO REFRESH
+  // =========================================
+
+  setInterval(
+    function() {
+
+      const searchOrderNumber =
+        document.getElementById(
+          "searchOrderNumber"
+        ).value.trim();
+
+
+      const searchCustomer =
+        document.getElementById(
+          "searchCustomer"
+        ).value.trim();
+
+
+      const searchPhone =
+        document.getElementById(
+          "searchPhone"
+        ).value.trim();
+
+
+      const searchEmail =
+        document.getElementById(
+          "searchEmail"
+        ).value.trim();
+
+
+      const searchAddress =
+        document.getElementById(
+          "searchAddress"
+        ).value.trim();
+
+
+      const searchProduct =
+        document.getElementById(
+          "searchProduct"
+        ).value.trim();
+
+
+      const searchPaymentMethod =
+        document.getElementById(
+          "searchPaymentMethod"
+        ).value;
+
+
+      const searchPaymentStatus =
+        document.getElementById(
+          "searchPaymentStatus"
+        ).value;
+
+
+      const searchOrderStatus =
+        document.getElementById(
+          "searchOrderStatus"
+        ).value;
+
+
+      const searchDate =
+        document.getElementById(
+          "searchDate"
+        ).value;
+
+
+      const hasSearch =
+        searchOrderNumber ||
+        searchCustomer ||
+        searchPhone ||
+        searchEmail ||
+        searchAddress ||
+        searchProduct ||
+        searchPaymentMethod ||
+        searchPaymentStatus ||
+        searchOrderStatus ||
+        searchDate;
+
+
+      if (!hasSearch) {
+
+        loadDashboard();
+
+      }
+
+    },
+    5000
+  );
+
+
+
+  // =========================================
+  // STORAGE LISTENER
+  // =========================================
+
+  window.addEventListener(
+    "storage",
+    function(event) {
+
+      if (
+        event.key ===
+        "shopSphereOrders"
+      ) {
+
+        refreshCurrentOrders();
+
+      }
+
+    }
+  );
+
+
+
+  // =========================================
+  // ENTER KEY SEARCH
+  // =========================================
+
+  document
+    .querySelectorAll(
+      ".search-field input"
+    )
+    .forEach(
+      input => {
+
+        input.addEventListener(
+          "keydown",
+          function(event) {
+
+            if (
+              event.key ===
+              "Enter"
+            ) {
+
+              performOrderSearch();
+
+            }
+
+          }
+        );
 
       }
     );
 
 
-  </script>
+</script>
+
 
 </body>
 </html>
