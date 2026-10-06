@@ -12,6 +12,21 @@
   <title>Admin Dashboard | ShopSphere</title>
 
   <!-- =========================================
+       ADMIN LOGIN PROTECTION
+  ========================================= -->
+
+  <script>
+    const ADMIN_SESSION_KEY = "shopSphereAdminLoggedIn";
+
+    if (
+      sessionStorage.getItem(ADMIN_SESSION_KEY) !== "true"
+    ) {
+      window.location.replace("admin-login.html");
+    }
+  </script>
+
+
+  <!-- =========================================
        SHEETJS - EXCEL EXPORT
   ========================================= -->
 
@@ -105,11 +120,18 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #e5e7eb;
+      gap: 20px;
     }
 
     .topbar h1 {
       font-size: 24px;
       color: #111827;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
     .admin-user {
@@ -132,6 +154,33 @@
 
     .admin-name {
       font-weight: bold;
+    }
+
+
+    /* =========================================
+       LOGOUT BUTTON
+    ========================================= */
+
+    .logout-btn {
+      border: none;
+      background: #dc2626;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    .logout-btn:hover {
+      background: #b91c1c;
+      transform: translateY(-1px);
+    }
+
+    .logout-btn:active {
+      transform: translateY(0);
     }
 
 
@@ -601,14 +650,24 @@
 
       .topbar {
         padding: 15px;
+        gap: 10px;
       }
 
       .topbar h1 {
         font-size: 19px;
       }
 
+      .topbar-right {
+        gap: 8px;
+      }
+
       .admin-name {
         display: none;
+      }
+
+      .logout-btn {
+        padding: 9px 10px;
+        font-size: 11px;
       }
 
       .content {
@@ -740,15 +799,28 @@
       </h1>
 
 
-      <div class="admin-user">
+      <div class="topbar-right">
 
-        <div class="admin-avatar">
-          A
+        <div class="admin-user">
+
+          <div class="admin-avatar">
+            A
+          </div>
+
+          <div class="admin-name">
+            Administrator
+          </div>
+
         </div>
 
-        <div class="admin-name">
-          Administrator
-        </div>
+
+        <button
+          type="button"
+          class="logout-btn"
+          onclick="adminLogout()"
+        >
+          🚪 Logout
+        </button>
 
       </div>
 
@@ -1167,6 +1239,10 @@
       SHOPSPHERE ADMIN DASHBOARD
       =========================================
 
+      Admin:
+      - Login protection
+      - Logout
+
       Products:
       - Supabase
 
@@ -1182,6 +1258,40 @@
       - Export orders to Excel
     */
 
+
+    /* =========================================
+       ADMIN LOGOUT
+    ========================================= */
+
+    function adminLogout() {
+
+      const confirmed =
+        confirm(
+          "Are you sure you want to logout?"
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      sessionStorage.removeItem(
+        "shopSphereAdminLoggedIn"
+      );
+
+
+      window.location.replace(
+        "admin-login.html"
+      );
+
+    }
+
+
+
+    /* =========================================
+       SUPABASE
+    ========================================= */
 
     const SUPABASE_URL =
       "https://ienquzigbawhvthnirtj.supabase.co";
@@ -1550,15 +1660,11 @@
       }
 
 
-      /* Update order */
-
       orders[
         orderIndex
       ].orderStatus =
         newStatus;
 
-
-      /* Save orders */
 
       localStorage.setItem(
         "shopSphereOrders",
@@ -1567,8 +1673,6 @@
         )
       );
 
-
-      /* Update latest order status */
 
       const latestOrderNumber =
         localStorage.getItem(
@@ -1662,8 +1766,6 @@
         .trim();
 
 
-      /* Check payment method */
-
       if (
         paymentMethod !==
         "Cash on Delivery"
@@ -1677,8 +1779,6 @@
 
       }
 
-
-      /* Check payment status */
 
       if (
         paymentStatus === "PAID" ||
@@ -1714,10 +1814,6 @@
       }
 
 
-      /* =========================================
-         UPDATE PAYMENT
-      ========================================= */
-
       const paymentTime =
         new Date().toISOString();
 
@@ -1734,8 +1830,6 @@
         paymentTime;
 
 
-      /* Keep existing order status */
-
       if (
         !orders[
           orderIndex
@@ -1750,8 +1844,6 @@
       }
 
 
-      /* Save */
-
       localStorage.setItem(
         "shopSphereOrders",
         JSON.stringify(
@@ -1759,10 +1851,6 @@
         )
       );
 
-
-      /* =========================================
-         UPDATE LATEST ORDER PAYMENT
-      ========================================= */
 
       const latestOrderNumber =
         localStorage.getItem(
@@ -1857,12 +1945,6 @@
       );
 
 
-      /*
-        If the deleted order is the latest
-        tracked order, clear the latest
-        tracking information.
-      */
-
       const latestOrderNumber =
         localStorage.getItem(
           "shopSphereOrderNumber"
@@ -1949,10 +2031,6 @@
       }
 
 
-      /* =========================================
-         SORT NEWEST FIRST
-      ========================================= */
-
       const sortedOrders =
         [...orders].sort(
           (a, b) => {
@@ -1978,10 +2056,6 @@
           }
         );
 
-
-      /* =========================================
-         SHOW LATEST 10
-      ========================================= */
 
       const recentOrders =
         sortedOrders.slice(
@@ -2051,11 +2125,6 @@
               let cashButton = "";
 
 
-              /*
-                Show Cash Received only for:
-                Cash on Delivery + UNPAID
-              */
-
               if (
                 isCOD &&
                 isUnpaid
@@ -2080,9 +2149,6 @@
 
                 <tr>
 
-
-                  <!-- ORDER -->
-
                   <td>
 
                     <strong>
@@ -2091,8 +2157,6 @@
 
                   </td>
 
-
-                  <!-- CUSTOMER -->
 
                   <td>
 
@@ -2103,8 +2167,6 @@
                   </td>
 
 
-                  <!-- AMOUNT -->
-
                   <td>
 
                     ${formatMoney(
@@ -2113,8 +2175,6 @@
 
                   </td>
 
-
-                  <!-- PAYMENT -->
 
                   <td>
 
@@ -2141,8 +2201,6 @@
 
                   </td>
 
-
-                  <!-- ORDER STATUS -->
 
                   <td
                     class="status-cell"
@@ -2222,8 +2280,6 @@
 
                   </td>
 
-
-                  <!-- ACTION -->
 
                   <td
                     class="action-cell"
@@ -2499,10 +2555,6 @@
       }
 
 
-      /* =========================================
-         PREPARE EXCEL DATA
-      ========================================= */
-
       const excelData =
         orders.map(
           order => {
@@ -2612,80 +2664,30 @@
         );
 
 
-      /* =========================================
-         CREATE WORKSHEET
-      ========================================= */
-
       const worksheet =
         XLSX.utils.json_to_sheet(
           excelData
         );
 
 
-      /* =========================================
-         COLUMN WIDTHS
-      ========================================= */
-
       worksheet["!cols"] = [
 
-        {
-          wch: 16
-        },
-
-        {
-          wch: 24
-        },
-
-        {
-          wch: 16
-        },
-
-        {
-          wch: 30
-        },
-
-        {
-          wch: 35
-        },
-
-        {
-          wch: 55
-        },
-
-        {
-          wch: 16
-        },
-
-        {
-          wch: 22
-        },
-
-        {
-          wch: 18
-        },
-
-        {
-          wch: 18
-        },
-
-        {
-          wch: 25
-        },
-
-        {
-          wch: 25
-        },
-
-        {
-          wch: 35
-        }
+        { wch: 16 },
+        { wch: 24 },
+        { wch: 16 },
+        { wch: 30 },
+        { wch: 35 },
+        { wch: 55 },
+        { wch: 16 },
+        { wch: 22 },
+        { wch: 18 },
+        { wch: 18 },
+        { wch: 25 },
+        { wch: 25 },
+        { wch: 35 }
 
       ];
 
-
-      /* =========================================
-         CREATE WORKBOOK
-      ========================================= */
 
       const workbook =
         XLSX.utils.book_new();
@@ -2697,10 +2699,6 @@
         "Orders"
       );
 
-
-      /* =========================================
-         DOWNLOAD
-      ========================================= */
 
       XLSX.writeFile(
         workbook,
@@ -2726,19 +2724,11 @@
         getOrders();
 
 
-      /* =========================================
-         TOTAL ORDERS
-      ========================================= */
-
       document.getElementById(
         "totalOrders"
       ).textContent =
         orders.length;
 
-
-      /* =========================================
-         TOTAL CUSTOMERS
-      ========================================= */
 
       document.getElementById(
         "totalCustomers"
@@ -2747,10 +2737,6 @@
           orders
         );
 
-
-      /* =========================================
-         TOTAL SALES
-      ========================================= */
 
       document.getElementById(
         "totalSales"
@@ -2762,18 +2748,10 @@
         );
 
 
-      /* =========================================
-         RECENT ORDERS
-      ========================================= */
-
       displayRecentOrders(
         orders
       );
 
-
-      /* =========================================
-         PRODUCT COUNT
-      ========================================= */
 
       await loadProductCount();
 
