@@ -113,6 +113,72 @@
       color: #dc2626;
     }
 
+    /* PAYMENT METHOD */
+
+    .payment-method-box {
+      margin-top: 8px;
+      padding: 18px;
+      border: 1px solid #d9dee8;
+      border-radius: 14px;
+      background: #fafbff;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid #e1e5ec;
+      border-radius: 12px;
+      background: white;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .payment-option:last-child {
+      margin-bottom: 0;
+    }
+
+    .payment-option:hover {
+      border-color: #4f46e5;
+      background: #f8f8ff;
+    }
+
+    .payment-option input[type="radio"] {
+      width: auto;
+      margin-top: 3px;
+      accent-color: #4f46e5;
+      cursor: pointer;
+    }
+
+    .payment-option-content {
+      flex: 1;
+    }
+
+    .payment-option-title {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .payment-option-description {
+      color: #667085;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .cod-note {
+      display: none;
+      margin-top: 12px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #ecfdf3;
+      color: #067647;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
     .summary-item {
       display: flex;
       justify-content: space-between;
@@ -487,9 +553,130 @@ function renderCheckout() {
           </div>
 
 
+          <!-- PAYMENT METHOD -->
+
+          <div class="form-group">
+
+            <label>
+              Payment Method <span class="required">*</span>
+            </label>
+
+
+            <div class="payment-method-box">
+
+
+              <label class="payment-option">
+
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Mobile Money"
+                  checked>
+
+                <div class="payment-option-content">
+
+                  <div class="payment-option-title">
+                    📱 Mobile Money
+                  </div>
+
+                  <div class="payment-option-description">
+                    Pay using M-Pesa, Airtel Money, Tigo Pesa,
+                    Halopesa or another supported mobile wallet.
+                  </div>
+
+                </div>
+
+              </label>
+
+
+              <label class="payment-option">
+
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Card Payment">
+
+                <div class="payment-option-content">
+
+                  <div class="payment-option-title">
+                    💳 Card Payment
+                  </div>
+
+                  <div class="payment-option-description">
+                    Pay securely using your debit or credit card.
+                  </div>
+
+                </div>
+
+              </label>
+
+
+              <label class="payment-option">
+
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Bank Payment">
+
+                <div class="payment-option-content">
+
+                  <div class="payment-option-title">
+                    🏦 Bank Payment
+                  </div>
+
+                  <div class="payment-option-description">
+                    Pay using a bank transfer or bank payment.
+                  </div>
+
+                </div>
+
+              </label>
+
+
+              <label class="payment-option">
+
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Cash on Delivery">
+
+                <div class="payment-option-content">
+
+                  <div class="payment-option-title">
+                    💵 Cash on Delivery
+                  </div>
+
+                  <div class="payment-option-description">
+                    Pay when you receive your order.
+                    No online payment is required now.
+                  </div>
+
+                </div>
+
+              </label>
+
+
+              <div
+                id="codNote"
+                class="cod-note">
+
+                💵 <strong>Cash on Delivery selected.</strong><br>
+
+                You will pay the order amount when your
+                order is delivered or when you collect it.
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
           <button
             type="submit"
-            class="place-order">
+            class="place-order"
+            id="continueButton">
 
             Continue to Payment
 
@@ -561,8 +748,8 @@ function renderCheckout() {
 
         <div class="payment-note">
 
-          🔒 Your order will be reviewed before payment
-          is completed.
+          🔒 Your order information is saved securely
+          before proceeding to payment.
 
         </div>
 
@@ -577,6 +764,45 @@ function renderCheckout() {
   document
     .getElementById("checkoutForm")
     .addEventListener("submit", handleCheckout);
+
+
+  // SHOW / HIDE COD MESSAGE
+
+  const paymentOptions =
+    document.querySelectorAll(
+      'input[name="paymentMethod"]'
+    );
+
+  const codNote =
+    document.getElementById("codNote");
+
+  const continueButton =
+    document.getElementById("continueButton");
+
+
+  paymentOptions.forEach(option => {
+
+    option.addEventListener("change", function() {
+
+      if (this.value === "Cash on Delivery") {
+
+        codNote.style.display = "block";
+
+        continueButton.textContent =
+          "Continue with Cash on Delivery";
+
+      } else {
+
+        codNote.style.display = "none";
+
+        continueButton.textContent =
+          "Continue to Payment";
+
+      }
+
+    });
+
+  });
 
 }
 
@@ -602,6 +828,18 @@ function handleCheckout(event) {
     document.getElementById("notes").value.trim();
 
 
+  const selectedPayment =
+    document.querySelector(
+      'input[name="paymentMethod"]:checked'
+    );
+
+
+  const paymentMethod =
+    selectedPayment
+      ? selectedPayment.value
+      : "Mobile Money";
+
+
   const customerData = {
 
     fullName,
@@ -609,6 +847,8 @@ function handleCheckout(event) {
     email,
     address,
     notes,
+
+    paymentMethod,
 
     createdAt:
       new Date().toISOString()
@@ -620,6 +860,22 @@ function handleCheckout(event) {
     "shopSphereCustomer",
     JSON.stringify(customerData)
   );
+
+
+  // SAVE SELECTED PAYMENT METHOD
+
+  localStorage.setItem(
+    "shopSpherePaymentMethod",
+    paymentMethod
+  );
+
+
+  document.getElementById(
+    "successMessage"
+  ).textContent =
+    paymentMethod === "Cash on Delivery"
+      ? "Order information saved. Preparing your Cash on Delivery order..."
+      : "Information saved. Preparing payment...";
 
 
   document.getElementById(
