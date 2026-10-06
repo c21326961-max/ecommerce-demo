@@ -22,19 +22,33 @@
     href="https://c21326961-max.github.io/ecommerce-demo/product.html"
   >
 
-  <meta property="og:title" content="Product Details — ShopSphere">
+  <meta
+    property="og:title"
+    content="Product Details — ShopSphere"
+  >
+
   <meta
     property="og:description"
     content="View product details and purchase on ShopSphere."
   >
+
   <meta property="og:type" content="website">
+
   <meta
     property="og:url"
     content="https://c21326961-max.github.io/ecommerce-demo/product.html"
   >
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Product Details — ShopSphere">
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Product Details — ShopSphere"
+  >
+
   <meta
     name="twitter:description"
     content="View product details and purchase on ShopSphere."
@@ -42,32 +56,27 @@
 
   <title>Product Details — ShopSphere</title>
 
-  <!-- Performance -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://ienquzigbawhvthnirtj.supabase.co">
+  <link
+    rel="preconnect"
+    href="https://cdn.jsdelivr.net"
+  >
 
-  <!-- Supabase -->
+  <link
+    rel="preconnect"
+    href="https://ienquzigbawhvthnirtj.supabase.co"
+  >
+
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
     defer
   ></script>
 
   <style>
-    /* ================================
-       RESET
-    ================================= */
-
-    *,
-    *::before,
-    *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
-    /* ================================
-       ROOT
-    ================================= */
 
     :root {
       --primary: #2563eb;
@@ -78,25 +87,16 @@
       --border: #e4e7ec;
       --background: #f5f7fb;
       --white: #ffffff;
-
       --success: #15803d;
       --success-bg: #dcfce7;
-
       --error: #b42318;
       --error-bg: #fee4e2;
-
       --warning: #92400e;
       --warning-bg: #fef3c7;
-
       --radius: 18px;
-
       --shadow:
         0 12px 35px rgba(16, 24, 40, 0.08);
     }
-
-    /* ================================
-       BODY
-    ================================= */
 
     html {
       scroll-behavior: smooth;
@@ -123,25 +123,26 @@
       overflow: hidden;
     }
 
-    /* ================================
-       ACCESSIBILITY
-    ================================= */
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
 
     .skip-link {
       position: fixed;
       top: -100px;
       left: 16px;
       z-index: 9999;
-
       background: white;
       color: var(--dark);
-
       padding: 12px 16px;
       border-radius: 10px;
-
       text-decoration: none;
       font-weight: 700;
-
       box-shadow: var(--shadow);
     }
 
@@ -154,22 +155,16 @@
       outline-offset: 3px;
     }
 
-    /* ================================
-       NAVBAR
-    ================================= */
+    /* NAVBAR */
 
     .navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-
       background: rgba(17, 24, 39, 0.97);
-
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-
       color: white;
-
       border-bottom:
         1px solid rgba(255, 255, 255, 0.08);
     }
@@ -177,23 +172,18 @@
     .nav-inner {
       width: min(1180px, 92%);
       min-height: 72px;
-
       margin: auto;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       gap: 20px;
     }
 
     .logo {
       color: white;
       text-decoration: none;
-
       font-size: 24px;
       font-weight: 900;
-
       letter-spacing: -0.5px;
       white-space: nowrap;
     }
@@ -211,13 +201,10 @@
     .nav-links a {
       color: #dbeafe;
       text-decoration: none;
-
       padding: 10px 12px;
       border-radius: 10px;
-
       font-size: 14px;
       font-weight: 600;
-
       transition:
         background 0.2s ease,
         color 0.2s ease;
@@ -231,9 +218,7 @@
     .cart-link {
       background: var(--primary);
       color: white !important;
-
       padding: 10px 15px !important;
-
       box-shadow:
         0 6px 16px rgba(37, 99, 235, 0.25);
     }
@@ -244,28 +229,19 @@
 
     .menu-button {
       display: none;
-
       width: 44px;
       height: 44px;
-
       border:
         1px solid rgba(255, 255, 255, 0.12);
-
       border-radius: 10px;
-
       background:
         rgba(255, 255, 255, 0.06);
-
       color: white;
-
       cursor: pointer;
-
       font-size: 22px;
     }
 
-    /* ================================
-       MAIN
-    ================================= */
+    /* MAIN */
 
     main {
       min-height: calc(100vh - 72px);
@@ -273,30 +249,19 @@
 
     .container {
       width: min(1180px, 92%);
-
       margin: 0 auto;
-
-      padding:
-        38px
-        0
-        70px;
+      padding: 38px 0 70px;
     }
 
-    /* ================================
-       BREADCRUMB
-    ================================= */
+    /* BREADCRUMB */
 
     .breadcrumb {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-
       gap: 8px;
-
       margin-bottom: 25px;
-
       color: var(--muted);
-
       font-size: 14px;
     }
 
@@ -310,43 +275,28 @@
       text-decoration: underline;
     }
 
-    .breadcrumb-separator {
-      color: #98a2b3;
-    }
-
-    /* ================================
-       LOADING
-    ================================= */
+    /* LOADING */
 
     .loading {
       min-height: 420px;
-
       display: flex;
       flex-direction: column;
-
       align-items: center;
       justify-content: center;
-
       text-align: center;
-
       color: var(--muted);
     }
 
     .spinner {
       width: 46px;
       height: 46px;
-
       border:
         4px solid #e5e7eb;
-
       border-top-color:
         var(--primary);
-
       border-radius: 50%;
-
       animation:
         spin 0.8s linear infinite;
-
       margin-bottom: 18px;
     }
 
@@ -356,24 +306,17 @@
       }
     }
 
-    /* ================================
-       ERROR
-    ================================= */
+    /* ERROR */
 
     .error-state {
       background: white;
-
       border:
         1px solid var(--border);
-
       border-radius:
         var(--radius);
-
       padding:
         50px 25px;
-
       text-align: center;
-
       box-shadow:
         var(--shadow);
     }
@@ -390,167 +333,107 @@
 
     .error-state p {
       color: var(--muted);
-
       max-width: 560px;
-
-      margin:
-        0 auto 22px;
+      margin: 0 auto 22px;
     }
 
     .back-button {
       display: inline-flex;
-
       align-items: center;
       justify-content: center;
-
       min-height: 46px;
-
-      padding:
-        0 18px;
-
+      padding: 0 18px;
       border-radius: 11px;
-
-      background:
-        var(--primary);
-
+      background: var(--primary);
       color: white;
-
       text-decoration: none;
-
       font-weight: 800;
     }
 
     .back-button:hover {
-      background:
-        var(--primary-dark);
+      background: var(--primary-dark);
     }
 
-    /* ================================
-       PRODUCT
-    ================================= */
+    /* PRODUCT */
 
     .product-box {
       background: white;
-
       border:
         1px solid var(--border);
-
       border-radius: 24px;
-
       padding:
         clamp(18px, 4vw, 38px);
-
       display: grid;
-
       grid-template-columns:
         minmax(0, 1fr)
         minmax(0, 1fr);
-
       gap:
         clamp(25px, 5vw, 60px);
-
       box-shadow:
         var(--shadow);
     }
 
-    /* ================================
-       IMAGE
-    ================================= */
+    /* IMAGE */
 
     .product-image {
       width: 100%;
-
       min-height: 460px;
-
       border-radius: 18px;
-
       background:
         linear-gradient(
           135deg,
           #eef2ff,
           #f8fafc
         );
-
       border:
         1px solid #e8ecf4;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       overflow: hidden;
-
       position: relative;
     }
 
     .product-image img {
       display: block;
-
       width: 100%;
       height: 100%;
-
       min-height: 460px;
-
       object-fit: contain;
-
       padding: 22px;
-
-      transition:
-        transform 0.35s ease;
-    }
-
-    .product-image:hover img {
-      transform:
-        scale(1.025);
     }
 
     .emoji-image {
       font-size:
         clamp(80px, 12vw, 140px);
-
       line-height: 1;
     }
 
-    /* ================================
-       PRODUCT INFO
-    ================================= */
+    /* PRODUCT INFO */
 
     .product-info {
       display: flex;
       flex-direction: column;
-
       justify-content: center;
-
       min-width: 0;
     }
 
     .category {
       align-self: flex-start;
-
       display: inline-flex;
-
       align-items: center;
-
       background:
         #e0e7ff;
-
       color:
         #3730a3;
-
       padding:
         7px 13px;
-
       border-radius:
         999px;
-
       font-size: 12px;
-
       font-weight: 800;
-
       text-transform:
         capitalize;
-
       margin-bottom:
         17px;
     }
@@ -558,13 +441,9 @@
     .product-info h1 {
       font-size:
         clamp(30px, 4vw, 44px);
-
       line-height: 1.1;
-
       letter-spacing: -1px;
-
       margin-bottom: 15px;
-
       overflow-wrap:
         anywhere;
     }
@@ -572,14 +451,10 @@
     .price {
       font-size:
         clamp(28px, 4vw, 36px);
-
       line-height: 1.1;
-
       font-weight: 900;
-
       color:
         var(--primary);
-
       margin:
         6px 0 20px;
     }
@@ -587,37 +462,24 @@
     .description {
       color:
         var(--muted);
-
       font-size: 16px;
-
       line-height: 1.75;
-
       margin-bottom: 20px;
-
       white-space:
         pre-line;
     }
 
-    /* ================================
-       STOCK
-    ================================= */
+    /* STOCK */
 
     .stock {
       display: inline-flex;
-
       align-items: center;
-
       width: fit-content;
-
       padding:
         8px 12px;
-
       border-radius: 9px;
-
       font-size: 14px;
-
       font-weight: 800;
-
       margin-bottom: 22px;
     }
 
@@ -636,9 +498,7 @@
       background: #fee2e2;
     }
 
-    /* ================================
-       QUANTITY
-    ================================= */
+    /* QUANTITY */
 
     .quantity-area {
       margin:
@@ -647,49 +507,33 @@
 
     .quantity-label {
       display: block;
-
       margin-bottom: 10px;
-
       font-size: 14px;
-
       font-weight: 800;
     }
 
     .quantity-box {
       display: inline-flex;
-
       align-items: center;
-
       min-height: 48px;
-
       border:
         1px solid #d0d5dd;
-
       border-radius: 12px;
-
       overflow: hidden;
-
       background: white;
     }
 
     .quantity-box button {
       width: 48px;
       height: 48px;
-
       border: 0;
-
       background:
         #f8fafc;
-
       color:
         var(--text);
-
       font-size: 22px;
-
       font-weight: 700;
-
       cursor: pointer;
-
       transition:
         background 0.2s ease,
         color 0.2s ease;
@@ -707,45 +551,30 @@
 
     .quantity-value {
       width: 62px;
-
       text-align: center;
-
       font-weight: 900;
-
       font-size: 16px;
     }
 
-    /* ================================
-       BUTTONS
-    ================================= */
+    /* BUTTONS */
 
     .buttons {
       display: grid;
-
       grid-template-columns:
         1fr 1fr;
-
       gap: 12px;
-
       margin-top: 25px;
     }
 
     .btn {
       min-height: 52px;
-
       border: 0;
-
       border-radius: 12px;
-
       padding:
         14px 18px;
-
       font-size: 15px;
-
       font-weight: 800;
-
       cursor: pointer;
-
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
@@ -758,11 +587,6 @@
         translateY(-1px);
     }
 
-    .btn:active:not(:disabled) {
-      transform:
-        translateY(0);
-    }
-
     .btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -771,14 +595,12 @@
     .add {
       background:
         var(--dark);
-
       color: white;
     }
 
     .add:hover:not(:disabled) {
       background:
         #1f2937;
-
       box-shadow:
         0 8px 18px
         rgba(17, 24, 39, 0.2);
@@ -787,142 +609,100 @@
     .buy {
       background:
         var(--primary);
-
       color: white;
     }
 
     .buy:hover:not(:disabled) {
       background:
         var(--primary-dark);
-
       box-shadow:
         0 8px 18px
         rgba(37, 99, 235, 0.25);
     }
 
-    /* ================================
-       MESSAGE
-    ================================= */
+    /* MESSAGE */
 
     .message {
       display: none;
-
       margin-top: 17px;
-
       padding:
         13px 15px;
-
       border-radius: 10px;
-
       font-size: 14px;
-
       font-weight: 700;
-
       line-height: 1.5;
     }
 
     .message.success {
       display: block;
-
       background:
         var(--success-bg);
-
       color:
         #166534;
-
       border:
         1px solid #bbf7d0;
     }
 
     .message.error {
       display: block;
-
       background:
         var(--error-bg);
-
       color:
         #991b1b;
-
       border:
         1px solid #fecaca;
     }
 
-    /* ================================
-       BENEFITS
-    ================================= */
+    /* BENEFITS */
 
     .product-benefits {
       display: grid;
-
       grid-template-columns:
         repeat(3, 1fr);
-
       gap: 10px;
-
       margin-top: 25px;
-
       padding-top: 22px;
-
       border-top:
         1px solid var(--border);
     }
 
     .benefit {
       text-align: center;
-
       color:
         var(--muted);
-
       font-size: 12px;
-
       font-weight: 700;
     }
 
     .benefit-icon {
       display: block;
-
       font-size: 20px;
-
       margin-bottom: 5px;
     }
 
-    /* ================================
-       FOOTER
-    ================================= */
+    /* FOOTER */
 
     footer {
       background:
         var(--dark);
-
       color:
         #9ca3af;
-
       text-align: center;
-
       padding:
         34px 20px
         calc(34px + env(safe-area-inset-bottom));
-
       font-size: 14px;
-
       line-height: 1.7;
     }
 
     footer strong {
       color: white;
-
       font-size: 17px;
     }
 
-    /* ================================
-       RESPONSIVE
-    ================================= */
+    /* RESPONSIVE */
 
     @media (max-width: 900px) {
-
-      .nav-links {
-        gap: 2px;
-      }
 
       .product-box {
         grid-template-columns:
@@ -943,36 +723,26 @@
 
       .menu-button {
         display: inline-flex;
-
         align-items: center;
         justify-content: center;
       }
 
       .nav-links {
         position: absolute;
-
         top: 64px;
         left: 0;
         right: 0;
-
         display: none;
-
         flex-direction: column;
-
         align-items: stretch;
-
         gap: 5px;
-
         padding:
           12px 4% 16px;
-
         background:
           #111827;
-
         border-top:
           1px solid
           rgba(255,255,255,0.08);
-
         box-shadow:
           0 12px 25px
           rgba(0,0,0,0.2);
@@ -984,7 +754,6 @@
 
       .nav-links a {
         width: 100%;
-
         padding:
           13px 14px;
       }
@@ -996,16 +765,13 @@
       .container {
         width:
           min(94%, 620px);
-
         padding-top: 25px;
         padding-bottom: 45px;
       }
 
       .product-box {
         border-radius: 18px;
-
         padding: 15px;
-
         gap: 25px;
       }
 
@@ -1056,10 +822,6 @@
       }
     }
 
-    /* ================================
-       REDUCED MOTION
-    ================================= */
-
     @media (prefers-reduced-motion: reduce) {
 
       html {
@@ -1086,9 +848,7 @@
     Skip to content
   </a>
 
-  <!-- ================================
-       NAVBAR
-  ================================= -->
+  <!-- NAVBAR -->
 
   <header class="navbar">
 
@@ -1141,15 +901,14 @@
 
   </header>
 
-  <!-- ================================
-       MAIN
-  ================================= -->
+
+  <!-- MAIN -->
 
   <main id="main-content">
 
     <div class="container">
 
-      <!-- Breadcrumb -->
+      <!-- BREADCRUMB -->
 
       <div class="breadcrumb">
 
@@ -1157,7 +916,7 @@
           Shop
         </a>
 
-        <span class="breadcrumb-separator">
+        <span>
           /
         </span>
 
@@ -1167,7 +926,8 @@
 
       </div>
 
-      <!-- Loading -->
+
+      <!-- LOADING -->
 
       <div
         id="loading"
@@ -1186,7 +946,8 @@
 
       </div>
 
-      <!-- Error -->
+
+      <!-- ERROR -->
 
       <div
         id="errorState"
@@ -1218,7 +979,8 @@
 
       </div>
 
-      <!-- Product -->
+
+      <!-- PRODUCT -->
 
       <section
         id="productBox"
@@ -1242,6 +1004,7 @@
           </div>
 
         </div>
+
 
         <!-- INFO -->
 
@@ -1280,7 +1043,8 @@
             Checking stock...
           </div>
 
-          <!-- Quantity -->
+
+          <!-- QUANTITY -->
 
           <div class="quantity-area">
 
@@ -1324,7 +1088,8 @@
 
           </div>
 
-          <!-- Buttons -->
+
+          <!-- BUTTONS -->
 
           <div class="buttons">
 
@@ -1346,7 +1111,8 @@
 
           </div>
 
-          <!-- Message -->
+
+          <!-- MESSAGE -->
 
           <div
             id="message"
@@ -1355,7 +1121,8 @@
             aria-live="polite"
           ></div>
 
-          <!-- Benefits -->
+
+          <!-- BENEFITS -->
 
           <div class="product-benefits">
 
@@ -1408,9 +1175,8 @@
 
   </main>
 
-  <!-- ================================
-       FOOTER
-  ================================= -->
+
+  <!-- FOOTER -->
 
   <footer>
 
@@ -1424,35 +1190,42 @@
 
     <br><br>
 
-    © 2026 ShopSphere. All rights reserved.
+    © <span id="year"></span> ShopSphere.
+    All rights reserved.
 
   </footer>
 
 
   <script>
-    /* =========================================
-       SUPABASE
-    ========================================= */
+
+    /* =====================================================
+       SUPABASE CONFIGURATION
+    ===================================================== */
 
     const SUPABASE_URL =
       "https://ienquzigbawhvthnirtj.supabase.co";
 
     /*
-      WEKA HAPA SUPABASE PUBLISHABLE KEY YAKO.
-
-      Tumia ile key uliyonayo kwenye
-      products.html.
-
-      USITUMIE service_role key.
+      IMPORTANT:
+      Weka PUBLISHABLE KEY yako hapa.
+      Usitumie service_role key.
     */
 
     const SUPABASE_KEY =
       "sb_publishable_tSbACTjOICJlthE03XmGCA_sIgigXup";
 
 
-    /* =========================================
-       GLOBAL VARIABLES
-    ========================================= */
+    /* =====================================================
+       CONSTANTS
+    ===================================================== */
+
+    const CART_KEY =
+      "shopSphereCart";
+
+
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
 
     let supabaseClient = null;
 
@@ -1461,28 +1234,33 @@
     let quantity = 1;
 
 
-    /* =========================================
-       GET PRODUCT ID FROM URL
-    ========================================= */
+    /* =====================================================
+       GET PRODUCT ID
+    ===================================================== */
 
-    const params =
+    const urlParams =
       new URLSearchParams(
         window.location.search
       );
 
     const productId =
-      params.get("id");
+      urlParams.get("id");
 
 
     console.log(
-      "ShopSphere Product ID:",
+      "CURRENT URL:",
+      window.location.href
+    );
+
+    console.log(
+      "PRODUCT ID FROM URL:",
       productId
     );
 
 
-    /* =========================================
+    /* =====================================================
        ELEMENTS
-    ========================================= */
+    ===================================================== */
 
     const loading =
       document.getElementById("loading");
@@ -1539,18 +1317,24 @@
       document.getElementById("cartCount");
 
     const breadcrumbProduct =
-      document.getElementById("breadcrumbProduct");
+      document.getElementById(
+        "breadcrumbProduct"
+      );
 
     const menuButton =
-      document.getElementById("menuButton");
+      document.getElementById(
+        "menuButton"
+      );
 
     const navLinks =
-      document.getElementById("navLinks");
+      document.getElementById(
+        "navLinks"
+      );
 
 
-    /* =========================================
+    /* =====================================================
        FORMAT PRICE
-    ========================================= */
+    ===================================================== */
 
     function formatPrice(price) {
 
@@ -1568,48 +1352,9 @@
     }
 
 
-    /* =========================================
-       ESCAPE HTML
-    ========================================= */
-
-    function escapeHtml(value) {
-
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-
-    /* =========================================
-       IMAGE URL
-    ========================================= */
-
-    function isValidImageUrl(url) {
-
-      if (
-        !url ||
-        typeof url !== "string"
-      ) {
-        return false;
-      }
-
-      const value =
-        url.trim();
-
-      return (
-        value.startsWith("https://") ||
-        value.startsWith("http://") ||
-        value.startsWith("/")
-      );
-    }
-
-
-    /* =========================================
+    /* =====================================================
        CART
-    ========================================= */
+    ===================================================== */
 
     function getCart() {
 
@@ -1617,7 +1362,7 @@
 
         const stored =
           localStorage.getItem(
-            "shopSphereCart"
+            CART_KEY
           );
 
         const cart =
@@ -1632,7 +1377,7 @@
       } catch (error) {
 
         console.error(
-          "Unable to read cart:",
+          "Cart read error:",
           error
         );
 
@@ -1646,7 +1391,7 @@
       try {
 
         localStorage.setItem(
-          "shopSphereCart",
+          CART_KEY,
           JSON.stringify(cart)
         );
 
@@ -1655,7 +1400,7 @@
       } catch (error) {
 
         console.error(
-          "Unable to save cart:",
+          "Cart save error:",
           error
         );
 
@@ -1682,7 +1427,9 @@
               sum +
               Math.max(
                 0,
-                Number(item.quantity) || 0
+                Number(
+                  item.quantity
+                ) || 0
               )
             );
 
@@ -1690,16 +1437,17 @@
           0
         );
 
+
       cartCount.textContent =
         total > 99
           ? "99+"
-          : total;
+          : String(total);
     }
 
 
-    /* =========================================
+    /* =====================================================
        MESSAGE
-    ========================================= */
+    ===================================================== */
 
     let messageTimer = null;
 
@@ -1719,6 +1467,7 @@
       message.className =
         "message " + type;
 
+
       messageTimer =
         setTimeout(
           () => {
@@ -1735,9 +1484,9 @@
     }
 
 
-    /* =========================================
-       ERROR STATE
-    ========================================= */
+    /* =====================================================
+       ERROR
+    ===================================================== */
 
     function showError(
       title,
@@ -1761,9 +1510,9 @@
     }
 
 
-    /* =========================================
-       MENU
-    ========================================= */
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
 
     function closeMenu() {
 
@@ -1812,6 +1561,7 @@
           "menu-open",
           isOpen
         );
+
       }
     );
 
@@ -1830,29 +1580,36 @@
       );
 
 
-    /* =========================================
-       QUANTITY BUTTONS
-    ========================================= */
+    /* =====================================================
+       QUANTITY
+    ===================================================== */
 
     function updateQuantityButtons() {
 
       const stock =
-        Number(product?.stock || 0);
+        Number(
+          product?.stock || 0
+        );
+
 
       quantityText.textContent =
-        quantity;
+        String(quantity);
+
 
       minusBtn.disabled =
         quantity <= 1;
+
 
       plusBtn.disabled =
         !product ||
         stock <= 0 ||
         quantity >= stock;
 
+
       const unavailable =
         !product ||
         stock <= 0;
+
 
       addBtn.disabled =
         unavailable;
@@ -1873,6 +1630,7 @@
         quantity--;
 
         updateQuantityButtons();
+
       }
     );
 
@@ -1882,7 +1640,9 @@
       () => {
 
         const stock =
-          Number(product?.stock || 0);
+          Number(
+            product?.stock || 0
+          );
 
         if (
           stock > 0 &&
@@ -1893,43 +1653,45 @@
 
           updateQuantityButtons();
         }
+
       }
     );
 
 
-    /* =========================================
-       RENDER IMAGE
-    ========================================= */
+    /* =====================================================
+       IMAGE
+    ===================================================== */
 
     function renderProductImage() {
 
       const imageUrl =
         product.image_url;
 
+
       if (
-        isValidImageUrl(imageUrl)
+        imageUrl &&
+        typeof imageUrl === "string" &&
+        (
+          imageUrl.startsWith("https://") ||
+          imageUrl.startsWith("http://")
+        )
       ) {
-
-        const safeUrl =
-          escapeHtml(imageUrl);
-
-        const safeName =
-          escapeHtml(product.name);
 
         productImage.innerHTML = `
           <img
-            src="${safeUrl}"
-            alt="${safeName}"
+            src="${imageUrl}"
+            alt="Product image"
             loading="eager"
             decoding="async"
-            fetchpriority="high"
           >
         `;
+
 
         const img =
           productImage.querySelector(
             "img"
           );
+
 
         img.addEventListener(
           "error",
@@ -1950,6 +1712,7 @@
           }
         );
 
+
       } else {
 
         productImage.innerHTML = `
@@ -1964,15 +1727,16 @@
     }
 
 
-    /* =========================================
+    /* =====================================================
        RENDER PRODUCT
-    ========================================= */
+    ===================================================== */
 
     function renderProduct() {
 
       if (!product) {
         return;
       }
+
 
       loading.style.display =
         "none";
@@ -1984,21 +1748,15 @@
         "grid";
 
 
-      /* Name */
-
       productName.textContent =
         product.name ||
         "Unnamed Product";
 
 
-      /* Category */
-
       productCategory.textContent =
         product.category ||
         "Product";
 
-
-      /* Price */
 
       productPrice.textContent =
         formatPrice(
@@ -2006,31 +1764,25 @@
         );
 
 
-      /* Description */
-
       productDescription.textContent =
         product.description ||
         "No description available for this product.";
 
-
-      /* Breadcrumb */
 
       breadcrumbProduct.textContent =
         product.name ||
         "Product";
 
 
-      /* Image */
-
       renderProductImage();
 
-
-      /* Stock */
 
       const stock =
         Math.max(
           0,
-          Number(product.stock) || 0
+          Number(
+            product.stock
+          ) || 0
         );
 
 
@@ -2041,6 +1793,7 @@
 
         stockText.className =
           "stock out-stock";
+
 
       } else if (stock <= 5) {
 
@@ -2057,6 +1810,7 @@
 
         stockText.className =
           "stock low-stock";
+
 
       } else {
 
@@ -2075,41 +1829,265 @@
       updateQuantityButtons();
 
 
-      /* Dynamic title */
-
       document.title =
         (
           product.name ||
           "Product Details"
         ) +
         " — ShopSphere";
+    }
 
 
-      /* Dynamic meta description */
+    /* =====================================================
+       WAIT FOR SUPABASE
+    ===================================================== */
 
-      const metaDescription =
-        document.querySelector(
-          'meta[name="description"]'
+    function waitForSupabase(
+      timeout = 10000
+    ) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const start =
+            Date.now();
+
+
+          function check() {
+
+            if (
+              window.supabase &&
+              typeof
+                window.supabase.createClient ===
+                "function"
+            ) {
+
+              resolve(
+                window.supabase
+              );
+
+              return;
+            }
+
+
+            if (
+              Date.now() - start >=
+              timeout
+            ) {
+
+              reject(
+                new Error(
+                  "Supabase library did not load."
+                )
+              );
+
+              return;
+            }
+
+
+            setTimeout(
+              check,
+              50
+            );
+          }
+
+
+          check();
+        }
+      );
+    }
+
+
+    /* =====================================================
+       LOAD PRODUCT
+    ===================================================== */
+
+    async function loadProduct() {
+
+      /*
+        THIS IS THE MOST IMPORTANT CHECK.
+      */
+
+      const cleanProductId =
+        productId
+          ? String(productId).trim()
+          : "";
+
+
+      console.log(
+        "================================="
+      );
+
+      console.log(
+        "SHOPSPHERE PRODUCT DEBUG"
+      );
+
+      console.log(
+        "Full URL:",
+        window.location.href
+      );
+
+      console.log(
+        "Search:",
+        window.location.search
+      );
+
+      console.log(
+        "Product ID:",
+        cleanProductId
+      );
+
+      console.log(
+        "================================="
+      );
+
+
+      if (!cleanProductId) {
+
+        showError(
+          "Product ID is missing",
+          "Please return to the Shop and select a product again."
         );
 
-      if (
-        metaDescription &&
-        product.description
-      ) {
+        return;
+      }
 
-        metaDescription.setAttribute(
-          "content",
-          String(
-            product.description
-          ).slice(0, 155)
+
+      try {
+
+        /*
+          Wait for Supabase CDN.
+        */
+
+        const supabase =
+          await waitForSupabase();
+
+
+        /*
+          Create client.
+        */
+
+        supabaseClient =
+          supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+          );
+
+
+        console.log(
+          "Searching Supabase for ID:",
+          cleanProductId
+        );
+
+
+        /*
+          IMPORTANT:
+          We use .eq("id", cleanProductId)
+          and .maybeSingle()
+        */
+
+        const result =
+          await supabaseClient
+            .from("products")
+            .select(
+              "id,name,description,category,price,stock,image_url,is_active"
+            )
+            .eq(
+              "id",
+              cleanProductId
+            )
+            .eq(
+              "is_active",
+              true
+            )
+            .maybeSingle();
+
+
+        const data =
+          result.data;
+
+        const error =
+          result.error;
+
+
+        console.log(
+          "Supabase result:",
+          result
+        );
+
+
+        if (error) {
+
+          console.error(
+            "Supabase error:",
+            error
+          );
+
+
+          showError(
+            "Unable to load product",
+            error.message ||
+            "There was a problem loading this product from the database."
+          );
+
+          return;
+        }
+
+
+        if (!data) {
+
+          console.error(
+            "No product found for ID:",
+            cleanProductId
+          );
+
+
+          showError(
+            "Product not found",
+            "The product ID was received correctly, but no active product was found in Supabase."
+          );
+
+          return;
+        }
+
+
+        /*
+          SUCCESS
+        */
+
+        product =
+          data;
+
+
+        console.log(
+          "PRODUCT LOADED SUCCESSFULLY:",
+          product
+        );
+
+
+        renderProduct();
+
+
+      } catch (error) {
+
+        console.error(
+          "Product loading exception:",
+          error
+        );
+
+
+        showError(
+          "Something went wrong",
+          error.message ||
+          "We could not load this product. Please try again."
         );
       }
     }
 
 
-    /* =========================================
+    /* =====================================================
        ADD TO CART
-    ========================================= */
+    ===================================================== */
 
     function addToCart(
       goToCheckout = false
@@ -2129,11 +2107,15 @@
       const availableStock =
         Math.max(
           0,
-          Number(product.stock) || 0
+          Number(
+            product.stock
+          ) || 0
         );
 
 
-      if (availableStock <= 0) {
+      if (
+        availableStock <= 0
+      ) {
 
         showMessage(
           "This product is out of stock.",
@@ -2153,17 +2135,6 @@
           "Selected quantity exceeds available stock.",
           "error"
         );
-
-        quantity =
-          Math.min(
-            Math.max(
-              quantity,
-              1
-            ),
-            availableStock
-          );
-
-        updateQuantityButtons();
 
         return;
       }
@@ -2186,7 +2157,10 @@
       ) {
 
         const existing =
-          cart[existingIndex];
+          cart[
+            existingIndex
+          ];
+
 
         const currentQuantity =
           Math.max(
@@ -2210,13 +2184,7 @@
           showMessage(
             "You cannot add more than " +
             availableStock +
-            " item" +
-            (
-              availableStock === 1
-                ? ""
-                : "s"
-            ) +
-            " of this product.",
+            " item(s) of this product.",
             "error"
           );
 
@@ -2231,7 +2199,9 @@
           availableStock;
 
         existing.price =
-          Number(product.price) || 0;
+          Number(
+            product.price
+          ) || 0;
 
         existing.image_url =
           product.image_url || "";
@@ -2241,6 +2211,7 @@
 
         existing.name =
           product.name || "";
+
 
       } else {
 
@@ -2253,7 +2224,9 @@
             product.name || "",
 
           price:
-            Number(product.price) || 0,
+            Number(
+              product.price
+            ) || 0,
 
           quantity:
             quantity,
@@ -2280,7 +2253,9 @@
       updateCartCount();
 
 
-      if (goToCheckout) {
+      if (
+        goToCheckout
+      ) {
 
         localStorage.setItem(
           "shopSphereBuyNow",
@@ -2307,9 +2282,9 @@
     }
 
 
-    /* =========================================
+    /* =====================================================
        BUTTON EVENTS
-    ========================================= */
+    ===================================================== */
 
     addBtn.addEventListener(
       "click",
@@ -2331,230 +2306,16 @@
     );
 
 
-    /* =========================================
-       WAIT FOR SUPABASE
-    ========================================= */
-
-    function waitForSupabase(
-      timeout = 10000
-    ) {
-
-      return new Promise(
-        (resolve, reject) => {
-
-          const start =
-            Date.now();
-
-          const check =
-            () => {
-
-              if (
-                window.supabase &&
-                typeof window.supabase.createClient ===
-                  "function"
-              ) {
-
-                resolve(
-                  window.supabase
-                );
-
-                return;
-              }
-
-
-              if (
-                Date.now() - start >=
-                timeout
-              ) {
-
-                reject(
-                  new Error(
-                    "Supabase library did not load."
-                  )
-                );
-
-                return;
-              }
-
-
-              setTimeout(
-                check,
-                50
-              );
-            };
-
-
-          check();
-        }
-      );
-    }
-
-
-    /* =========================================
-       LOAD PRODUCT
-    ========================================= */
-
-    async function loadProduct() {
-
-      /*
-        IMPORTANT:
-
-        products.html should open:
-
-        product.html?id=PRODUCT_UUID
-      */
-
-      if (
-        !productId ||
-        !String(productId).trim()
-      ) {
-
-        console.error(
-          "Product ID missing from URL:",
-          window.location.href
-        );
-
-        showError(
-          "Product ID is missing",
-          "Please return to the Shop and select a product again."
-        );
-
-        return;
-      }
-
-
-      try {
-
-        /* Wait until Supabase is ready */
-
-        const supabase =
-          await waitForSupabase();
-
-
-        /*
-          Create Supabase client
-        */
-
-        supabaseClient =
-          supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-          );
-
-
-        console.log(
-          "Loading product ID:",
-          productId
-        );
-
-
-        /*
-          Get product from Supabase
-        */
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .from("products")
-            .select(
-              "id,name,description,category,price,stock,image_url,is_active"
-            )
-            .eq(
-              "id",
-              productId
-            )
-            .eq(
-              "is_active",
-              true
-            )
-            .maybeSingle();
-
-
-        if (error) {
-
-          console.error(
-            "Supabase product error:",
-            error
-          );
-
-          showError(
-            "Unable to load product",
-            "There was a problem connecting to the product database. Please check your Supabase key and RLS settings."
-          );
-
-          return;
-        }
-
-
-        if (!data) {
-
-          console.error(
-            "Product not found for ID:",
-            productId
-          );
-
-          showError(
-            "Product not found",
-            "This product may have been removed, disabled, or the product link may be incorrect."
-          );
-
-          return;
-        }
-
-
-        /*
-          Product successfully loaded
-        */
-
-        product =
-          data;
-
-
-        console.log(
-          "Product loaded successfully:",
-          product
-        );
-
-
-        renderProduct();
-
-      } catch (error) {
-
-        console.error(
-          "Unexpected product error:",
-          error
-        );
-
-        showError(
-          "Something went wrong",
-          "We could not load this product right now. Please refresh the page and try again."
-        );
-      }
-    }
-
-
-    /* =========================================
-       INITIALIZE
-    ========================================= */
-
-    updateCartCount();
-
-    loadProduct();
-
-
-    /* =========================================
-       CART COUNT UPDATE
-    ========================================= */
+    /* =====================================================
+       STORAGE UPDATE
+    ===================================================== */
 
     window.addEventListener(
       "storage",
       event => {
 
         if (
-          event.key ===
-          "shopSphereCart"
+          event.key === CART_KEY
         ) {
 
           updateCartCount();
@@ -2571,6 +2332,25 @@
 
       }
     );
+
+
+    /* =====================================================
+       YEAR
+    ===================================================== */
+
+    document.getElementById(
+      "year"
+    ).textContent =
+      new Date().getFullYear();
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    updateCartCount();
+
+    loadProduct();
 
   </script>
 
