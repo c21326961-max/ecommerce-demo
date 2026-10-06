@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Payment | ShopSphere</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,6 +26,7 @@
       color: #1f2937;
     }
 
+
     header {
       background: #111827;
       color: white;
@@ -28,14 +36,17 @@
       align-items: center;
     }
 
+
     .logo {
       font-size: 24px;
       font-weight: bold;
     }
 
+
     .logo span {
       color: #22c55e;
     }
+
 
     nav a {
       color: white;
@@ -44,9 +55,11 @@
       font-size: 14px;
     }
 
+
     nav a:hover {
       color: #22c55e;
     }
+
 
     .container {
       max-width: 1100px;
@@ -54,10 +67,12 @@
       padding: 0 20px;
     }
 
+
     .page-title {
       text-align: center;
       margin-bottom: 35px;
     }
+
 
     .page-title h1 {
       font-size: 34px;
@@ -65,15 +80,18 @@
       margin-bottom: 10px;
     }
 
+
     .page-title p {
       color: #6b7280;
     }
+
 
     .payment-layout {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 25px;
     }
+
 
     .card {
       background: white;
@@ -82,11 +100,13 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.07);
     }
 
+
     .card h2 {
       font-size: 21px;
       margin-bottom: 22px;
       color: #111827;
     }
+
 
     .payment-method {
       border: 2px solid #e5e7eb;
@@ -97,14 +117,17 @@
       transition: 0.2s;
     }
 
+
     .payment-method:hover {
       border-color: #22c55e;
     }
+
 
     .payment-method.active {
       border-color: #22c55e;
       background: #f0fdf4;
     }
+
 
     .payment-method label {
       display: flex;
@@ -114,11 +137,13 @@
       font-weight: bold;
     }
 
+
     .payment-method input {
       width: 18px;
       height: 18px;
       accent-color: #22c55e;
     }
+
 
     .method-description {
       margin-top: 8px;
@@ -127,6 +152,7 @@
       font-size: 14px;
       line-height: 1.5;
     }
+
 
     .notice {
       background: #fff7ed;
@@ -138,6 +164,7 @@
       line-height: 1.5;
       font-size: 14px;
     }
+
 
     .cod-notice {
       display: none;
@@ -151,9 +178,11 @@
       font-size: 14px;
     }
 
+
     .cod-notice strong {
       color: #14532d;
     }
+
 
     .order-item {
       display: flex;
@@ -163,13 +192,16 @@
       border-bottom: 1px solid #e5e7eb;
     }
 
+
     .order-item:last-child {
       border-bottom: none;
     }
 
+
     .item-name {
       font-weight: bold;
     }
+
 
     .item-quantity {
       color: #6b7280;
@@ -177,10 +209,12 @@
       margin-top: 4px;
     }
 
+
     .item-price {
       font-weight: bold;
       white-space: nowrap;
     }
+
 
     .total {
       display: flex;
@@ -191,6 +225,7 @@
       font-size: 21px;
       font-weight: bold;
     }
+
 
     .pay-button {
       width: 100%;
@@ -205,14 +240,17 @@
       cursor: pointer;
     }
 
+
     .pay-button:hover {
       background: #16a34a;
     }
+
 
     .pay-button:disabled {
       background: #9ca3af;
       cursor: not-allowed;
     }
+
 
     .back-link {
       display: inline-block;
@@ -222,15 +260,18 @@
       font-size: 14px;
     }
 
+
     .back-link:hover {
       color: #22c55e;
     }
+
 
     .empty {
       text-align: center;
       padding: 40px 20px;
       color: #6b7280;
     }
+
 
     footer {
       text-align: center;
@@ -239,7 +280,9 @@
       font-size: 14px;
     }
 
+
     @media (max-width: 800px) {
+
       .payment-layout {
         grid-template-columns: 1fr;
       }
@@ -255,11 +298,16 @@
       .page-title h1 {
         font-size: 28px;
       }
+
     }
+
   </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -267,42 +315,84 @@
     Shop<span>Sphere</span>
   </div>
 
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Shop</a>
-    <a href="cart.html">Cart</a>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="products.html">
+      Shop
+    </a>
+
+    <a href="cart.html">
+      Cart
+    </a>
+
   </nav>
 
 </header>
 
+
 <div class="container">
 
+
   <div class="page-title">
-    <h1>Payment</h1>
-    <p>Choose your preferred payment method to complete your order.</p>
+
+    <h1>
+      Payment
+    </h1>
+
+    <p>
+      Choose your preferred payment method to complete your order.
+    </p>
+
   </div>
 
-  <div id="emptyMessage" class="card empty" style="display:none;">
 
-    <h2>Your cart is empty</h2>
+  <div
+    id="emptyMessage"
+    class="card empty"
+    style="display:none;"
+  >
 
-    <p>Please add products before making a payment.</p>
+    <h2>
+      Your cart is empty
+    </h2>
+
+    <p>
+      Please add products before making a payment.
+    </p>
 
     <br>
 
-    <a href="products.html" class="back-link">
+    <a
+      href="products.html"
+      class="back-link"
+    >
       ← Continue Shopping
     </a>
 
   </div>
 
-  <div id="paymentContent" class="payment-layout">
 
-    <!-- PAYMENT METHODS -->
+  <div
+    id="paymentContent"
+    class="payment-layout"
+  >
+
+
+    <!-- =========================================
+         PAYMENT METHODS
+    ========================================== -->
 
     <div class="card">
 
-      <h2>Choose Payment Method</h2>
+      <h2>
+        Choose Payment Method
+      </h2>
+
 
       <!-- MOBILE MONEY -->
 
@@ -323,11 +413,13 @@
 
         </label>
 
+
         <div class="method-description">
           Pay using mobile money services.
         </div>
 
       </div>
+
 
       <!-- CARD -->
 
@@ -347,11 +439,13 @@
 
         </label>
 
+
         <div class="method-description">
           Pay securely using your debit or credit card.
         </div>
 
       </div>
+
 
       <!-- BANK -->
 
@@ -371,15 +465,20 @@
 
         </label>
 
+
         <div class="method-description">
           Make payment directly through your bank.
         </div>
 
       </div>
 
+
       <!-- CASH ON DELIVERY -->
 
-      <div class="payment-method" id="codMethod">
+      <div
+        class="payment-method"
+        id="codMethod"
+      >
 
         <label>
 
@@ -395,12 +494,14 @@
 
         </label>
 
+
         <div class="method-description">
           Pay when you receive or collect your order.
           No online payment is required now.
         </div>
 
       </div>
+
 
       <!-- ONLINE NOTICE -->
 
@@ -409,7 +510,9 @@
         id="onlineNotice"
       >
 
-        <strong>Demo Payment</strong>
+        <strong>
+          Demo Payment
+        </strong>
 
         <br>
 
@@ -419,6 +522,7 @@
         a successful payment.
 
       </div>
+
 
       <!-- COD NOTICE -->
 
@@ -448,6 +552,7 @@
 
       </div>
 
+
       <!-- BUTTON -->
 
       <button
@@ -458,23 +563,37 @@
         Continue to Payment
       </button>
 
-      <a href="checkout.html" class="back-link">
+
+      <a
+        href="checkout.html"
+        class="back-link"
+      >
         ← Back to Checkout
       </a>
 
     </div>
 
-    <!-- ORDER SUMMARY -->
+
+
+    <!-- =========================================
+         ORDER SUMMARY
+    ========================================== -->
 
     <div class="card">
 
-      <h2>Order Summary</h2>
+      <h2>
+        Order Summary
+      </h2>
+
 
       <div id="orderItems"></div>
 
+
       <div class="total">
 
-        <span>Total</span>
+        <span>
+          Total
+        </span>
 
         <span id="orderTotal">
           TSh 0
@@ -488,11 +607,15 @@
 
 </div>
 
+
 <footer>
   © 2026 ShopSphere. All rights reserved.
 </footer>
 
+
+
 <script>
+
 
   // ==========================================
   // GET CART
@@ -500,8 +623,11 @@
 
   const cart =
     JSON.parse(
-      localStorage.getItem("shopSphereCart")
+      localStorage.getItem(
+        "shopSphereCart"
+      )
     ) || [];
+
 
 
   // ==========================================
@@ -510,8 +636,11 @@
 
   const customer =
     JSON.parse(
-      localStorage.getItem("shopSphereCustomer")
+      localStorage.getItem(
+        "shopSphereCustomer"
+      )
     ) || {};
+
 
 
   // ==========================================
@@ -519,25 +648,46 @@
   // ==========================================
 
   const paymentContent =
-    document.getElementById("paymentContent");
+    document.getElementById(
+      "paymentContent"
+    );
+
 
   const emptyMessage =
-    document.getElementById("emptyMessage");
+    document.getElementById(
+      "emptyMessage"
+    );
+
 
   const orderItems =
-    document.getElementById("orderItems");
+    document.getElementById(
+      "orderItems"
+    );
+
 
   const orderTotal =
-    document.getElementById("orderTotal");
+    document.getElementById(
+      "orderTotal"
+    );
+
 
   const payButton =
-    document.getElementById("payButton");
+    document.getElementById(
+      "payButton"
+    );
+
 
   const onlineNotice =
-    document.getElementById("onlineNotice");
+    document.getElementById(
+      "onlineNotice"
+    );
+
 
   const codNotice =
-    document.getElementById("codNotice");
+    document.getElementById(
+      "codNotice"
+    );
+
 
 
   // ==========================================
@@ -547,60 +697,84 @@
   let orderTotalAmount = 0;
 
 
+
   // ==========================================
   // CHECK CART
   // ==========================================
 
-  if (cart.length === 0) {
+  if (
+    cart.length === 0
+  ) {
 
-    paymentContent.style.display = "none";
+    paymentContent.style.display =
+      "none";
 
-    emptyMessage.style.display = "block";
+    emptyMessage.style.display =
+      "block";
 
   } else {
 
-    cart.forEach(item => {
+    cart.forEach(
+      item => {
 
-      const quantity =
-        Number(item.quantity) || 1;
+        const quantity =
+          Number(
+            item.quantity
+          ) || 1;
 
-      const price =
-        Number(item.price) || 0;
 
-      const itemTotal =
-        price * quantity;
+        const price =
+          Number(
+            item.price
+          ) || 0;
 
-      orderTotalAmount += itemTotal;
 
-      const itemElement =
-        document.createElement("div");
+        const itemTotal =
+          price * quantity;
 
-      itemElement.className =
-        "order-item";
 
-      itemElement.innerHTML = `
+        orderTotalAmount +=
+          itemTotal;
 
-        <div>
 
-          <div class="item-name">
-            ${item.name}
+        const itemElement =
+          document.createElement(
+            "div"
+          );
+
+
+        itemElement.className =
+          "order-item";
+
+
+        itemElement.innerHTML = `
+
+          <div>
+
+            <div class="item-name">
+              ${escapeHtml(item.name || "Product")}
+            </div>
+
+            <div class="item-quantity">
+              Quantity: ${quantity}
+            </div>
+
           </div>
 
-          <div class="item-quantity">
-            Quantity: ${quantity}
+          <div class="item-price">
+            TSh ${itemTotal.toLocaleString()}
           </div>
 
-        </div>
+        `;
 
-        <div class="item-price">
-          TSh ${itemTotal.toLocaleString()}
-        </div>
 
-      `;
+        orderItems.appendChild(
+          itemElement
+        );
 
-      orderItems.appendChild(itemElement);
+      }
+    );
 
-    });
 
     orderTotal.textContent =
       "TSh " +
@@ -609,19 +783,196 @@
   }
 
 
+
   // ==========================================
-  // GENERATE ORDER NUMBER
+  // ESCAPE HTML
   // ==========================================
 
-  function generateOrderNumber() {
+  function escapeHtml(value) {
 
-    return "SS-" +
-      Math.floor(
-        100000 +
-        Math.random() * 900000
+    return String(value)
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
       );
 
   }
+
+
+
+  // ==========================================
+  // GET EXISTING ORDERS
+  // ==========================================
+
+  function getExistingOrders() {
+
+    try {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            "shopSphereOrders"
+          )
+        );
+
+      return Array.isArray(saved)
+        ? saved
+        : [];
+
+    } catch (error) {
+
+      console.error(
+        "Could not read existing orders:",
+        error
+      );
+
+      return [];
+
+    }
+
+  }
+
+
+
+  // ==========================================
+  // GENERATE UNIQUE ORDER NUMBER
+  // ==========================================
+
+  function generateUniqueOrderNumber() {
+
+    const existingOrders =
+      getExistingOrders();
+
+
+    const existingNumbers =
+      new Set(
+        existingOrders.map(
+          order =>
+            String(
+              order.orderNumber || ""
+            )
+        )
+      );
+
+
+    let orderNumber = "";
+
+
+    /*
+      Format:
+
+      SS-YYYYMMDD-HHMMSS-RRRR
+
+      Example:
+
+      SS-20261006-031522-4827
+
+      Timestamp makes the number
+      highly unique.
+
+      Random section provides
+      additional protection.
+    */
+
+
+    do {
+
+      const now =
+        new Date();
+
+
+      const year =
+        now.getFullYear();
+
+
+      const month =
+        String(
+          now.getMonth() + 1
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      const day =
+        String(
+          now.getDate()
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      const hours =
+        String(
+          now.getHours()
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      const minutes =
+        String(
+          now.getMinutes()
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      const seconds =
+        String(
+          now.getSeconds()
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      const random =
+        Math.floor(
+          1000 +
+          Math.random() * 9000
+        );
+
+
+      orderNumber =
+        `SS-${year}${month}${day}-${hours}${minutes}${seconds}-${random}`;
+
+
+    } while (
+      existingNumbers.has(
+        orderNumber
+      )
+    );
+
+
+    return orderNumber;
+
+  }
+
 
 
   // ==========================================
@@ -635,72 +986,118 @@
   ) {
 
     const orderNumber =
-      generateOrderNumber();
+      generateUniqueOrderNumber();
+
 
     const orderTime =
       new Date().toISOString();
 
+
     const newOrder = {
 
-      orderNumber: orderNumber,
+      orderNumber:
+        orderNumber,
 
-      customer: customer,
+      customer:
+        customer,
 
-      products: cart,
+      products:
+        cart,
 
-      total: orderTotalAmount,
+      total:
+        orderTotalAmount,
 
-      paymentMethod: paymentMethod,
+      paymentMethod:
+        paymentMethod,
 
-      paymentStatus: paymentStatus,
+      paymentStatus:
+        paymentStatus,
 
-      orderStatus: orderStatus,
+      orderStatus:
+        orderStatus,
 
-      paymentTime: orderTime,
+      paymentTime:
+        orderTime,
 
-      createdAt: orderTime
+      createdAt:
+        orderTime
 
     };
 
 
     let orders =
-      JSON.parse(
-        localStorage.getItem(
-          "shopSphereOrders"
-        )
-      ) || [];
+      getExistingOrders();
 
 
-    orders.push(newOrder);
+    /*
+      Final safety check.
+      Never save an order if the
+      generated Order Number already exists.
+    */
+
+    const duplicate =
+      orders.some(
+        order =>
+          String(
+            order.orderNumber
+          ) ===
+          String(
+            orderNumber
+          )
+      );
+
+
+    if (duplicate) {
+
+      alert(
+        "Order Number conflict detected. Please try again."
+      );
+
+      return;
+
+    }
+
+
+    orders.push(
+      newOrder
+    );
 
 
     localStorage.setItem(
       "shopSphereOrders",
-      JSON.stringify(orders)
+      JSON.stringify(
+        orders
+      )
     );
 
 
-    // Save latest order information
+    // ======================================
+    // SAVE LATEST ORDER INFORMATION
+    // ======================================
 
     localStorage.setItem(
       "shopSphereOrderNumber",
       orderNumber
     );
 
+
     localStorage.setItem(
       "shopSphereOrderStatus",
       orderStatus
     );
+
 
     localStorage.setItem(
       "shopSpherePaymentMethod",
       paymentMethod
     );
 
+
     localStorage.setItem(
       "shopSpherePaymentStatus",
       paymentStatus
     );
+
 
     localStorage.setItem(
       "shopSpherePaymentTime",
@@ -708,15 +1105,18 @@
     );
 
 
-    // Clear cart after order is created
+    // ======================================
+    // CLEAR CART
+    // ======================================
 
     localStorage.removeItem(
       "shopSphereCart"
     );
 
 
-    // IMPORTANT:
-    // Go directly to success page
+    // ======================================
+    // GO TO SUCCESS PAGE
+    // ======================================
 
     window.location.replace(
       "success.html"
@@ -725,54 +1125,71 @@
   }
 
 
+
   // ==========================================
   // PAYMENT METHOD SELECTION
   // ==========================================
 
   document
-    .querySelectorAll(".payment-method")
-    .forEach(method => {
+    .querySelectorAll(
+      ".payment-method"
+    )
+    .forEach(
+      method => {
 
-      method.addEventListener(
-        "click",
-        function(event) {
+        method.addEventListener(
+          "click",
+          function() {
 
-          const radio =
-            this.querySelector(
-              'input[type="radio"]'
-            );
-
-          if (!radio) return;
-
-
-          document
-            .querySelectorAll(".payment-method")
-            .forEach(item => {
-
-              item.classList.remove(
-                "active"
+            const radio =
+              this.querySelector(
+                'input[type="radio"]'
               );
 
-            });
+
+            if (!radio) {
+              return;
+            }
 
 
-          this.classList.add("active");
+            document
+              .querySelectorAll(
+                ".payment-method"
+              )
+              .forEach(
+                item => {
 
-          radio.checked = true;
+                  item.classList.remove(
+                    "active"
+                  );
+
+                }
+              );
 
 
-          updatePaymentInterface(
-            radio.value
-          );
+            this.classList.add(
+              "active"
+            );
 
-        }
-      );
 
-    });
+            radio.checked =
+              true;
+
+
+            updatePaymentInterface(
+              radio.value
+            );
+
+          }
+        );
+
+      }
+    );
+
 
 
   // ==========================================
-  // UPDATE INTERFACE
+  // UPDATE PAYMENT INTERFACE
   // ==========================================
 
   function updatePaymentInterface(
@@ -787,8 +1204,10 @@
       codNotice.style.display =
         "block";
 
+
       onlineNotice.style.display =
         "none";
+
 
       payButton.textContent =
         "Place Order — Cash on Delivery";
@@ -798,8 +1217,10 @@
       codNotice.style.display =
         "none";
 
+
       onlineNotice.style.display =
         "block";
+
 
       payButton.textContent =
         "Continue to Payment";
@@ -807,6 +1228,7 @@
     }
 
   }
+
 
 
   // ==========================================
@@ -817,7 +1239,9 @@
     "click",
     function() {
 
-      if (cart.length === 0) {
+      if (
+        cart.length === 0
+      ) {
 
         alert(
           "Your cart is empty."
@@ -849,6 +1273,7 @@
         selectedMethod.value;
 
 
+
       // ======================================
       // CASH ON DELIVERY
       // ======================================
@@ -858,21 +1283,13 @@
         "Cash on Delivery"
       ) {
 
-        this.disabled = true;
+        this.disabled =
+          true;
+
 
         this.textContent =
           "Placing Order...";
 
-
-        /*
-          IMPORTANT:
-
-          COD does NOT go through
-          any payment process.
-
-          It immediately creates the order
-          as UNPAID + Pending.
-        */
 
         createOrder(
           "Cash on Delivery",
@@ -880,33 +1297,41 @@
           "Pending"
         );
 
+
         return;
 
       }
+
 
 
       // ======================================
       // ONLINE PAYMENT
       // ======================================
 
-      this.disabled = true;
+      this.disabled =
+        true;
+
 
       this.textContent =
         "Processing Payment...";
 
 
-      setTimeout(() => {
+      setTimeout(
+        () => {
 
-        createOrder(
-          paymentMethod,
-          "PAID",
-          "Processing"
-        );
+          createOrder(
+            paymentMethod,
+            "PAID",
+            "Processing"
+          );
 
-      }, 1500);
+        },
+        1500
+      );
 
     }
   );
+
 
 
   // ==========================================
@@ -926,6 +1351,7 @@
     );
 
   }
+
 
 </script>
 
