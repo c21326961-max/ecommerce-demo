@@ -542,6 +542,8 @@ body{
 
 /* ================= PRODUCT GRID ================= */
 
+/* ================= PRODUCT GRID ================= */
+
 .product-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -575,63 +577,6 @@ body{
   height:100%;
   object-fit:cover;
   display:block;
-  transition:.3s;
-}
-
-.product-card:hover .product-image img{
-  transform:scale(1.04);
-}
-
-.no-image{
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:7px;
-  color:#94a3b8;
-  font-size:12px;
-}
-
-.no-image strong{
-  font-size:34px;
-  color:#cbd5e1;
-}
-
-.badge{
-  position:absolute;
-  top:11px;
-  left:11px;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:10px;
-  font-weight:800;
-  background:white;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
-
-.badge.active{
-  color:#15803d;
-  background:#dcfce7;
-}
-
-.badge.inactive{
-  color:#b91c1c;
-  background:#fee2e2;
-}
-
-.category-badge{
-  position:absolute;
-  top:11px;
-  right:11px;
-  padding:5px 9px;
-  border-radius:999px;
-  background:rgba(17,24,39,.78);
-  color:white;
-  font-size:10px;
-  font-weight:700;
-  text-transform:capitalize;
 }
 
 .product-body{
@@ -662,30 +607,80 @@ body{
   margin-bottom:14px;
 }
 
-.stock{
-  font-weight:700;
-}
-
-.stock.good{
-  color:#15803d;
-}
-
-.stock.low{
-  color:#c2410c;
-}
-
-.stock.out{
-  color:#dc2626;
-}
-
 .product-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
 }
 
-.product-actions .btn{
-  padding:9px 8px;
+/* TABLET */
+@media(max-width:1000px){
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+/* MOBILE — 2 PRODUCTS EVERY ROW */
+@media(max-width:650px){
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .product-image{
+    height:150px;
+  }
+
+  .product-body{
+    padding:11px;
+  }
+
+  .product-name{
+    font-size:13px;
+  }
+
+  .product-price{
+    font-size:15px;
+  }
+
+  .product-meta{
+    font-size:10px;
+    margin-bottom:10px;
+  }
+
+  .product-actions{
+    grid-template-columns:1fr;
+    gap:5px;
+  }
+
+  .product-actions .btn{
+    font-size:10px;
+    padding:8px 4px;
+  }
+}
+
+/* SMALL MOBILE — STILL 2 PRODUCTS */
+@media(max-width:390px){
+  .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .product-image{
+    height:125px;
+  }
+
+  .product-body{
+    padding:9px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .product-price{
+    font-size:13px;
+  }
 }
 
 /* ================= EMPTY / STATUS ================= */
